@@ -26,7 +26,7 @@ const WelcomePage = () => {
           <Text style={styles.subtitle}>Bienvenue sur Bump.</Text>
           <View style={styles.buttonsBlock}>
             <CustomButton onPress={() => null} text="Créer mon compte" />
-            <View style={{ marginTop: 15 }}>
+            <View style={styles.bottomButton}>
               <CustomButton
                 onPress={() => null}
                 text="J'ai déjà un compte"
@@ -76,5 +76,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 50,
     alignSelf: "center",
+  },
+  bottomButton: {
+    marginTop: 15,
   },
 });
