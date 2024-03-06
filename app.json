@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "bump-mobile",
+    "name": "Bump",
     "slug": "bump-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -11,7 +11,11 @@
       "resizeMode": "contain",
       "backgroundColor": "#F8B60D"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "./src/assets/images/splashScreen.png",
+      "./src/assets/images/appIcon.png",
+      "./src/assets/images/welcomeImage.png"
+    ],
     "ios": {
       "supportsTablet": true
     },
