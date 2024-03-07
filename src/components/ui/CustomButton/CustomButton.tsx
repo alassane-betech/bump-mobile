@@ -27,7 +27,7 @@ const CustomButton = ({
         styles.button,
         {
           backgroundColor: backgroundColor ? backgroundColor : COLORS.secondary,
-          width: width ? width : screenWidth / 2 + 65,
+          width: width ? width : screenWidth / 2 + 100,
           height: height ? height : 50,
         },
       ]}

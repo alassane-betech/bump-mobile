@@ -1,9 +1,12 @@
+import { Dimensions } from "react-native";
+
 const FONTS = {
   regular: "NunitoSans_400Regular",
   semiBold: "NunitoSans_600SemiBold",
   bold: "NunitoSans_700Bold",
   extraBold: "NunitoSans_800ExtraBold",
   black: "NunitoSans_900Black",
+  Logo: "Modak",
 };
 
 const COLORS = {
@@ -13,3 +16,13 @@ const COLORS = {
 };
 
 export { FONTS, COLORS };
+
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
+const deviceDiagonal = Math.sqrt(width ** 2 + height ** 2);
+
+export const window = {
+  width,
+  height,
+  isSmallDevice: deviceDiagonal <= 750,
+};

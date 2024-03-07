@@ -6,8 +6,8 @@ import {
   NunitoSans_900Black,
   useFonts,
 } from "@expo-google-fonts/nunito-sans";
-import WelcomePage from "@src/pages/welcomePage/WelcomePage";
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+import Root from "@src/navigation/Root";
+import { ActivityIndicator } from "react-native";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -16,24 +16,12 @@ export default function App() {
     NunitoSans_700Bold,
     NunitoSans_800ExtraBold,
     NunitoSans_900Black,
+    Modak: require("@src/assets/fonts/Modak-Regular.ttf"),
   });
 
   if (!fontsLoaded) {
     return <ActivityIndicator />;
   }
 
-  return (
-    <View style={styles.container}>
-      <WelcomePage />
-    </View>
-  );
+  return <Root />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
