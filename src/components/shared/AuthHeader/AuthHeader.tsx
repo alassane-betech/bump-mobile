@@ -1,9 +1,13 @@
-import { COLORS, FONTS } from "@src/styles/BaseStyle";
-import { View, StyleSheet, Text } from "react-native";
+import { COLORS, FONTS, window } from "@src/styles/BaseStyle";
+import { View, StyleSheet, Text, Image } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 export default function AuthHeader() {
   return (
-    <View style={styles.container}>
+    <View
+      style={
+        window.isSmallDevice ? styles.containerSmallDevice : styles.container
+      }
+    >
       <View style={styles.header}>
         <MaterialIcons
           name="keyboard-arrow-left"
@@ -17,8 +21,12 @@ export default function AuthHeader() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  containerSmallDevice: {
     flex: 1 / 5.5,
+    justifyContent: "center",
+  },
+  container: {
+    height: "15%",
     justifyContent: "center",
   },
   logoTitle: {

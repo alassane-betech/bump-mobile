@@ -17,13 +17,15 @@
       "./src/assets/images/welcomeImage.png"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "userInterfaceStyle": "automatic"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#F8B60D"
-      }
+      },
+      "userInterfaceStyle": "automatic"
     },
     "web": {
       "favicon": "./src/assets/images/favicon.png"

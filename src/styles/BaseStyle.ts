@@ -1,4 +1,5 @@
 import { Dimensions } from "react-native";
+import { Theme } from "./Types";
 
 const FONTS = {
   regular: "NunitoSans_400Regular",
@@ -7,6 +8,38 @@ const FONTS = {
   extraBold: "NunitoSans_800ExtraBold",
   black: "NunitoSans_900Black",
   Logo: "Modak",
+};
+
+export const LighTheme: Theme = {
+  primary: "#F8B60D",
+  background: {
+    input: "#ECEFF3",
+    card: "",
+  },
+  surface: "#FFFFFF",
+  text: {
+    default: "#2E3136",
+    button: "#FFFFFF",
+    input: "#5E646E",
+    title: "#2E3136",
+    link: "#68A9F1",
+  },
+};
+
+export const DarkTheme: Theme = {
+  primary: "#F8B60D",
+  background: {
+    input: "red",
+    card: "red",
+  },
+  surface: "#1e1e1e",
+  text: {
+    default: "",
+    button: "",
+    input: "",
+    title: "",
+    link: "",
+  },
 };
 
 const COLORS = {
@@ -24,5 +57,5 @@ const deviceDiagonal = Math.sqrt(width ** 2 + height ** 2);
 export const window = {
   width,
   height,
-  isSmallDevice: deviceDiagonal <= 750,
+  isSmallDevice: deviceDiagonal <= 800,
 };

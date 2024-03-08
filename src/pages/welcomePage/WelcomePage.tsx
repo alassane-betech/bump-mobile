@@ -29,11 +29,11 @@ const WelcomePage = () => {
           <Text style={styles.title}>au défi</Text>
           <Text style={styles.subtitle}>Bienvenue sur Bump.</Text>
           <View style={styles.buttonsBlock}>
-            <CustomButton onPress={goToSignup} text="Créer mon compte" />
+            <CustomButton onPress={goToSignup} title="Créer mon compte" />
             <View style={styles.bottomButton}>
               <CustomButton
                 onPress={() => null}
-                text="J'ai déjà un compte"
+                title="J'ai déjà un compte"
                 textColor={COLORS.secondary}
                 backgroundColor={COLORS.tertiary}
               />
