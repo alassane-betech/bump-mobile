@@ -1,11 +1,15 @@
 import { COLORS, FONTS } from "@src/styles/BaseStyle";
-import { Dimensions, StyleSheet, Text, TouchableOpacity } from "react-native";
+import {
+  ButtonProps,
+  Dimensions,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 
 const { width: screenWidth } = Dimensions.get("screen");
 
-interface CustomButtonProps {
-  onPress: () => void;
-  text: string;
+interface CustomButtonProps extends ButtonProps {
   textColor?: string;
   backgroundColor?: string;
   width?: number;
@@ -13,29 +17,29 @@ interface CustomButtonProps {
 }
 
 const CustomButton = ({
-  text,
   textColor,
   backgroundColor,
   width,
   height,
-  onPress,
+  ...props
 }: CustomButtonProps) => {
   return (
     <TouchableOpacity
-      onPress={onPress}
+      {...props}
       style={[
         styles.button,
         {
           backgroundColor: backgroundColor ? backgroundColor : COLORS.secondary,
-          width: width ? width : screenWidth / 2 + 65,
+          width: width ? width : screenWidth / 2 + 100,
           height: height ? height : 50,
+          opacity: props.disabled ? 0.3 : 1,
         },
       ]}
     >
       <Text
         style={[styles.buttonText, { color: textColor ? textColor : "white" }]}
       >
-        {text}
+        {props.title}
       </Text>
     </TouchableOpacity>
   );
