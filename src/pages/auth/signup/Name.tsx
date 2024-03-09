@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import AuthContainer from "@src/components/containers/AuthContainer/AuthContainer";
 import { CustomText } from "@src/components/ui/CustomText/CustomText";
 import { TextField } from "@src/components/ui/TextField/TextField";
@@ -7,9 +8,11 @@ import { StyleSheet, View } from "react-native";
 export default function Name() {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
+  const navigation = useNavigation();
 
   const submitForm = () => {
     // Should store data and go to next screen!
+    navigation.navigate("Credentials");
   };
 
   const isDisabledButton = useMemo(() => {
@@ -17,6 +20,7 @@ export default function Name() {
   }, [firstname, lastname]);
   return (
     <AuthContainer
+      buttonTitle="Continuer et acceptez "
       isSubmitButtonDisabled={isDisabledButton}
       onSubmit={submitForm}
       title="Quel est ton nom ?"

@@ -1,15 +1,11 @@
-import Svg, { Path, Circle } from "react-native-svg";
+import Svg, { Path, Circle, SvgProps } from "react-native-svg";
 
-export function HeaderRightThing(props: any) {
+interface HeaderProp extends SvgProps {
+  dark?: boolean;
+}
+export function HeaderRightThing({ dark, ...props }: HeaderProp) {
   return (
-    <Svg
-      width={75}
-      height={77}
-      viewBox="0 0 75 77"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
+    <Svg width={75} height={77} viewBox="0 0 75 77" fill="none" {...props}>
       <Path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -21,11 +17,11 @@ export function HeaderRightThing(props: any) {
         cy={25.091}
         r={3.01519}
         transform="rotate(-56.608 32.067 25.091)"
-        fill={props?.dark ? "black" : "white"}
+        fill={dark ? "black" : "white"}
       />
       <Path
         d="M58.322 28.323a3.015 3.015 0 01-1.016 4.142c-1.424.862-3.86 2.774-4.722 1.35-.863-1.425.173-5.645 1.597-6.508a3.015 3.015 0 014.141 1.016zM40.873 36.246c3.526.935 4.998 6.916 4.312 9.504-.687 2.588-4.102 3.928-7.627 2.993-3.526-.935-5.827-3.791-5.14-6.38.686-2.588 4.93-7.053 8.455-6.117z"
-        fill={props?.dark ? "black" : "white"}
+        fill={dark ? "black" : "white"}
       />
     </Svg>
   );

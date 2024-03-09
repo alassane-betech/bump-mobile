@@ -17,6 +17,7 @@ interface AuthContainerProps {
   children: JSX.Element;
   title: string;
   isSubmitButtonDisabled: boolean;
+  buttonTitle: string;
   onSubmit: () => void;
 }
 
@@ -24,6 +25,7 @@ export default function AuthContainer({
   children,
   title,
   isSubmitButtonDisabled,
+  buttonTitle,
   onSubmit,
 }: AuthContainerProps) {
   const { theme } = useThemeContext();
@@ -52,7 +54,7 @@ export default function AuthContainer({
           <CustomButton
             disabled={isSubmitButtonDisabled}
             onPress={onSubmit}
-            title="Continuez et acceptez"
+            title={buttonTitle}
           />
         </View>
       </KeyboardAvoidingView>
