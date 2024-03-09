@@ -10,4 +10,11 @@ export type RootStackParamList = {
 export type AuthStackParamList = {
   WelcomePage: undefined;
   Name: undefined;
+  Credentials: undefined;
 };
+
+export enum PAGES {
+  WelcomePage = "WelcomePage",
+  Name = "Name",
+  Credentials = "Credentials",
+}

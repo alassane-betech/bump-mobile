@@ -59,3 +59,5 @@ export const window = {
   height,
   isSmallDevice: deviceDiagonal <= 800,
 };
+
+export const defaultHitSlot = { top: 20, left: 20, bottom: 20, right: 20 };
