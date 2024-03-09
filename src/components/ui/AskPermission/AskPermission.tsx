@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React from "react";
-import { PermissionImage } from "@src/assets/svgs/ContactsPermissionImage";
 import { MaterialIcons } from "@expo/vector-icons";
 import { COLORS, FONTS } from "@src/styles/BaseStyle";
 import CustomButton from "../CustomButton/CustomButton";
@@ -61,15 +60,12 @@ export const AskPermission: React.FC<AskPermissionProps> = ({ type }) => {
         />
       </TouchableOpacity>
 
-      {/* SVG not working as expected uncomment and comment image block to test */}
-      {/* <View style={styles.image}>
-        <PermissionImage />
-      </View> */}
       <Image
         source={getPermissionType(type).image}
         resizeMode="contain"
         style={styles.image}
       />
+
       <View style={styles.body}>
         <Text style={styles.title}>{getPermissionType(type).title}</Text>
         <Text style={styles.subtitle}>{getPermissionType(type).subTitle}</Text>
