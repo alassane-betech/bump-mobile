@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
-import { COLORS, FONTS } from "@src/styles/BaseStyle";
+import { COLORS, FONTS, window } from "@src/styles/BaseStyle";
 import CustomButton from "../CustomButton/CustomButton";
 
 const { height, width } = Dimensions.get("screen");
@@ -95,9 +95,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   image: {
-    top: height / 8,
+    top: height * 0.1,
     position: "absolute",
     alignSelf: "center",
+    width: window.isSmallDevice ? width * 0.6 : width * 0.6,
+    height: window.isSmallDevice ? height * 0.23 : height * 0.2,
   },
   backButton: {
     position: "absolute",
@@ -107,7 +109,6 @@ const styles = StyleSheet.create({
   buttonsBlock: {
     position: "absolute",
     bottom: 50,
-    width: "80%",
     alignSelf: "center",
   },
   bottomButton: {
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
   },
   body: {
     position: "absolute",
-    top: height / 3,
+    top: window.isSmallDevice ? height * 0.33 : height * 0.28,
     marginTop: 20,
     alignSelf: "center",
     width: width - 25,
