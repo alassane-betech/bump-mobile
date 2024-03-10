@@ -28,6 +28,10 @@ export default function BirthdateForm() {
 
   const showHideDatePicker = () => setShowDatePicker(!showDatePicker);
 
+  const handleConfirm = (date: Date) => {
+    setDate(formatDate(date));
+    setShowDatePicker(false);
+  };
   return (
     <AuthContainer
       buttonTitle="Créer mon compte"
@@ -57,10 +61,7 @@ export default function BirthdateForm() {
           isVisible={showDatePicker}
           mode="date"
           maximumDate={new Date()}
-          onConfirm={(date: any) => {
-            setDate(formatDate(date));
-            setShowDatePicker(false);
-          }}
+          onConfirm={handleConfirm}
           display="spinner"
           locale="fr_FR"
           confirmTextIOS="Valider"
