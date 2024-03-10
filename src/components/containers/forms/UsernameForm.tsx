@@ -1,6 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 import AuthContainer from "@src/components/containers/AuthContainer/AuthContainer";
 import { TextField } from "@src/components/ui/TextField/TextField";
+import { useSignup } from "@src/context/SignupContext";
+import { AUTH_PAGES } from "@src/navigation/Types";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
@@ -13,11 +15,11 @@ const usernameValidationSchema = Yup.object().shape({
 
 export default function UsernameForm() {
   const navigation = useNavigation();
+  const { updateUser } = useSignup();
 
   const submitForm = ({ username }: FormValues) => {
-    console.log(username);
-    // Should store data and go to next screen!
-    navigation.navigate("Credentials");
+    updateUser({ username });
+    navigation.navigate(AUTH_PAGES.Cooktype);
   };
 
   return (

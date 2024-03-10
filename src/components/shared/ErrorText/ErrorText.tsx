@@ -18,6 +18,8 @@ export default function ErrorText({ text, withBackground }: ErrorTextProps) {
           backgroundColor: theme.error.background,
           padding: 8,
           borderRadius: 12,
+          width: "100%",
+          marginTop: 10,
         },
       ]}
     >

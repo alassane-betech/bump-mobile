@@ -5,6 +5,7 @@ import { TextField } from "@src/components/ui/TextField/TextField";
 import { StyleSheet } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { useSignup } from "@src/context/SignupContext";
 
 interface FormValues {
   firstname: string;
@@ -16,11 +17,11 @@ const nameValidationSchema = Yup.object().shape({
 });
 
 export default function NameForm() {
+  const { updateUser } = useSignup();
   const navigation = useNavigation();
 
   const submitForm = ({ firstname, lastname }: FormValues) => {
-    console.log(lastname);
-    // Should store data and go to next screen!
+    updateUser({ firstname, lastname });
     navigation.navigate("Credentials");
   };
 

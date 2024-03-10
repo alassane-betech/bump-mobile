@@ -10,6 +10,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { useNavigation } from "@react-navigation/native";
 import { AUTH_PAGES } from "@src/navigation/Types";
+import { useSignup } from "@src/context/SignupContext";
 
 interface FormValues {
   email: string;
@@ -45,6 +46,7 @@ const CredentialsValidationSchema = Yup.object().shape({
 
 export default function CredentialsForm() {
   const navigation = useNavigation();
+  const { updateUser } = useSignup();
   const [passwordCriteria, setPasswordCriteria] = useState<PasswordCriteria>({
     minLength: false,
     oneDigit: false,
@@ -55,9 +57,9 @@ export default function CredentialsForm() {
   const handleTogglePasswordVisibility = () =>
     setIsPasswordVisible(!isPasswordVisible);
 
-  const submitForm = (values: FormValues) => {
-    // Should store data and go to next screen
-    navigation.navigate(AUTH_PAGES.Username);
+  const submitForm = ({ email, password }: FormValues) => {
+    updateUser({ email, password });
+    navigation.navigate(AUTH_PAGES.Birthdate);
   };
 
   const isDisabledButton = false;

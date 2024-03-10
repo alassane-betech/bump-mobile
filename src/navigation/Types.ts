@@ -13,6 +13,7 @@ export type AuthStackParamList = {
   Credentials: undefined;
   Username: undefined;
   Birthdate: undefined;
+  Cooktype: undefined;
 };
 
 export enum AUTH_PAGES {
@@ -21,4 +22,5 @@ export enum AUTH_PAGES {
   Credentials = "Credentials",
   Username = "Username",
   Birthdate = "Birthdate",
+  Cooktype = "Cooktype",
 }

@@ -3,6 +3,10 @@ export type Theme = {
   background: {
     input: string;
     card: string;
+    button: {
+      primary: string;
+      secondary: string;
+    };
   };
   surface: string;
   text: {

@@ -5,6 +5,7 @@ export default {
     fontFamily: FONTS.extraBold,
     fontSize: 22,
     lineHeight: 26,
+    letterSpacing: -1,
   },
   body: {
     fontFamily: FONTS.regular,

@@ -1,11 +1,12 @@
 import { HeaderRightThing } from "@src/assets/svgs/HeaderRightThing";
 import AuthHeader from "@src/components/shared/AuthHeader/AuthHeader";
-import CustomButton from "@src/components/ui/CustomButton/CustomButton";
+import CustomButton, {
+  EButtonVariant,
+} from "@src/components/ui/CustomButton/CustomButton";
 import { useThemeContext } from "@src/context/ThemeContext";
 import { Theme } from "@src/styles/Types";
 import Typo from "@src/styles/Typo";
 import React from "react";
-import DateTimePicker from "@react-native-community/datetimepicker";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -19,8 +20,6 @@ interface AuthContainerProps {
   title: string;
   isSubmitButtonDisabled?: boolean;
   buttonTitle: string;
-  showDatePicker?: boolean;
-  onDateChange?: (e: any, date: Date) => void;
   onSubmit: () => void;
 }
 
@@ -29,8 +28,6 @@ export default function AuthContainer({
   title,
   isSubmitButtonDisabled,
   buttonTitle,
-  showDatePicker,
-  onDateChange,
   onSubmit,
 }: AuthContainerProps) {
   const { theme } = useThemeContext();
@@ -55,24 +52,13 @@ export default function AuthContainer({
 
         <View style={styles.children}>{children}</View>
 
-        <View
-          style={[styles.bottomButton, { flex: showDatePicker ? 1 : 1 / 4 }]}
-        >
+        <View style={[styles.bottomButton]}>
           <CustomButton
             disabled={isSubmitButtonDisabled}
             onPress={onSubmit}
+            variant={EButtonVariant.Primary}
             title={buttonTitle}
           />
-          {showDatePicker && (
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={new Date()}
-              mode={"date"}
-              display="spinner"
-              is24Hour={true}
-              onChange={onDateChange}
-            />
-          )}
         </View>
       </KeyboardAvoidingView>
     </View>
@@ -112,5 +98,6 @@ const styles = StyleSheet.create({
   bottomButton: {
     alignItems: "center",
     justifyContent: "center",
+    flex: 1 / 4,
   },
 });

@@ -15,6 +15,10 @@ export const LighTheme: Theme = {
   background: {
     input: "#ECEFF3",
     card: "",
+    button: {
+      primary: "#2B323B",
+      secondary: "#ECEFF3",
+    },
   },
   surface: "#FFFFFF",
   text: {
@@ -42,6 +46,10 @@ export const DarkTheme: Theme = {
   background: {
     input: "red",
     card: "red",
+    button: {
+      primary: "",
+      secondary: "",
+    },
   },
   surface: "#1e1e1e",
   text: {

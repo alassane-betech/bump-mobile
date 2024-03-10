@@ -64,6 +64,7 @@ export const TextField = ({
       useNativeDriver: false,
     }).start();
   }, [isFocused, props.value, animatedIsFocused]);
+
   const focusInput = () => {
     setIsFocused(true);
     inputRef.current.focus();
@@ -84,40 +85,42 @@ export const TextField = ({
   };
 
   return (
-    <TouchableWithoutFeedback onPress={focusInput}>
-      <>
-        <View style={themed.container}>
-          <Animated.Text style={[themed.label, labelStyle]}>
-            {label}
-          </Animated.Text>
-          <TextInput
-            {...props}
-            onPressIn={handleOnPressIn}
-            selectionColor={theme.text.input}
-            style={[themed.textInput, props.style]}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            blurOnSubmit
-            ref={inputRef}
-            editable={type !== ETextFielType.Date}
-          />
-          {type === ETextFielType.Password && (
-            <TouchableOpacity
-              hitSlop={defaultHitSlot}
-              style={styles.eyeContainer}
-              onPress={togglePasswordVisibility}
-            >
-              <Feather
-                name={props?.secureTextEntry ? "eye" : "eye-off"}
-                size={20}
-                color={theme.text.input}
-              />
-            </TouchableOpacity>
-          )}
-        </View>
-        {error && <ErrorText text={error} />}
-      </>
-    </TouchableWithoutFeedback>
+    <>
+      <TouchableOpacity
+        activeOpacity={1}
+        style={themed.container}
+        onPress={focusInput}
+      >
+        <Animated.Text style={[themed.label, labelStyle]}>
+          {label}
+        </Animated.Text>
+        <TextInput
+          {...props}
+          onPressIn={handleOnPressIn}
+          selectionColor={theme.text.input}
+          style={[themed.textInput, props.style]}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          blurOnSubmit
+          ref={inputRef}
+          editable={type !== ETextFielType.Date}
+        />
+        {type === ETextFielType.Password && (
+          <TouchableOpacity
+            hitSlop={defaultHitSlot}
+            style={styles.eyeContainer}
+            onPress={togglePasswordVisibility}
+          >
+            <Feather
+              name={props?.secureTextEntry ? "eye" : "eye-off"}
+              size={20}
+              color={theme.text.input}
+            />
+          </TouchableOpacity>
+        )}
+      </TouchableOpacity>
+      {error && <ErrorText text={error} />}
+    </>
   );
 };
 
@@ -147,6 +150,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 10,
     top: 0,
+    zIndex: 1000,
     bottom: 0,
     justifyContent: "center",
     alignItems: "center",
