@@ -12,4 +12,15 @@ export type Theme = {
     title: string;
     link: string;
   };
+  border: {
+    default: string;
+  };
+  success: {
+    color: string;
+    background: string;
+  };
+  error: {
+    color: string;
+    background: string;
+  };
 };

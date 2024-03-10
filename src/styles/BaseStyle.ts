@@ -24,6 +24,17 @@ export const LighTheme: Theme = {
     title: "#2E3136",
     link: "#68A9F1",
   },
+  border: {
+    default: "#E6E6E6",
+  },
+  success: {
+    color: "#00875A",
+    background: "",
+  },
+  error: {
+    color: "#F91D45",
+    background: "#FFEBE6",
+  },
 };
 
 export const DarkTheme: Theme = {
@@ -39,6 +50,17 @@ export const DarkTheme: Theme = {
     input: "",
     title: "",
     link: "",
+  },
+  border: {
+    default: "",
+  },
+  success: {
+    color: "",
+    background: "",
+  },
+  error: {
+    color: "",
+    background: "",
   },
 };
 

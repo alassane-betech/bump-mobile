@@ -5,6 +5,7 @@ import { useThemeContext } from "@src/context/ThemeContext";
 import { Theme } from "@src/styles/Types";
 import Typo from "@src/styles/Typo";
 import React from "react";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -16,8 +17,10 @@ import {
 interface AuthContainerProps {
   children: JSX.Element;
   title: string;
-  isSubmitButtonDisabled: boolean;
+  isSubmitButtonDisabled?: boolean;
   buttonTitle: string;
+  showDatePicker?: boolean;
+  onDateChange?: (e: any, date: Date) => void;
   onSubmit: () => void;
 }
 
@@ -26,6 +29,8 @@ export default function AuthContainer({
   title,
   isSubmitButtonDisabled,
   buttonTitle,
+  showDatePicker,
+  onDateChange,
   onSubmit,
 }: AuthContainerProps) {
   const { theme } = useThemeContext();
@@ -50,12 +55,24 @@ export default function AuthContainer({
 
         <View style={styles.children}>{children}</View>
 
-        <View style={styles.bottomButton}>
+        <View
+          style={[styles.bottomButton, { flex: showDatePicker ? 1 : 1 / 4 }]}
+        >
           <CustomButton
             disabled={isSubmitButtonDisabled}
             onPress={onSubmit}
             title={buttonTitle}
           />
+          {showDatePicker && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={new Date()}
+              mode={"date"}
+              display="spinner"
+              is24Hour={true}
+              onChange={onDateChange}
+            />
+          )}
         </View>
       </KeyboardAvoidingView>
     </View>
@@ -93,7 +110,6 @@ const styles = StyleSheet.create({
   },
   children: { flex: 1, paddingHorizontal: 20 },
   bottomButton: {
-    flex: 1 / 4,
     alignItems: "center",
     justifyContent: "center",
   },

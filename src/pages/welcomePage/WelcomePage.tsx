@@ -1,5 +1,6 @@
 import { useNavigation } from "@react-navigation/core";
 import CustomButton from "@src/components/ui/CustomButton/CustomButton";
+import { AUTH_PAGES } from "@src/navigation/Types";
 import { COLORS, FONTS } from "@src/styles/BaseStyle";
 import { StatusBar } from "expo-status-bar";
 import {
@@ -15,7 +16,7 @@ const { width, height } = Dimensions.get("screen");
 const WelcomePage = () => {
   const navigation = useNavigation();
 
-  const goToSignup = () => navigation.navigate("Name");
+  const goToSignup = () => navigation.navigate(AUTH_PAGES.Fullname);
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
