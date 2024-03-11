@@ -33,7 +33,12 @@ export default function CookType() {
         {COOK_TYPE?.map(({ id, name }, index) => {
           return (
             <View key={id}>
-              <UserType index={index} type={name} onSelect={setSelected} />
+              <UserType
+                selected={selected === name}
+                index={index}
+                type={name}
+                onSelect={setSelected}
+              />
             </View>
           );
         })}
@@ -48,10 +53,12 @@ export default function CookType() {
 const UserType = ({
   type,
   index,
+  selected,
   onSelect,
 }: {
   type: string;
   index: number;
+  selected?: boolean;
   onSelect: (type: string) => void;
 }) => {
   const handleSelect = () => onSelect(type);
@@ -61,9 +68,9 @@ const UserType = ({
         style={styles.buttonItem}
         title={type}
         onPress={handleSelect}
-        variant={EButtonVariant.Secondary}
+        variant={selected ? EButtonVariant.Primary : EButtonVariant.Secondary}
       />
-      {index == 2 && <Hr />}
+      {index === 2 && <Hr />}
     </View>
   );
 };

@@ -6,9 +6,7 @@ import React, { useRef, useState } from "react";
 import {
   Animated,
   TextInput,
-  View,
   StyleSheet,
-  TouchableWithoutFeedback,
   TextInputProps,
   TouchableOpacity,
   NativeSyntheticEvent,
@@ -27,6 +25,7 @@ interface TextFieldProps extends TextInputProps {
   label: string;
   type?: ETextFielType;
   error?: string;
+  onPress?: () => void;
   togglePasswordVisibility?: () => void;
 }
 export const TextField = ({
@@ -34,6 +33,7 @@ export const TextField = ({
   type = ETextFielType.Default,
   error,
   togglePasswordVisibility,
+  onPress,
   ...props
 }: TextFieldProps) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -47,10 +47,10 @@ export const TextField = ({
     }
   };
 
-  const handleOnPressIn = (e: NativeSyntheticEvent<NativeTouchEvent>) => {
+  const handleOnPressIn = () => {
     setIsFocused(true);
-    if (props.onPressIn) {
-      props.onPressIn(e);
+    if (onPress) {
+      onPress();
     }
   };
 
@@ -68,6 +68,9 @@ export const TextField = ({
   const focusInput = () => {
     setIsFocused(true);
     inputRef.current.focus();
+    if (onPress) {
+      onPress();
+    }
   };
 
   const labelStyle: any = {

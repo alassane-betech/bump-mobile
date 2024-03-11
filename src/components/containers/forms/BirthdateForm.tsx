@@ -39,24 +39,14 @@ export default function BirthdateForm() {
       title="Date de naissance"
     >
       <>
-        {Platform.OS === "android" ? (
-          <TouchableOpacity activeOpacity={1} onPress={showHideDatePicker}>
-            <TextField
-              label="Date de naissance"
-              type={ETextFielType.Date}
-              value={date?.toString() || ""}
-              error={errorText}
-            />
-          </TouchableOpacity>
-        ) : (
-          <TextField
-            onPressIn={showHideDatePicker}
-            label="Date de naissance"
-            type={ETextFielType.Date}
-            value={date?.toString() || ""}
-            error={errorText}
-          />
-        )}
+        <TextField
+          onPress={showHideDatePicker}
+          label="Date de naissance"
+          type={ETextFielType.Date}
+          value={date?.toString() || ""}
+          error={errorText}
+        />
+
         <DateTimePickerModal
           isVisible={showDatePicker}
           mode="date"
