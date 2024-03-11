@@ -1,19 +1,30 @@
+import { useThemeContext } from "@src/context/ThemeContext";
 import { COLORS, FONTS } from "@src/styles/BaseStyle";
+import { Theme } from "@src/styles/Types";
+import Typo from "@src/styles/Typo";
+import { useMemo } from "react";
 import {
   ButtonProps,
   Dimensions,
   StyleSheet,
   Text,
   TouchableOpacity,
+  ViewStyle,
 } from "react-native";
 
 const { width: screenWidth } = Dimensions.get("screen");
 
+export enum EButtonVariant {
+  Primary = "primary",
+  Secondary = "secondary",
+}
 interface CustomButtonProps extends ButtonProps {
   textColor?: string;
   backgroundColor?: string;
+  variant?: EButtonVariant;
   width?: number;
   height?: number;
+  style?: ViewStyle | ViewStyle[];
 }
 
 const CustomButton = ({
@@ -21,26 +32,29 @@ const CustomButton = ({
   backgroundColor,
   width,
   height,
+  variant,
+  style,
   ...props
 }: CustomButtonProps) => {
+  const { theme } = useThemeContext();
+  const buttonThemed = useMemo(() => getButtonThemeStyle(theme), [theme]);
+  const textThemed = useMemo(() => getTextThemeStyle(theme), [theme]);
+
+  const ButtonStyle = [
+    styles.button,
+    variant && buttonThemed[variant],
+    style,
+    { opacity: props.disabled ? 0.3 : 1 },
+    backgroundColor && { backgroundColor },
+  ];
+  const TextStyle = [
+    styles.buttonText,
+    variant && textThemed[variant],
+    textColor && { color: textColor },
+  ];
   return (
-    <TouchableOpacity
-      {...props}
-      style={[
-        styles.button,
-        {
-          backgroundColor: backgroundColor ? backgroundColor : COLORS.secondary,
-          width: width ? width : screenWidth / 2 + 100,
-          height: height ? height : 50,
-          opacity: props.disabled ? 0.3 : 1,
-        },
-      ]}
-    >
-      <Text
-        style={[styles.buttonText, { color: textColor ? textColor : "white" }]}
-      >
-        {props.title}
-      </Text>
+    <TouchableOpacity {...props} style={ButtonStyle}>
+      <Text style={TextStyle}>{props.title}</Text>
     </TouchableOpacity>
   );
 };
@@ -52,9 +66,30 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 25,
+    width: screenWidth / 2 + 100,
+    height: 50,
   },
   buttonText: {
-    fontSize: 16,
-    fontFamily: FONTS.bold,
+    ...Typo.button,
   },
 });
+
+const getButtonThemeStyle = (theme: Theme) =>
+  StyleSheet.create({
+    primary: {
+      backgroundColor: theme.background.button.primary,
+    },
+    secondary: {
+      backgroundColor: theme.background.button.secondary,
+    },
+  });
+
+const getTextThemeStyle = (theme: Theme) =>
+  StyleSheet.create({
+    primary: {
+      color: theme.text.button,
+    },
+    secondary: {
+      color: theme.text.default,
+    },
+  });

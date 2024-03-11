@@ -1,0 +1,64 @@
+import { useNavigation } from "@react-navigation/native";
+import AuthContainer from "@src/components/containers/AuthContainer/AuthContainer";
+import {
+  ETextFielType,
+  TextField,
+} from "@src/components/ui/TextField/TextField";
+import { useSignup } from "@src/context/SignupContext";
+import { AUTH_PAGES } from "@src/navigation/Types";
+import { formatDate } from "@src/utils/Helpers";
+import { useState } from "react";
+import { Platform, TouchableOpacity } from "react-native";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+
+export default function BirthdateForm() {
+  const [date, setDate] = useState("");
+  const { updateUser } = useSignup();
+  const [errorText, setErrorText] = useState("");
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const navigation = useNavigation();
+  const submitForm = () => {
+    if (date) {
+      updateUser({ birthdate: date });
+      navigation.navigate(AUTH_PAGES.Username);
+    } else {
+      setErrorText("Renseigne ce champs");
+    }
+  };
+
+  const showHideDatePicker = () => setShowDatePicker(!showDatePicker);
+
+  const handleConfirm = (date: Date) => {
+    setDate(formatDate(date));
+    setShowDatePicker(false);
+  };
+  return (
+    <AuthContainer
+      buttonTitle="Créer mon compte"
+      onSubmit={submitForm}
+      title="Date de naissance"
+    >
+      <>
+        <TextField
+          onPress={showHideDatePicker}
+          label="Date de naissance"
+          type={ETextFielType.Date}
+          value={date?.toString() || ""}
+          error={errorText}
+        />
+
+        <DateTimePickerModal
+          isVisible={showDatePicker}
+          mode="date"
+          maximumDate={new Date()}
+          onConfirm={handleConfirm}
+          display="spinner"
+          locale="fr_FR"
+          confirmTextIOS="Valider"
+          cancelTextIOS="Annuler"
+          onCancel={() => setShowDatePicker(false)}
+        />
+      </>
+    </AuthContainer>
+  );
+}

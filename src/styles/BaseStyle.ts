@@ -15,6 +15,10 @@ export const LighTheme: Theme = {
   background: {
     input: "#ECEFF3",
     card: "",
+    button: {
+      primary: "#2B323B",
+      secondary: "#ECEFF3",
+    },
   },
   surface: "#FFFFFF",
   text: {
@@ -24,6 +28,17 @@ export const LighTheme: Theme = {
     title: "#2E3136",
     link: "#68A9F1",
   },
+  border: {
+    default: "#E6E6E6",
+  },
+  success: {
+    color: "#00875A",
+    background: "",
+  },
+  error: {
+    color: "#F91D45",
+    background: "#FFEBE6",
+  },
 };
 
 export const DarkTheme: Theme = {
@@ -31,6 +46,10 @@ export const DarkTheme: Theme = {
   background: {
     input: "red",
     card: "red",
+    button: {
+      primary: "",
+      secondary: "",
+    },
   },
   surface: "#1e1e1e",
   text: {
@@ -39,6 +58,17 @@ export const DarkTheme: Theme = {
     input: "",
     title: "",
     link: "",
+  },
+  border: {
+    default: "",
+  },
+  success: {
+    color: "",
+    background: "",
+  },
+  error: {
+    color: "",
+    background: "",
   },
 };
 

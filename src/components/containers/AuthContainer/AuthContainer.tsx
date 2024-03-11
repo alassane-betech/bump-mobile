@@ -1,6 +1,8 @@
 import { HeaderRightThing } from "@src/assets/svgs/HeaderRightThing";
 import AuthHeader from "@src/components/shared/AuthHeader/AuthHeader";
-import CustomButton from "@src/components/ui/CustomButton/CustomButton";
+import CustomButton, {
+  EButtonVariant,
+} from "@src/components/ui/CustomButton/CustomButton";
 import { useThemeContext } from "@src/context/ThemeContext";
 import { Theme } from "@src/styles/Types";
 import Typo from "@src/styles/Typo";
@@ -16,7 +18,7 @@ import {
 interface AuthContainerProps {
   children: JSX.Element;
   title: string;
-  isSubmitButtonDisabled: boolean;
+  isSubmitButtonDisabled?: boolean;
   buttonTitle: string;
   onSubmit: () => void;
 }
@@ -50,10 +52,11 @@ export default function AuthContainer({
 
         <View style={styles.children}>{children}</View>
 
-        <View style={styles.bottomButton}>
+        <View style={[styles.bottomButton]}>
           <CustomButton
             disabled={isSubmitButtonDisabled}
             onPress={onSubmit}
+            variant={EButtonVariant.Primary}
             title={buttonTitle}
           />
         </View>
@@ -93,8 +96,8 @@ const styles = StyleSheet.create({
   },
   children: { flex: 1, paddingHorizontal: 20 },
   bottomButton: {
-    flex: 1 / 4,
     alignItems: "center",
     justifyContent: "center",
+    flex: 1 / 4,
   },
 });

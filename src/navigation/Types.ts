@@ -9,12 +9,18 @@ export type RootStackParamList = {
 
 export type AuthStackParamList = {
   WelcomePage: undefined;
-  Name: undefined;
+  Fullname: undefined;
   Credentials: undefined;
+  Username: undefined;
+  Birthdate: undefined;
+  Cooktype: undefined;
 };
 
-export enum PAGES {
+export enum AUTH_PAGES {
   WelcomePage = "WelcomePage",
-  Name = "Name",
+  Fullname = "Fullname",
   Credentials = "Credentials",
+  Username = "Username",
+  Birthdate = "Birthdate",
+  Cooktype = "Cooktype",
 }

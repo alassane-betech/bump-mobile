@@ -9,6 +9,7 @@ import {
   Text as RNText,
   StyleSheet,
   TextProps,
+  TextStyle,
   ViewStyle,
 } from "react-native";
 
@@ -25,7 +26,7 @@ export enum ETextVariant {
 }
 
 interface CustomTextProps extends TextProps {
-  style?: ViewStyle;
+  style?: TextStyle | TextStyle[];
   variant?: ETextVariant;
   link?: string;
 }

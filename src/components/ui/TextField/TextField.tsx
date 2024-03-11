@@ -1,26 +1,58 @@
 import { useThemeContext } from "@src/context/ThemeContext";
-import { COLORS, FONTS } from "@src/styles/BaseStyle";
+import { FONTS, defaultHitSlot } from "@src/styles/BaseStyle";
 import { Theme } from "@src/styles/Types";
 import Typo from "@src/styles/Typo";
 import React, { useRef, useState } from "react";
 import {
   Animated,
   TextInput,
-  View,
   StyleSheet,
-  TouchableWithoutFeedback,
   TextInputProps,
+  TouchableOpacity,
+  NativeSyntheticEvent,
+  TextInputFocusEventData,
+  NativeTouchEvent,
 } from "react-native";
+import Feather from "@expo/vector-icons/Feather";
+import ErrorText from "@src/components/shared/ErrorText/ErrorText";
 
+export enum ETextFielType {
+  Password = "Password",
+  Default = "Default",
+  Date = "Date",
+}
 interface TextFieldProps extends TextInputProps {
   label: string;
+  type?: ETextFielType;
+  error?: string;
+  onPress?: () => void;
+  togglePasswordVisibility?: () => void;
 }
-export const TextField = ({ label, ...props }: TextFieldProps) => {
+export const TextField = ({
+  label,
+  type = ETextFielType.Default,
+  error,
+  togglePasswordVisibility,
+  onPress,
+  ...props
+}: TextFieldProps) => {
   const [isFocused, setIsFocused] = useState(false);
   const animatedIsFocused = useRef(new Animated.Value(0)).current;
   const inputRef = useRef(null);
   const handleFocus = () => setIsFocused(true);
-  const handleBlur = () => setIsFocused(false);
+  const handleBlur = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+    setIsFocused(false);
+    if (props.onBlur) {
+      props.onBlur(e);
+    }
+  };
+
+  const handleOnPressIn = () => {
+    setIsFocused(true);
+    if (onPress) {
+      onPress();
+    }
+  };
 
   const { theme } = useThemeContext();
   const themed = React.useMemo(() => getThemeStyle(theme), [theme]);
@@ -32,9 +64,13 @@ export const TextField = ({ label, ...props }: TextFieldProps) => {
       useNativeDriver: false,
     }).start();
   }, [isFocused, props.value, animatedIsFocused]);
+
   const focusInput = () => {
     setIsFocused(true);
     inputRef.current.focus();
+    if (onPress) {
+      onPress();
+    }
   };
 
   const labelStyle: any = {
@@ -52,21 +88,42 @@ export const TextField = ({ label, ...props }: TextFieldProps) => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={focusInput}>
-      <View style={themed.container}>
+    <>
+      <TouchableOpacity
+        activeOpacity={1}
+        style={themed.container}
+        onPress={focusInput}
+      >
         <Animated.Text style={[themed.label, labelStyle]}>
           {label}
         </Animated.Text>
         <TextInput
           {...props}
+          onPressIn={handleOnPressIn}
+          selectionColor={theme.text.input}
           style={[themed.textInput, props.style]}
           onFocus={handleFocus}
           onBlur={handleBlur}
           blurOnSubmit
           ref={inputRef}
+          editable={type !== ETextFielType.Date}
         />
-      </View>
-    </TouchableWithoutFeedback>
+        {type === ETextFielType.Password && (
+          <TouchableOpacity
+            hitSlop={defaultHitSlot}
+            style={styles.eyeContainer}
+            onPress={togglePasswordVisibility}
+          >
+            <Feather
+              name={props?.secureTextEntry ? "eye" : "eye-off"}
+              size={20}
+              color={theme.text.input}
+            />
+          </TouchableOpacity>
+        )}
+      </TouchableOpacity>
+      {error && <ErrorText text={error} />}
+    </>
   );
 };
 
@@ -90,3 +147,15 @@ const getThemeStyle = (theme: Theme) =>
       borderRadius: 10,
     },
   });
+
+const styles = StyleSheet.create({
+  eyeContainer: {
+    position: "absolute",
+    right: 10,
+    top: 0,
+    zIndex: 1000,
+    bottom: 0,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

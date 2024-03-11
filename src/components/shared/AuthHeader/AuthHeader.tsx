@@ -1,10 +1,7 @@
-import { COLORS, FONTS, defaultHitSlot, window } from "@src/styles/BaseStyle";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { FONTS, window } from "@src/styles/BaseStyle";
+import { View, StyleSheet, Text } from "react-native";
+import BackButton from "../BackButton/BackButton";
 export default function AuthHeader() {
-  const navigation = useNavigation();
-  const goBack = () => navigation.goBack();
   return (
     <View
       style={
@@ -12,17 +9,7 @@ export default function AuthHeader() {
       }
     >
       <View style={styles.header}>
-        <TouchableOpacity
-          onPress={goBack}
-          style={styles.back}
-          hitSlop={defaultHitSlot}
-        >
-          <MaterialIcons
-            name="keyboard-arrow-left"
-            size={40}
-            color={COLORS.secondary}
-          />
-        </TouchableOpacity>
+        <BackButton />
         <Text style={styles.logoTitle}>BUMP</Text>
       </View>
     </View>
@@ -38,7 +25,6 @@ const styles = StyleSheet.create({
     height: "15%",
     justifyContent: "center",
   },
-  back: { zIndex: 1000 },
   logoTitle: {
     fontFamily: FONTS.Logo,
     color: "white",
