@@ -10,7 +10,7 @@ import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { COLORS, FONTS, window } from "@src/styles/BaseStyle";
 import CustomButton from "../CustomButton/CustomButton";
-import { CustomText, ETextVariant } from "../CustomText/CustomText";
+import { CustomText } from "../CustomText/CustomText";
 
 const { height, width } = Dimensions.get("screen");
 
