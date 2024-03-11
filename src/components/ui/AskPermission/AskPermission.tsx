@@ -10,6 +10,7 @@ import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { COLORS, FONTS, window } from "@src/styles/BaseStyle";
 import CustomButton from "../CustomButton/CustomButton";
+import { CustomText, ETextVariant } from "../CustomText/CustomText";
 
 const { height, width } = Dimensions.get("screen");
 
@@ -67,8 +68,12 @@ export const AskPermission: React.FC<AskPermissionProps> = ({ type }) => {
       />
 
       <View style={styles.body}>
-        <Text style={styles.title}>{getPermissionType(type).title}</Text>
-        <Text style={styles.subtitle}>{getPermissionType(type).subTitle}</Text>
+        <CustomText style={styles.title}>
+          {getPermissionType(type).title}
+        </CustomText>
+        <CustomText style={styles.subtitle}>
+          {getPermissionType(type).subTitle}
+        </CustomText>
       </View>
       <View style={styles.buttonsBlock}>
         <CustomButton
@@ -98,7 +103,7 @@ const styles = StyleSheet.create({
     top: height * 0.1,
     position: "absolute",
     alignSelf: "center",
-    width: window.isSmallDevice ? width * 0.6 : width * 0.6,
+    width: width * 0.6,
     height: window.isSmallDevice ? height * 0.23 : height * 0.2,
   },
   backButton: {

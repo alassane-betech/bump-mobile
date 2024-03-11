@@ -4,13 +4,7 @@ import { Theme } from "@src/styles/Types";
 import Typo from "@src/styles/Typo";
 import { goToLink } from "@src/utils/Helpers";
 import React from "react";
-import {
-  Linking,
-  Text as RNText,
-  StyleSheet,
-  TextProps,
-  ViewStyle,
-} from "react-native";
+import { Text as RNText, StyleSheet, TextProps } from "react-native";
 
 const styles = StyleSheet.create({
   title: Typo.screenTitle,
@@ -25,16 +19,16 @@ export enum ETextVariant {
 }
 
 interface CustomTextProps extends TextProps {
-  style?: ViewStyle;
   variant?: ETextVariant;
   link?: string;
 }
-export const CustomText = ({
+
+export const CustomText: React.FC<CustomTextProps> = ({
   link,
-  style,
   variant,
+  style,
   ...props
-}: CustomTextProps) => {
+}) => {
   const { theme } = useThemeContext();
 
   const themed = React.useMemo(() => getThemeStyle(theme), [theme]);
@@ -43,12 +37,12 @@ export const CustomText = ({
     themed.text,
     variant && styles[variant],
     style,
-    !!link && themed.link,
+    link && themed.link,
   ];
 
   return (
     <RNText
-      {...(!!link && { onPress: () => goToLink(link) })}
+      {...(link && { onPress: () => goToLink(link) })}
       style={textStyle}
       {...props}
     />
@@ -60,7 +54,7 @@ const getThemeStyle = (theme: Theme) =>
     text: {
       fontFamily: FONTS.regular,
       fontSize: 13,
-      lineHeight: 20,
+      lineHeight: 30,
       color: theme.text.default,
     },
     link: {
