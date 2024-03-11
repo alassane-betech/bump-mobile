@@ -1,5 +1,8 @@
 import { useNavigation } from "@react-navigation/core";
-import CustomButton from "@src/components/ui/CustomButton/CustomButton";
+import CustomButton, {
+  EButtonVariant,
+} from "@src/components/ui/CustomButton/CustomButton";
+import { AUTH_PAGES } from "@src/navigation/Types";
 import { COLORS, FONTS, window } from "@src/styles/BaseStyle";
 import { StatusBar } from "expo-status-bar";
 import {
@@ -15,7 +18,7 @@ const { width, height } = Dimensions.get("screen");
 const WelcomePage = () => {
   const navigation = useNavigation();
 
-  const goToSignup = () => navigation.navigate("Name");
+  const goToSignup = () => navigation.navigate(AUTH_PAGES.Fullname);
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
@@ -29,13 +32,16 @@ const WelcomePage = () => {
           <Text style={styles.title}>au défi</Text>
           <Text style={styles.subtitle}>Bienvenue sur Bump.</Text>
           <View style={styles.buttonsBlock}>
-            <CustomButton onPress={goToSignup} title="Créer mon compte" />
+            <CustomButton
+              onPress={goToSignup}
+              variant={EButtonVariant.Primary}
+              title="Créer mon compte"
+            />
             <View style={styles.bottomButton}>
               <CustomButton
                 onPress={() => null}
                 title="J'ai déjà un compte"
-                textColor={COLORS.secondary}
-                backgroundColor={COLORS.tertiary}
+                variant={EButtonVariant.Secondary}
               />
             </View>
           </View>

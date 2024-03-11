@@ -3,6 +3,10 @@ export type Theme = {
   background: {
     input: string;
     card: string;
+    button: {
+      primary: string;
+      secondary: string;
+    };
   };
   surface: string;
   text: {
@@ -11,5 +15,16 @@ export type Theme = {
     input: string;
     title: string;
     link: string;
+  };
+  border: {
+    default: string;
+  };
+  success: {
+    color: string;
+    background: string;
+  };
+  error: {
+    color: string;
+    background: string;
   };
 };

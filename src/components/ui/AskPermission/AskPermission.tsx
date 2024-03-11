@@ -1,14 +1,13 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  Dimensions,
-  TouchableOpacity,
-} from "react-native";
-import React from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { COLORS, FONTS, window } from "@src/styles/BaseStyle";
+import React from "react";
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import CustomButton from "../CustomButton/CustomButton";
 import { CustomText } from "../CustomText/CustomText";
 

@@ -4,7 +4,7 @@ import { Theme } from "@src/styles/Types";
 import Typo from "@src/styles/Typo";
 import { goToLink } from "@src/utils/Helpers";
 import React from "react";
-import { Text as RNText, StyleSheet, TextProps } from "react-native";
+import { Text as RNText, StyleSheet, TextProps, TextStyle } from "react-native";
 
 const styles = StyleSheet.create({
   title: Typo.screenTitle,
@@ -19,6 +19,7 @@ export enum ETextVariant {
 }
 
 interface CustomTextProps extends TextProps {
+  style?: TextStyle | TextStyle[];
   variant?: ETextVariant;
   link?: string;
 }
