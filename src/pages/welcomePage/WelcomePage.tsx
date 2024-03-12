@@ -3,7 +3,7 @@ import CustomButton, {
   EButtonVariant,
 } from "@src/components/ui/CustomButton/CustomButton";
 import { AUTH_PAGES } from "@src/navigation/Types";
-import { COLORS, FONTS } from "@src/styles/BaseStyle";
+import { COLORS, FONTS, window } from "@src/styles/BaseStyle";
 import { StatusBar } from "expo-status-bar";
 import {
   Dimensions,
@@ -77,15 +77,14 @@ const styles = StyleSheet.create({
   },
   bottomView: {
     width,
-    backgroundColor: "white",
+    backgroundColor: "transparent",
     position: "absolute",
     bottom: 0,
-    height: height / 2 - 65,
+    height: window.isSmallDevice ? height * 0.45 : height * 0.42,
   },
   buttonsBlock: {
     position: "absolute",
-    bottom: 50,
-    width: "80%",
+    bottom: height * 0.05,
     alignSelf: "center",
   },
   bottomButton: {
