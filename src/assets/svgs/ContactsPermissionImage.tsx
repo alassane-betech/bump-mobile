@@ -1,12 +1,6 @@
 import * as React from "react";
 import Svg, { Circle, Path, Defs, Pattern, Use, Image } from "react-native-svg";
-
-export interface IconProps {
-  height?: number;
-  width?: number;
-  color?: string;
-  backgroundColor?: string;
-}
+import { IconProps } from "./Types";
 
 export const PermissionImage = ({
   height,
