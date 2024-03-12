@@ -1,3 +1,4 @@
+import { BumpEgg } from "@src/assets/svgs/BumpEgg";
 import { CheckedElement } from "@src/components/ui/CheckedElement/CheckedElement";
 import CustomButton from "@src/components/ui/CustomButton/CustomButton";
 import { EggElement } from "@src/components/ui/EggElement/EggElement";
@@ -22,7 +23,10 @@ export const LoggedInWelcomePage: React.FC = () => {
         resizeMode="cover"
         style={styles.image}
       >
-        <View style={styles.titleBlock}>
+        <View style={styles.headerBlock}>
+          <View style={styles.bumpEgg}>
+            <BumpEgg />
+          </View>
           <Text style={styles.title}>Bienvenue sur Bump !</Text>
         </View>
         <View style={styles.body}>
@@ -78,6 +82,7 @@ export const LoggedInWelcomePage: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: COLORS.primary,
   },
   image: {
     flex: 1,
@@ -86,8 +91,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: "5%",
   },
-  titleBlock: {
-    marginTop: height * 0.23,
+  headerBlock: {
+    marginTop: height * 0.09,
+    justifyContent: "center",
   },
   title: {
     textAlign: "center",
@@ -108,28 +114,11 @@ const styles = StyleSheet.create({
   eggsElements: {
     marginTop: 25,
   },
-  eggElement: {
-    marginTop: 15,
-    backgroundColor: COLORS.tertiary,
-    flexDirection: "row",
-    alignItems: "center",
-    paddingLeft: 18,
-    paddingVertical: 10,
-    borderRadius: 15,
-  },
-  textBlock: {
-    marginLeft: 15,
-  },
-  eggElementTitle: {
-    fontSize: 16,
-    fontFamily: FONTS.bold,
-  },
-  eggElementSubTitle: {
-    fontSize: 14,
-    fontFamily: FONTS.regular,
-  },
   bottomButton: {
     marginVertical: 20,
+    alignSelf: "center",
+  },
+  bumpEgg: {
     alignSelf: "center",
   },
 });

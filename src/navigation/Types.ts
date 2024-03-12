@@ -31,7 +31,6 @@ export type AuthStackParamList = {
 
 export enum MAIN_PAGES {
   Main = "Main",
-  LoggedInWelcomePage = "LoggedInWelcomePage",
   Home = "Home",
 }
 

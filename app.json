@@ -14,7 +14,8 @@
     "assetBundlePatterns": [
       "./src/assets/images/splashScreen.png",
       "./src/assets/images/appIcon.png",
-      "./src/assets/images/welcomeImage.png"
+      "./src/assets/images/welcomeImage.png",
+      "./src/assets/images/loggedInwelcomePage.png"
     ],
     "ios": {
       "supportsTablet": true,
