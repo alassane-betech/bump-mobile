@@ -3,11 +3,16 @@ import { FONTS } from "@src/styles/BaseStyle";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { CustomText } from "../CustomText/CustomText";
+import { useThemeContext } from "@src/context/ThemeContext";
 
 export const CheckedElement: React.FC<{ text: string }> = ({ text }) => {
+  const { theme } = useThemeContext();
+
   return (
     <View style={styles.checkedElement}>
-      <View style={styles.checkIcon}>
+      <View
+        style={[styles.checkIcon, { backgroundColor: theme.cardBackGround }]}
+      >
         <CheckIcon />
       </View>
       <CustomText style={styles.checkedElementText}>{text}</CustomText>
@@ -26,7 +31,6 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.bold,
   },
   checkIcon: {
-    backgroundColor: "#F7F8FA",
     width: 24,
     height: 24,
     alignItems: "center",

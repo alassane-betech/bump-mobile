@@ -1,13 +1,18 @@
-import { View, Text, StyleSheet } from "react-native";
+import { useThemeContext } from "@src/context/ThemeContext";
 import React, { PropsWithChildren } from "react";
+import { StyleSheet, View } from "react-native";
 
 export const CustomCard: React.FC<PropsWithChildren> = ({ children }) => {
-  return <View style={styles.card}>{children}</View>;
+  const { theme } = useThemeContext();
+  return (
+    <View style={[styles.card, { backgroundColor: theme.cardBackGround }]}>
+      {children}
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#F7F8FA",
     borderRadius: 15,
   },
 });
