@@ -33,6 +33,15 @@ export default function BirthdateForm() {
     setDate(date);
     setShowDatePicker(false);
   };
+
+  const getValue = () => {
+    if (date) {
+      return formatDate(date);
+    } else if (userInfo.birthdate) {
+      return formatDate(new Date(userInfo.birthdate));
+    }
+    return "";
+  };
   return (
     <AuthContainer
       buttonTitle="Créer mon compte"
@@ -44,13 +53,7 @@ export default function BirthdateForm() {
           onPress={showHideDatePicker}
           label="Date de naissance"
           type={ETextFielType.Date}
-          value={
-            date
-              ? formatDate(date)
-              : userInfo.birthdate
-              ? formatDate(new Date(userInfo.birthdate))
-              : ""
-          }
+          value={getValue()}
           error={errorText}
         />
 
