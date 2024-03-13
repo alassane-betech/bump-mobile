@@ -8,18 +8,19 @@ import { useSignup } from "@src/context/SignupContext";
 import { AUTH_PAGES } from "@src/navigation/Types";
 import { formatDate } from "@src/utils/Helpers";
 import { useState } from "react";
-import { Platform, TouchableOpacity } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 export default function BirthdateForm() {
-  const [date, setDate] = useState("");
-  const { updateUser } = useSignup();
+  const [date, setDate] = useState(null);
+  const { userInfo, updateUser } = useSignup();
   const [errorText, setErrorText] = useState("");
   const [showDatePicker, setShowDatePicker] = useState(false);
   const navigation = useNavigation();
   const submitForm = () => {
-    if (date) {
-      updateUser({ birthdate: date });
+    setErrorText("");
+    const birthdate = date || userInfo.birthdate;
+    if (birthdate) {
+      updateUser({ birthdate });
       navigation.navigate(AUTH_PAGES.Username);
     } else {
       setErrorText("Renseigne ce champs");
@@ -29,8 +30,17 @@ export default function BirthdateForm() {
   const showHideDatePicker = () => setShowDatePicker(!showDatePicker);
 
   const handleConfirm = (date: Date) => {
-    setDate(formatDate(date));
+    setDate(date);
     setShowDatePicker(false);
+  };
+
+  const getValue = () => {
+    if (date) {
+      return formatDate(date);
+    } else if (userInfo.birthdate) {
+      return formatDate(new Date(userInfo.birthdate));
+    }
+    return "";
   };
   return (
     <AuthContainer
@@ -43,7 +53,7 @@ export default function BirthdateForm() {
           onPress={showHideDatePicker}
           label="Date de naissance"
           type={ETextFielType.Date}
-          value={date?.toString() || ""}
+          value={getValue()}
           error={errorText}
         />
 

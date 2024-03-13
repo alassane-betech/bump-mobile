@@ -14,7 +14,7 @@ const AuthStack = createNativeStackNavigator<AuthStackParamList>();
 export default function Auth() {
   return (
     <SignupProvider>
-      <AuthStack.Navigator initialRouteName={AUTH_PAGES.LoggedInWelcomePage}>
+      <AuthStack.Navigator>
         <AuthStack.Screen
           name={AUTH_PAGES.WelcomePage}
           component={WelcomePage}
