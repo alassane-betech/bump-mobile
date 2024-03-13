@@ -1,18 +1,9 @@
+import { User } from "@src/types/userTypes";
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
-interface UserInfo {
-  firstname: string;
-  lastname: string;
-  email: string;
-  password: string;
-  birthdate: string;
-  username: string;
-  userType: string;
-}
-
 interface SignupContextType {
-  userInfo: UserInfo;
-  updateUser: (newInfo: Partial<UserInfo>) => void;
+  userInfo: User;
+  updateUser: (newInfo: Partial<User>) => void;
 }
 
 const SignupContext = createContext<SignupContextType | undefined>(undefined);
@@ -30,17 +21,17 @@ interface SignupProviderProps {
 }
 
 export const SignupProvider: React.FC<SignupProviderProps> = ({ children }) => {
-  const [userInfo, setUserInfo] = useState<UserInfo>({
+  const [userInfo, setUserInfo] = useState<User>({
     firstname: "",
     lastname: "",
     email: "",
     password: "",
     birthdate: "",
     username: "",
-    userType: "",
+    category: "",
   });
 
-  const updateUser = (newInfo: Partial<UserInfo>) => {
+  const updateUser = (newInfo: Partial<User>) => {
     setUserInfo((prevInfo) => ({ ...prevInfo, ...newInfo }));
   };
 

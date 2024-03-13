@@ -17,7 +17,7 @@ const nameValidationSchema = Yup.object().shape({
 });
 
 export default function NameForm() {
-  const { updateUser } = useSignup();
+  const { userInfo, updateUser } = useSignup();
   const navigation = useNavigation();
 
   const submitForm = ({ firstname, lastname }: FormValues) => {
@@ -27,7 +27,10 @@ export default function NameForm() {
 
   return (
     <Formik
-      initialValues={{ firstname: "", lastname: "" }}
+      initialValues={{
+        firstname: userInfo.firstname,
+        lastname: userInfo.lastname,
+      }}
       validationSchema={nameValidationSchema}
       onSubmit={(values) => {
         submitForm(values);

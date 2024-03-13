@@ -18,7 +18,7 @@ import {
 interface AuthContainerProps {
   children: JSX.Element;
   title: string;
-  isSubmitButtonDisabled?: boolean;
+  loading?: boolean;
   buttonTitle: string;
   onSubmit: () => void;
 }
@@ -26,7 +26,7 @@ interface AuthContainerProps {
 export default function AuthContainer({
   children,
   title,
-  isSubmitButtonDisabled,
+  loading,
   buttonTitle,
   onSubmit,
 }: AuthContainerProps) {
@@ -54,7 +54,7 @@ export default function AuthContainer({
 
         <View style={[styles.bottomButton]}>
           <CustomButton
-            disabled={isSubmitButtonDisabled}
+            disabled={loading}
             onPress={onSubmit}
             variant={EButtonVariant.Primary}
             title={buttonTitle}

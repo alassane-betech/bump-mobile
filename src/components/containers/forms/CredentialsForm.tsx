@@ -46,7 +46,7 @@ const CredentialsValidationSchema = Yup.object().shape({
 
 export default function CredentialsForm() {
   const navigation = useNavigation();
-  const { updateUser } = useSignup();
+  const { userInfo, updateUser } = useSignup();
   const [passwordCriteria, setPasswordCriteria] = useState<PasswordCriteria>({
     minLength: false,
     oneDigit: false,
@@ -65,7 +65,7 @@ export default function CredentialsForm() {
   const isDisabledButton = false;
   return (
     <Formik
-      initialValues={{ email: "", password: "" }}
+      initialValues={{ email: userInfo.email, password: userInfo.password }}
       validationSchema={CredentialsValidationSchema}
       onSubmit={(values) => {
         submitForm(values);
@@ -91,7 +91,6 @@ export default function CredentialsForm() {
         }, [values.password]);
         return (
           <AuthContainer
-            isSubmitButtonDisabled={isDisabledButton}
             onSubmit={handleSubmit}
             title="Identifiants"
             buttonTitle="Continuer"
