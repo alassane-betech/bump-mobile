@@ -10,14 +10,19 @@ const api = axios.create({
 });
 
 api.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+  (response) => response,
   (error) => {
-    if (axios.isAxiosError(error) && error.response?.data) {
+    if (!error.response) {
+      const networkErrorMessage = error.request
+        ? "Network Error: The request was made but no response was received"
+        : "Network Error: Something went wrong in setting up the request";
+
+      return Promise.reject(new Error(networkErrorMessage));
+    }
+    if (axios.isAxiosError(error)) {
       const serverError: ServerError = {
-        message: error.response?.data.message,
-        error: error.response?.data.error,
+        message: error.response.data.message || "An error occurred",
+        error: error.response.data.error || error.response.statusText,
       };
       return Promise.reject(serverError);
     }
