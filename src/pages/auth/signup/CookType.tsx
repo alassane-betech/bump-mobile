@@ -17,22 +17,22 @@ export default function CookType() {
   const { mutate: createUser, data, isPending, isSuccess } = useCreateUser();
 
   const [showError, setShowError] = useState(false);
-  const handleSelect = (category: string) => {
-    updateUser({ category });
-  };
+
   const submit = () => {
     setShowError(false);
     if (userInfo.category) {
-      const input = {
-        ...userInfo,
-        birthdate:
-          userInfo?.birthdate &&
-          formatDate(new Date(userInfo.birthdate), "dd/MM/yyyy"),
-      };
-      createUser(input);
+      requestCreateUser();
     } else {
       setShowError(true);
     }
+  };
+
+  const requestCreateUser = () => {
+    const input = {
+      ...userInfo,
+      birthdate: formatDate(new Date(userInfo.birthdate), "dd/MM/yyyy"),
+    };
+    createUser(input);
   };
   useEffect(() => {
     if (data && isSuccess) {
@@ -53,12 +53,12 @@ export default function CookType() {
         {COOK_TYPE?.map(({ id, name, value }, index) => {
           return (
             <View key={id}>
-              <UserType
+              <CategoryUserType
                 selected={userInfo.category === value}
-                index={index}
+                showDivider={index === 2}
                 type={name}
                 value={value}
-                onSelect={handleSelect}
+                onSelect={updateUser}
               />
             </View>
           );
@@ -71,20 +71,20 @@ export default function CookType() {
   );
 }
 
-const UserType = ({
+const CategoryUserType = ({
   type,
-  index,
+  showDivider,
   value,
   selected,
   onSelect,
 }: {
   type: string;
-  index: number;
+  showDivider: boolean;
   value: string;
   selected?: boolean;
-  onSelect: (type: string) => void;
+  onSelect: ({ category }: { category: string }) => void;
 }) => {
-  const handleSelect = () => onSelect(value);
+  const handleSelect = () => onSelect({ category: value });
   return (
     <View>
       <CustomButton
@@ -93,7 +93,7 @@ const UserType = ({
         onPress={handleSelect}
         variant={selected ? EButtonVariant.Primary : EButtonVariant.Secondary}
       />
-      {index === 2 && <Hr />}
+      {showDivider && <Hr />}
     </View>
   );
 };
