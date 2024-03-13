@@ -1,7 +1,9 @@
 import { EggIcon } from "@src/assets/svgs/EggIcon";
+import { CustomCard } from "@src/components/shared/CustomCard/CustomCard";
 import { FONTS } from "@src/styles/BaseStyle";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { CustomText } from "../CustomText/CustomText";
 
 interface EggElementProps {
   eggColor: string;
@@ -15,25 +17,31 @@ export const EggElement: React.FC<EggElementProps> = ({
   subTitle,
 }) => {
   return (
-    <View style={styles.eggElement}>
-      <EggIcon color={eggColor} />
-      <View style={styles.textBlock}>
-        <Text style={styles.eggElementTitle}>{title}</Text>
-        <Text style={styles.eggElementSubTitle}>{subTitle}</Text>
-      </View>
+    <View style={styles.eggElementBlock}>
+      <CustomCard>
+        <View style={styles.eggElement}>
+          <EggIcon color={eggColor} />
+          <View style={styles.textBlock}>
+            <CustomText style={styles.eggElementTitle}>{title}</CustomText>
+            <CustomText style={styles.eggElementSubTitle}>
+              {subTitle}
+            </CustomText>
+          </View>
+        </View>
+      </CustomCard>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  eggElement: {
+  eggElementBlock: {
     marginTop: 15,
-    backgroundColor: "#F7F8FA",
+  },
+  eggElement: {
     flexDirection: "row",
     alignItems: "center",
     paddingLeft: 18,
     paddingVertical: 10,
-    borderRadius: 15,
   },
   textBlock: {
     marginLeft: 15,

@@ -39,6 +39,7 @@ export const LighTheme: Theme = {
     color: "#F91D45",
     background: "#FFEBE6",
   },
+  cardBackGround: "#F7F8FA",
 };
 
 export const DarkTheme: Theme = {
@@ -52,6 +53,7 @@ export const DarkTheme: Theme = {
     },
   },
   surface: "#1e1e1e",
+  cardBackGround: "#",
   text: {
     default: "",
     button: "",
@@ -76,6 +78,10 @@ const COLORS = {
   primary: "#F8B60D",
   secondary: "#2B323B",
   tertiary: "#ECEFF3",
+  brown: "#C59E74",
+  red: "#EB5855",
+  blue: "#52ACED",
+  grey: "#C5D1DC",
 };
 
 export { FONTS, COLORS };

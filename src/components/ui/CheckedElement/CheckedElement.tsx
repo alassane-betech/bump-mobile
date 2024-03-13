@@ -1,7 +1,8 @@
 import { CheckIcon } from "@src/assets/svgs/CheckIcon";
-import { COLORS, FONTS } from "@src/styles/BaseStyle";
+import { FONTS } from "@src/styles/BaseStyle";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { CustomText } from "../CustomText/CustomText";
 
 export const CheckedElement: React.FC<{ text: string }> = ({ text }) => {
   return (
@@ -9,7 +10,7 @@ export const CheckedElement: React.FC<{ text: string }> = ({ text }) => {
       <View style={styles.checkIcon}>
         <CheckIcon />
       </View>
-      <Text style={styles.checkedElementText}>{text}</Text>
+      <CustomText style={styles.checkedElementText}>{text}</CustomText>
     </View>
   );
 };

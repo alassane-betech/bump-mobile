@@ -39,27 +39,27 @@ export const LoggedInWelcomePage: React.FC = () => {
 
             <View style={styles.eggsElements}>
               <EggElement
-                eggColor="#C59E74"
+                eggColor={COLORS.brown}
                 title="Cuisinier du dimanche"
                 subTitle="Tu commences ici"
               />
               <EggElement
-                eggColor="#C5D1DC"
+                eggColor={COLORS.grey}
                 title="Apprenti"
                 subTitle="1 000 points"
               />
               <EggElement
-                eggColor="#F3CC45"
+                eggColor={COLORS.primary}
                 title="Pépite"
                 subTitle="5 000 points"
               />
               <EggElement
-                eggColor="#52ACED"
+                eggColor={COLORS.blue}
                 title="Régalade"
                 subTitle="15 000 points"
               />
               <EggElement
-                eggColor="#EB5855"
+                eggColor={COLORS.red}
                 title="Master"
                 subTitle="50 000 points"
               />
@@ -86,10 +86,6 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-  },
-  backButton: {
-    position: "absolute",
-    top: "5%",
   },
   headerBlock: {
     marginTop: height * 0.09,
