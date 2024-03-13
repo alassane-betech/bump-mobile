@@ -15,7 +15,7 @@
       "./src/assets/images/splashScreen.png",
       "./src/assets/images/appIcon.png",
       "./src/assets/images/welcomeImage.png",
-      "./src/assets/images/loggedInwelcomePage.png"
+      "./src/assets/images/frame.png"
     ],
     "ios": {
       "supportsTablet": true,
