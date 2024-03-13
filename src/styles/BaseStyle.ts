@@ -53,7 +53,7 @@ export const DarkTheme: Theme = {
     },
   },
   surface: "#1e1e1e",
-  cardBackGround: "#",
+  cardBackGround: "",
   text: {
     default: "",
     button: "",
