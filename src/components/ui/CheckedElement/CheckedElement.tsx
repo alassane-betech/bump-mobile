@@ -23,6 +23,7 @@ export const CheckedElement: React.FC<{ text: string }> = ({ text }) => {
 const styles = StyleSheet.create({
   checkedElement: {
     flexDirection: "row",
+    alignItems: "center",
     marginTop: 20,
   },
   checkedElementText: {
