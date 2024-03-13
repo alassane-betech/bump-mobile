@@ -20,7 +20,7 @@ export const LoggedInWelcomePage: React.FC = () => {
     <View style={styles.container}>
       <Image
         source={require("@src/assets/images/frame.png")}
-        resizeMode="contain"
+        resizeMode="cover"
         style={styles.image}
       />
       <View style={styles.headerBlock}>
@@ -85,7 +85,6 @@ const styles = StyleSheet.create({
   },
   image: {
     position: "absolute",
-    height: window.isSmallDevice ? height * 0.65 : height * 0.53,
     width,
   },
   headerBlock: {
