@@ -55,7 +55,7 @@ const getThemeStyle = (theme: Theme) =>
     text: {
       fontFamily: FONTS.regular,
       fontSize: 13,
-      lineHeight: 30,
+      lineHeight: 20,
       color: theme.text.default,
     },
     link: {

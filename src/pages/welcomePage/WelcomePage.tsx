@@ -19,6 +19,8 @@ const WelcomePage = () => {
   const navigation = useNavigation();
 
   const goToSignup = () => navigation.navigate(AUTH_PAGES.Fullname);
+  const goToLogin = () => navigation.navigate(AUTH_PAGES.Login);
+
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
@@ -39,7 +41,7 @@ const WelcomePage = () => {
             />
             <View style={styles.bottomButton}>
               <CustomButton
-                onPress={() => null}
+                onPress={goToLogin}
                 title="J'ai déjà un compte"
                 variant={EButtonVariant.Secondary}
               />
