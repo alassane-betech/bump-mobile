@@ -23,9 +23,7 @@ export const useLogin = () => {
     mutationFn: (credentials) => userService.login(credentials),
     onError: ({ message }) => {
       const msg = Array.isArray(message) ? message.join(", ") : message;
-      showError(
-        msg || "Une erreur est survenue lors de la création de l’utilisateur."
-      );
+      showError(msg || "Une erreur est survenue lors de l'authentification.");
     },
   });
 };
