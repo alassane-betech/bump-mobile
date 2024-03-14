@@ -3,7 +3,7 @@ import {
   ETextFielType,
   TextField,
 } from "@src/components/ui/TextField/TextField";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Formik } from "formik";
 import { useNavigation } from "@react-navigation/native";
@@ -17,9 +17,10 @@ import {
   CredentialsValidationSchema,
 } from "./CredentialsForm";
 import { useLogin } from "@src/hooks/useUsers";
+import { AuthContext } from "@src/context/AuthContext";
 
 export default function LoginForm() {
-  const navigation = useNavigation();
+  const { authContext } = useContext(AuthContext);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const { mutate: login, data, isPending, isSuccess } = useLogin();
 
@@ -32,9 +33,7 @@ export default function LoginForm() {
 
   useEffect(() => {
     if (data && isSuccess) {
-      const { access_token } = data;
-      alert(access_token);
-      // should navigate to welcome page and pass the token via params!
+      authContext.setToken(data.access_token);
     }
   }, [data, isSuccess]);
 

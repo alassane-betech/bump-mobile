@@ -27,7 +27,7 @@ export type AuthStackParamList = {
   [AUTH_PAGES.Username]: undefined;
   [AUTH_PAGES.Birthdate]: undefined;
   [AUTH_PAGES.Cooktype]: undefined;
-  [AUTH_PAGES.LoggedInWelcomePage]: undefined;
+  [AUTH_PAGES.LoggedInWelcomePage]: { token: string };
   [AUTH_PAGES.Login]: undefined;
 };
 

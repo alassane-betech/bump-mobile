@@ -7,35 +7,41 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "@src/api/queryClient";
 import { ErrorProvider } from "@src/context/ErrorContext";
 import Main from "./Main";
+import { AuthContext, useAuthContext } from "@src/context/AuthContext";
+import Loader from "@src/components/ui/Loader/Loader";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function Root() {
-  const isSignedIn = false;
+  const { state, authContext } = useAuthContext();
+
+  if (state?.isLoading) return <Loader />;
   return (
     <QueryClientProvider client={queryClient}>
       <NavigationContainer>
-        <ThemeProvider>
-          <ErrorProvider>
-            <Stack.Navigator>
-              {isSignedIn ? (
-                <Stack.Screen
-                  name={MAIN_PAGES.Main}
-                  component={Main}
-                  options={{ headerShown: false }}
-                />
-              ) : (
-                <>
+        <AuthContext.Provider value={{ state, authContext }}>
+          <ThemeProvider>
+            <ErrorProvider>
+              <Stack.Navigator>
+                {state.token ? (
                   <Stack.Screen
-                    name={AUTH_PAGES.Auth}
-                    component={Auth}
+                    name={MAIN_PAGES.Main}
+                    component={Main}
                     options={{ headerShown: false }}
                   />
-                </>
-              )}
-            </Stack.Navigator>
-          </ErrorProvider>
-        </ThemeProvider>
+                ) : (
+                  <>
+                    <Stack.Screen
+                      name={AUTH_PAGES.Auth}
+                      component={Auth}
+                      options={{ headerShown: false }}
+                    />
+                  </>
+                )}
+              </Stack.Navigator>
+            </ErrorProvider>
+          </ThemeProvider>
+        </AuthContext.Provider>
       </NavigationContainer>
     </QueryClientProvider>
   );

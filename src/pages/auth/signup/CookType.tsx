@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import AuthContainer from "@src/components/containers/AuthContainer/AuthContainer";
 import ErrorText from "@src/components/shared/ErrorText/ErrorText";
 import CustomButton, {
@@ -6,6 +7,7 @@ import CustomButton, {
 import Hr from "@src/components/ui/Hr/Hr";
 import { useSignup } from "@src/context/SignupContext";
 import { useCreateUser } from "@src/hooks/useUsers";
+import { AUTH_PAGES } from "@src/navigation/Types";
 import { window } from "@src/styles/BaseStyle";
 import { COOK_TYPE } from "@src/utils/Data";
 import { formatDate } from "@src/utils/Helpers";
@@ -13,6 +15,7 @@ import { useEffect, useState } from "react";
 import { ScrollView, View, StyleSheet } from "react-native";
 
 export default function CookType() {
+  const navigation = useNavigation();
   const { userInfo, updateUser } = useSignup();
   const { mutate: createUser, data, isPending, isSuccess } = useCreateUser();
 
@@ -36,9 +39,9 @@ export default function CookType() {
   };
   useEffect(() => {
     if (data && isSuccess) {
-      const { access_token } = data;
-      alert(access_token);
-      // should navigate to welcome page and pass the token via params!
+      navigation.navigate(AUTH_PAGES.LoggedInWelcomePage, {
+        token: data.access_token,
+      });
     }
   }, [data, isSuccess]);
 
