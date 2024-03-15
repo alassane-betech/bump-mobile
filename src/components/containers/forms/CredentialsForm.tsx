@@ -12,7 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import { AUTH_PAGES } from "@src/navigation/Types";
 import { useSignup } from "@src/context/SignupContext";
 
-interface FormValues {
+export interface CredentialsFormValues {
   email: string;
   password: string;
 }
@@ -27,7 +27,7 @@ const passwordCriteriaRegex = {
   oneDigit: /\d/, // Au moins un chiffre
   oneSpecialChar: /[^A-Za-z0-9]/, // Au moins un caractère spécial
 };
-const CredentialsValidationSchema = Yup.object().shape({
+export const CredentialsValidationSchema = Yup.object().shape({
   email: Yup.string()
     .email("Adresse email invalide")
     .required("Renseigne ce champs"),
@@ -57,12 +57,11 @@ export default function CredentialsForm() {
   const handleTogglePasswordVisibility = () =>
     setIsPasswordVisible(!isPasswordVisible);
 
-  const submitForm = ({ email, password }: FormValues) => {
+  const submitForm = ({ email, password }: CredentialsFormValues) => {
     updateUser({ email, password });
     navigation.navigate(AUTH_PAGES.Birthdate);
   };
 
-  const isDisabledButton = false;
   return (
     <Formik
       initialValues={{ email: userInfo.email, password: userInfo.password }}

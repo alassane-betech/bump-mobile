@@ -55,6 +55,7 @@ export default function AuthContainer({
         <View style={[styles.bottomButton]}>
           <CustomButton
             disabled={loading}
+            loading={loading}
             onPress={onSubmit}
             variant={EButtonVariant.Primary}
             title={buttonTitle}

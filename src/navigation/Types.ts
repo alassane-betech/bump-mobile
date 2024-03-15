@@ -17,6 +17,7 @@ export enum AUTH_PAGES {
   Birthdate = "Birthdate",
   Cooktype = "Cooktype",
   LoggedInWelcomePage = "LoggedInWelcomePage",
+  Login = "Login",
 }
 
 export type AuthStackParamList = {
@@ -26,7 +27,8 @@ export type AuthStackParamList = {
   [AUTH_PAGES.Username]: undefined;
   [AUTH_PAGES.Birthdate]: undefined;
   [AUTH_PAGES.Cooktype]: undefined;
-  [AUTH_PAGES.LoggedInWelcomePage]: undefined;
+  [AUTH_PAGES.LoggedInWelcomePage]: { token: string };
+  [AUTH_PAGES.Login]: undefined;
 };
 
 export enum MAIN_PAGES {

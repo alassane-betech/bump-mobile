@@ -8,6 +8,7 @@ import Username from "@src/pages/auth/signup/Username";
 import WelcomePage from "@src/pages/welcomePage/WelcomePage";
 import { AUTH_PAGES, AuthStackParamList } from "./Types";
 import { LoggedInWelcomePage } from "@src/pages/auth/loggedInWelcomePage/LoggedInWelcomePage";
+import Login from "@src/pages/auth/login/Login";
 
 const AuthStack = createNativeStackNavigator<AuthStackParamList>();
 
@@ -48,6 +49,12 @@ export default function Auth() {
         <AuthStack.Screen
           name={AUTH_PAGES.LoggedInWelcomePage}
           component={LoggedInWelcomePage}
+          options={{ headerShown: false }}
+        />
+
+        <AuthStack.Screen
+          name={AUTH_PAGES.Login}
+          component={Login}
           options={{ headerShown: false }}
         />
       </AuthStack.Navigator>
