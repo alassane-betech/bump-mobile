@@ -13,15 +13,7 @@ import { Home } from "@src/pages/home/Home";
 import { Lunch } from "@src/pages/lunch/Lunch";
 import { Profil } from "@src/pages/profil/Profil";
 import { COLORS, FONTS } from "@src/styles/BaseStyle";
-import { useEffect, useRef, useState } from "react";
-import {
-  Animated,
-  Dimensions,
-  Image,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import { MAIN_PAGES } from "./Types";
 
 const Tab = createBottomTabNavigator();
@@ -68,22 +60,6 @@ const routes = [
 ];
 
 const Main = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const activeDotAnim = useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    Animated.timing(activeDotAnim, {
-      toValue: activeIndex,
-      duration: 200,
-      useNativeDriver: false,
-    }).start();
-  }, [activeIndex]);
-
-  const activeDotPosition = activeDotAnim.interpolate({
-    inputRange: routes.map((_, index) => index),
-    outputRange: routes.map((_, index) => index * 50),
-  });
-
   return (
     <Tab.Navigator
       initialRouteName={MAIN_PAGES.Home}
