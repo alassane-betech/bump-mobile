@@ -30,7 +30,9 @@ export default function BirthdateForm() {
   const showHideDatePicker = () => setShowDatePicker(!showDatePicker);
 
   const handleConfirm = (date: Date) => {
-    setDate(date);
+    date.setDate(date.getDate() + 1);
+    const formattedDate = date.toISOString().split('T')[0];
+    setDate(formattedDate);
     setShowDatePicker(false);
   };
 
