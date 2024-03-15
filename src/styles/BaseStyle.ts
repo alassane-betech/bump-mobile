@@ -82,6 +82,12 @@ const COLORS = {
   red: "#EB5855",
   blue: "#52ACED",
   grey: "#C5D1DC",
+  orange: "#CEA038",
+  shadowColor: "#000",
+  black: "black",
+  darkGray: "gray",
+  white: "white",
+  tabIconFocused: "#2E3136",
 };
 
 export { FONTS, COLORS };

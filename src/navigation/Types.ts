@@ -32,8 +32,14 @@ export type AuthStackParamList = {
 export enum MAIN_PAGES {
   Main = "Main",
   Home = "Home",
+  Lunch = "Lunch",
+  Duels = "Duels",
+  Profil = "Profil",
 }
 
 export type MainStackParamList = {
   [MAIN_PAGES.Home]: undefined;
+  [MAIN_PAGES.Lunch]: undefined;
+  [MAIN_PAGES.Duels]: undefined;
+  [MAIN_PAGES.Profil]: undefined;
 };
