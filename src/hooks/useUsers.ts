@@ -27,3 +27,29 @@ export const useLogin = () => {
     },
   });
 };
+
+export const useValidateEmail = () => {
+  const { showError } = useError();
+  return useMutation<boolean, ServerError, string>({
+    mutationFn: (email) => userService.validateEmail(email),
+    onError: ({ message }) => {
+      const msg = Array.isArray(message) ? message.join(", ") : message;
+      showError(
+        msg || "Une erreur est survenue lors de la validation de l'email"
+      );
+    },
+  });
+};
+
+export const useValidateUsername = () => {
+  const { showError } = useError();
+  return useMutation<boolean, ServerError, string>({
+    mutationFn: (username) => userService.validateUsername(username),
+    onError: ({ message }) => {
+      const msg = Array.isArray(message) ? message.join(", ") : message;
+      showError(
+        msg || "Une erreur est survenue lors de la validation du username"
+      );
+    },
+  });
+};

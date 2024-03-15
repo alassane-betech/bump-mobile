@@ -11,6 +11,7 @@ import * as Yup from "yup";
 import { useNavigation } from "@react-navigation/native";
 import { AUTH_PAGES } from "@src/navigation/Types";
 import { useSignup } from "@src/context/SignupContext";
+import { useValidateEmail } from "@src/hooks/useUsers";
 
 export interface CredentialsFormValues {
   email: string;
@@ -47,6 +48,8 @@ export const CredentialsValidationSchema = Yup.object().shape({
 export default function CredentialsForm() {
   const navigation = useNavigation();
   const { userInfo, updateUser } = useSignup();
+  const { mutateAsync: validateEmail, isPending } = useValidateEmail();
+  const [emailExists, setEmailExists] = useState(false);
   const [passwordCriteria, setPasswordCriteria] = useState<PasswordCriteria>({
     minLength: false,
     oneDigit: false,
@@ -58,8 +61,15 @@ export default function CredentialsForm() {
     setIsPasswordVisible(!isPasswordVisible);
 
   const submitForm = ({ email, password }: CredentialsFormValues) => {
-    updateUser({ email, password });
-    navigation.navigate(AUTH_PAGES.Birthdate);
+    setEmailExists(false);
+    validateEmail(email).then((data) => {
+      if (data === true) {
+        updateUser({ email, password });
+        navigation.navigate(AUTH_PAGES.Birthdate);
+      } else {
+        setEmailExists(true);
+      }
+    });
   };
 
   return (
@@ -92,6 +102,7 @@ export default function CredentialsForm() {
           <AuthContainer
             onSubmit={handleSubmit}
             title="Identifiants"
+            loading={isPending}
             buttonTitle="Continuer"
           >
             <View>
@@ -100,8 +111,13 @@ export default function CredentialsForm() {
                 onChangeText={handleChange("email")}
                 onBlur={handleBlur("email")}
                 value={values.email}
+                autoCapitalize="none"
                 keyboardType="email-address"
-                error={touched.email && errors.email && errors.email}
+                error={
+                  emailExists
+                    ? "Adresse email déjà utilisée"
+                    : touched.email && errors.email && errors.email
+                }
               />
               <TextField
                 secureTextEntry={!isPasswordVisible}
