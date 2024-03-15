@@ -8,7 +8,6 @@ import { useSignup } from "@src/context/SignupContext";
 import { useCreateUser } from "@src/hooks/useUsers";
 import { window } from "@src/styles/BaseStyle";
 import { COOK_TYPE } from "@src/utils/Data";
-import { formatDate } from "@src/utils/Helpers";
 import { useEffect, useState } from "react";
 import { ScrollView, View, StyleSheet } from "react-native";
 
@@ -28,11 +27,7 @@ export default function CookType() {
   };
 
   const requestCreateUser = () => {
-    const input = {
-      ...userInfo,
-      birthdate: formatDate(new Date(userInfo.birthdate), "dd/MM/yyyy"),
-    };
-    createUser(input);
+    createUser(userInfo);
   };
   useEffect(() => {
     if (data && isSuccess) {
