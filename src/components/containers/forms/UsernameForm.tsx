@@ -24,7 +24,7 @@ export default function UsernameForm() {
   const submitForm = ({ username }: FormValues) => {
     setUsernameExists(false);
     validateUsername(username).then((data) => {
-      if (data === true) {
+      if (data) {
         updateUser({ username });
         navigation.navigate(AUTH_PAGES.Cooktype);
       } else {

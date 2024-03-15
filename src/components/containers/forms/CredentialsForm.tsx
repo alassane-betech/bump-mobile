@@ -63,7 +63,7 @@ export default function CredentialsForm() {
   const submitForm = ({ email, password }: CredentialsFormValues) => {
     setEmailExists(false);
     validateEmail(email).then((data) => {
-      if (data === true) {
+      if (data) {
         updateUser({ email, password });
         navigation.navigate(AUTH_PAGES.Birthdate);
       } else {
