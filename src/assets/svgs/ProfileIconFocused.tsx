@@ -21,6 +21,6 @@ export const ProfileIconFocused = ({ height, width, color }: IconProps) => (
 
 ProfileIconFocused.defaultProps = {
   color: COLORS.tabIconFocused,
-  height: 20,
+  height: 22,
   width: 22,
 };

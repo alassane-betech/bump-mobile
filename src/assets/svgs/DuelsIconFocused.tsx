@@ -16,6 +16,6 @@ export const DuelsIconFocused = ({ height, width, color }: IconProps) => (
 
 DuelsIconFocused.defaultProps = {
   color: COLORS.tabIconFocused,
-  height: 21,
+  height: 22,
   width: 22,
 };

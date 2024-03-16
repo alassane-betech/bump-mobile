@@ -16,6 +16,6 @@ export const DuelsIcon = ({ height, width, color }: IconProps) => (
 
 DuelsIcon.defaultProps = {
   color: COLORS.darkGray,
-  height: 21,
+  height: 22,
   width: 22,
 };

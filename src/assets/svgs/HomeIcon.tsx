@@ -13,6 +13,6 @@ export const HomeIcon = ({ height, width, color }: IconProps) => (
 
 HomeIcon.defaultProps = {
   color: "gray",
-  height: 20,
+  height: 22,
   width: 22,
 };

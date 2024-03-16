@@ -19,7 +19,7 @@ export default function Root() {
         <ThemeProvider>
           <ErrorProvider>
             <Stack.Navigator>
-              {!isSignedIn ? (
+              {isSignedIn ? (
                 <Stack.Screen
                   name={MAIN_PAGES.Main}
                   component={Main}

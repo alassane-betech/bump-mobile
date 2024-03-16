@@ -15,6 +15,6 @@ export const ProfileIcon = ({ height, width, color }: IconProps) => (
 
 ProfileIcon.defaultProps = {
   color: "gray",
-  height: 20,
+  height: 22,
   width: 22,
 };
