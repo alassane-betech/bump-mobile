@@ -6,8 +6,6 @@ import {
 import { useContext, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Formik } from "formik";
-import { useNavigation } from "@react-navigation/native";
-import { AUTH_PAGES } from "@src/navigation/Types";
 import {
   CustomText,
   ETextVariant,
@@ -68,6 +66,7 @@ export default function LoginForm() {
                 onChangeText={handleChange("email")}
                 onBlur={handleBlur("email")}
                 value={values.email}
+                autoCapitalize="none"
                 keyboardType="email-address"
                 error={touched.email && errors.email && errors.email}
               />

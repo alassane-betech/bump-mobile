@@ -12,3 +12,15 @@ export const login = async (
   const { data } = await api.post(`/auth/signin`, credentials);
   return data;
 };
+
+export const validateEmail = async (email: string): Promise<boolean> => {
+  const { data } = await api.get(`/users/validate-email?email=${email}`);
+  return data;
+};
+
+export const validateUsername = async (username: string): Promise<boolean> => {
+  const { data } = await api.get(
+    `/users/validate-username?username=${username}`
+  );
+  return data;
+};
