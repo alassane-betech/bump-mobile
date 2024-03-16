@@ -11,7 +11,7 @@ export const CheckedElement: React.FC<{ text: string }> = ({ text }) => {
   return (
     <View style={styles.checkedElement}>
       <View
-        style={[styles.checkIcon, { backgroundColor: theme.cardBackGround }]}
+        style={[styles.checkIcon, { backgroundColor: theme.cardBackground }]}
       >
         <CheckIcon />
       </View>

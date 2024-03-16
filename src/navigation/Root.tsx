@@ -1,11 +1,12 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Auth from "./Auth";
-import { AUTH_PAGES, MAIN_PAGES, RootStackParamList } from "./Types";
-import { ThemeProvider } from "@src/context/ThemeContext";
-import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "@src/api/queryClient";
 import { ErrorProvider } from "@src/context/ErrorContext";
+import { ThemeProvider } from "@src/context/ThemeContext";
+import { QueryClientProvider } from "@tanstack/react-query";
+import Auth from "./Auth";
+import { AUTH_PAGES, MAIN_PAGES, RootStackParamList } from "./Types";
+
 import Main from "./Main";
 import { AuthContext, useAuthContext } from "@src/context/AuthContext";
 import Loader from "@src/components/ui/Loader/Loader";

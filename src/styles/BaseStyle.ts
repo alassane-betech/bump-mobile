@@ -39,7 +39,10 @@ export const LighTheme: Theme = {
     color: "#F91D45",
     background: "#FFEBE6",
   },
-  cardBackGround: "#F7F8FA",
+  cardBackground: "#F7F8FA",
+  layout: {
+    backgroundColor: "white",
+  },
 };
 
 export const DarkTheme: Theme = {
@@ -53,7 +56,7 @@ export const DarkTheme: Theme = {
     },
   },
   surface: "#1e1e1e",
-  cardBackGround: "",
+  cardBackground: "",
   text: {
     default: "",
     button: "",
@@ -72,6 +75,9 @@ export const DarkTheme: Theme = {
     color: "",
     background: "",
   },
+  layout: {
+    backgroundColor: "",
+  },
 };
 
 const COLORS = {
@@ -82,6 +88,12 @@ const COLORS = {
   red: "#EB5855",
   blue: "#52ACED",
   grey: "#C5D1DC",
+  orange: "#CEA038",
+  shadowColor: "#000",
+  black: "black",
+  darkGray: "gray",
+  white: "white",
+  tabIconFocused: "#2E3136",
 };
 
 export { FONTS, COLORS };

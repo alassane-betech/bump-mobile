@@ -1,10 +1,10 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 
-export const Home: React.FC = () => {
+export const Duels: React.FC = () => {
   return (
     <View style={styles.container}>
-      <Text>Home Page</Text>
+      <Text>Duels Page</Text>
     </View>
   );
 };
