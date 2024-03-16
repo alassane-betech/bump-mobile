@@ -1,5 +1,4 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { BumpPlusEgg } from "@src/assets/svgs/BumpPlusEgg";
 import { DuelsIcon } from "@src/assets/svgs/DuelsIcon";
 import { DuelsIconFocused } from "@src/assets/svgs/DuelsIconFocused";
 import { HomeIcon } from "@src/assets/svgs/HomeIcon";
@@ -41,7 +40,7 @@ const routes = [
     component: function EmptyComponent() {
       return null;
     },
-    iconPath: <BumpPlusEgg />,
+    iconPath: null,
     iconFocusedPath: null,
   },
   {
