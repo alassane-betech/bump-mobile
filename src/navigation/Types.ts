@@ -37,7 +37,7 @@ export enum MAIN_PAGES {
   Profil = "Profil",
 }
 
-export type MainStackParamList = {
+export type MainTabParamList = {
   [MAIN_PAGES.Home]: undefined;
   [MAIN_PAGES.Lunch]: undefined;
   [MAIN_PAGES.Duels]: undefined;
