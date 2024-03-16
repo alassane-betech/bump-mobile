@@ -39,7 +39,10 @@ export const LighTheme: Theme = {
     color: "#F91D45",
     background: "#FFEBE6",
   },
-  cardBackGround: "#F7F8FA",
+  cardBackground: "#F7F8FA",
+  layout: {
+    backgroundColor: "white",
+  },
 };
 
 export const DarkTheme: Theme = {
@@ -53,7 +56,7 @@ export const DarkTheme: Theme = {
     },
   },
   surface: "#1e1e1e",
-  cardBackGround: "",
+  cardBackground: "",
   text: {
     default: "",
     button: "",
@@ -71,6 +74,9 @@ export const DarkTheme: Theme = {
   error: {
     color: "",
     background: "",
+  },
+  layout: {
+    backgroundColor: "",
   },
 };
 

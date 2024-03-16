@@ -65,7 +65,7 @@ const Main = () => {
       <Tab.Navigator
         initialRouteName={MAIN_PAGES.Home}
         screenOptions={{
-          tabBarStyle: [styles.tabBarStyle, { marginBottom: 5 }],
+          tabBarStyle: styles.tabBarStyle,
         }}
       >
         {routes?.map((route, index) => (
@@ -135,6 +135,7 @@ const styles = StyleSheet.create({
   },
   tabBarStyle: {
     backgroundColor: COLORS.white,
+    marginBottom: 5,
   },
   tabTitle: {
     fontSize: 10,

@@ -27,5 +27,8 @@ export type Theme = {
     color: string;
     background: string;
   };
-  cardBackGround: string;
+  cardBackground: string;
+  layout: {
+    backgroundColor: string;
+  };
 };
