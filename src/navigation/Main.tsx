@@ -1,6 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { DuelsIcon } from "@src/assets/svgs/DuelsIcon";
-import { DuelsIconFocused } from "@src/assets/svgs/DuelsIconFocused";
+import { DuelsIcon, DuelsIconFocused } from "@src/assets/svgs/DuelsIcon";
 import { HomeIcon, HomeIconFocused } from "@src/assets/svgs/HomeIcon";
 import { LunchIcon, LunchIconFocused } from "@src/assets/svgs/LunchIcon";
 import { ProfileIcon, ProfileIconFocused } from "@src/assets/svgs/ProfileIcon";
