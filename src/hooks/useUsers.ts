@@ -1,29 +1,31 @@
-import { useError } from "@src/context/ErrorContext";
 import * as userService from "@src/services/userServices";
-import { ServerError } from "@src/types/ServerResponseTypes";
-import { AuthResult, LoginCredentials, User } from "@src/types/userTypes";
-import { useMutation } from "@tanstack/react-query";
+import { AuthResult, User } from "@src/types/userTypes";
+import useMutationWithErrorHandling from "./useMutationWithErrorHandling";
 
 export const useCreateUser = () => {
-  const { showError } = useError();
-  return useMutation<AuthResult, ServerError, User>({
-    mutationFn: (userData) => userService.createUser(userData),
-    onError: ({ message }) => {
-      const msg = Array.isArray(message) ? message.join(", ") : message;
-      showError(
-        msg || "Une erreur est survenue lors de la création de l’utilisateur."
-      );
-    },
-  });
+  return useMutationWithErrorHandling<AuthResult, User>(
+    userService.createUser,
+    "Une erreur est survenue lors de la création de l’utilisateur."
+  );
 };
 
 export const useLogin = () => {
-  const { showError } = useError();
-  return useMutation<AuthResult, ServerError, LoginCredentials>({
-    mutationFn: (credentials) => userService.login(credentials),
-    onError: ({ message }) => {
-      const msg = Array.isArray(message) ? message.join(", ") : message;
-      showError(msg || "Une erreur est survenue lors de l'authentification.");
-    },
-  });
+  return useMutationWithErrorHandling<AuthResult, User>(
+    userService.login,
+    "Une erreur est survenue lors de l'authentification."
+  );
+};
+
+export const useValidateEmail = () => {
+  return useMutationWithErrorHandling<boolean, string>(
+    userService.validateEmail,
+    "Une erreur est survenue lors de la validation de l'email"
+  );
+};
+
+export const useValidateUsername = () => {
+  return useMutationWithErrorHandling<boolean, string>(
+    userService.validateUsername,
+    "Une erreur est survenue lors de la validation du username"
+  );
 };

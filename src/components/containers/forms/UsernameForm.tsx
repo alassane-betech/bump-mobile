@@ -2,8 +2,10 @@ import { useNavigation } from "@react-navigation/native";
 import AuthContainer from "@src/components/containers/AuthContainer/AuthContainer";
 import { TextField } from "@src/components/ui/TextField/TextField";
 import { useSignup } from "@src/context/SignupContext";
+import { useValidateUsername } from "@src/hooks/useUsers";
 import { AUTH_PAGES } from "@src/navigation/Types";
 import { Formik } from "formik";
+import { useState } from "react";
 import * as Yup from "yup";
 
 interface FormValues {
@@ -16,10 +18,19 @@ const usernameValidationSchema = Yup.object().shape({
 export default function UsernameForm() {
   const navigation = useNavigation();
   const { userInfo, updateUser } = useSignup();
+  const [usernameExists, setUsernameExists] = useState(false);
+  const { mutateAsync: validateUsername, isPending } = useValidateUsername();
 
   const submitForm = ({ username }: FormValues) => {
-    updateUser({ username });
-    navigation.navigate(AUTH_PAGES.Cooktype);
+    setUsernameExists(false);
+    validateUsername(username).then((data) => {
+      if (data) {
+        updateUser({ username });
+        navigation.navigate(AUTH_PAGES.Cooktype);
+      } else {
+        setUsernameExists(true);
+      }
+    });
   };
 
   return (
@@ -41,14 +52,20 @@ export default function UsernameForm() {
         <AuthContainer
           buttonTitle="Créer mon compte"
           onSubmit={handleSubmit}
+          loading={isPending}
           title="Nom d’utilisateur"
         >
           <TextField
             label="Nom d'utilisateur"
             value={values.username}
+            autoCapitalize="none"
             onChangeText={handleChange("username")}
             onBlur={handleBlur("username")}
-            error={touched.username && errors.username && errors.username}
+            error={
+              usernameExists
+                ? "Username déjà utilisé"
+                : touched.username && errors.username && errors.username
+            }
           />
         </AuthContainer>
       )}
