@@ -26,7 +26,7 @@ interface CustomTextProps extends TextProps {
 
 export const CustomText: React.FC<CustomTextProps> = ({
   link,
-  variant,
+  variant = ETextVariant.Body,
   style,
   ...props
 }) => {
@@ -53,9 +53,6 @@ export const CustomText: React.FC<CustomTextProps> = ({
 const getThemeStyle = (theme: Theme) =>
   StyleSheet.create({
     text: {
-      fontFamily: FONTS.regular,
-      fontSize: 13,
-      lineHeight: 30,
       color: theme.text.default,
     },
     link: {

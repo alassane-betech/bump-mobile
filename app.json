@@ -31,6 +31,9 @@
     "web": {
       "favicon": "./src/assets/images/favicon.png"
     },
-    "plugins": ["expo-font"]
+    "plugins": [
+      "expo-font",
+      "expo-secure-store"
+    ]
   }
 }

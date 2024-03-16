@@ -6,6 +6,7 @@ import { StyleSheet } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useSignup } from "@src/context/SignupContext";
+import { AUTH_PAGES } from "@src/navigation/Types";
 
 interface FormValues {
   firstname: string;
@@ -22,7 +23,7 @@ export default function NameForm() {
 
   const submitForm = ({ firstname, lastname }: FormValues) => {
     updateUser({ firstname, lastname });
-    navigation.navigate("Credentials");
+    navigation.navigate(AUTH_PAGES.Credentials);
   };
 
   return (

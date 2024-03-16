@@ -1,9 +1,11 @@
+import { useRoute } from "@react-navigation/native";
 import { BumpEgg } from "@src/assets/svgs/BumpEgg";
 import { CheckedElement } from "@src/components/ui/CheckedElement/CheckedElement";
 import CustomButton from "@src/components/ui/CustomButton/CustomButton";
 import { EggElement } from "@src/components/ui/EggElement/EggElement";
-import { COLORS, FONTS, window } from "@src/styles/BaseStyle";
-import React from "react";
+import { AuthContext } from "@src/context/AuthContext";
+import { COLORS, FONTS } from "@src/styles/BaseStyle";
+import React, { useContext } from "react";
 import {
   Dimensions,
   Image,
@@ -16,6 +18,12 @@ import {
 const { height, width } = Dimensions.get("screen");
 
 export const LoggedInWelcomePage: React.FC = () => {
+  const { authContext } = useContext(AuthContext);
+  const { params } = useRoute();
+  const { token } = params as { token: string };
+
+  const goToMain = () => authContext.setToken(token);
+
   return (
     <View style={styles.container}>
       <Image
@@ -70,6 +78,7 @@ export const LoggedInWelcomePage: React.FC = () => {
               title="Suivant"
               backgroundColor={COLORS.secondary}
               textColor="white"
+              onPress={goToMain}
             />
           </View>
         </ScrollView>

@@ -8,7 +8,12 @@ export interface User {
   category: string;
 }
 
-export interface CreateUserResult {
+export interface LoginCredentials {
+  email: string;
+  password: string;
+}
+
+export interface AuthResult {
   access_token: string;
   message: string;
 }
