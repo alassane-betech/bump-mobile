@@ -1,12 +1,9 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { DuelsIcon } from "@src/assets/svgs/DuelsIcon";
 import { DuelsIconFocused } from "@src/assets/svgs/DuelsIconFocused";
-import { HomeIcon } from "@src/assets/svgs/HomeIcon";
-import { HomeIconFocused } from "@src/assets/svgs/HomeIconFocused";
-import { LunchIcon } from "@src/assets/svgs/LunchIcon";
-import { LunchIconFocused } from "@src/assets/svgs/LunchIconFocused";
-import { ProfileIcon } from "@src/assets/svgs/ProfileIcon";
-import { ProfileIconFocused } from "@src/assets/svgs/ProfileIconFocused";
+import { HomeIcon, HomeIconFocused } from "@src/assets/svgs/HomeIcon";
+import { LunchIcon, LunchIconFocused } from "@src/assets/svgs/LunchIcon";
+import { ProfileIcon, ProfileIconFocused } from "@src/assets/svgs/ProfileIcon";
 import { Duels } from "@src/pages/duels/Duels";
 import { Home } from "@src/pages/home/Home";
 import { Lunch } from "@src/pages/lunch/Lunch";
