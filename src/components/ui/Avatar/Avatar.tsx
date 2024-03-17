@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Image, StyleSheet } from "react-native";
-import { LinearGradient } from "expo-linear-gradient"; // ou react-native-linear-gradient
+import { LinearGradient } from "expo-linear-gradient";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { useThemeContext } from "@src/context/ThemeContext";
 type AvatarProps = {
@@ -46,7 +46,6 @@ const Avatar: React.FC<AvatarProps> = ({
               height: size,
               borderRadius: size / 2,
               borderWidth: borderWidth,
-              borderColor: "transparent", // Nécessaire pour iOS
             },
           ]}
         >
@@ -68,28 +67,12 @@ const Avatar: React.FC<AvatarProps> = ({
               height: gradientSize,
               borderRadius: gradientSize / 2,
               borderColor,
-              padding: 5,
-              borderWidth: 0.4,
             },
           ]}
         >
           <Image source={{ uri: imageUri }} style={styles.avatarImage} />
         </View>
-        <View
-          style={{
-            position: "absolute",
-            bottom: -5,
-            right: -8,
-            borderColor: "white",
-            width: 35,
-            zIndex: 1000,
-            height: 35,
-            borderRadius: 20,
-            backgroundColor: "white",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <View style={styles.addButton}>
           <FontAwesome6
             name="circle-plus"
             size={24}
@@ -107,9 +90,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   imageContainer: {
-    padding: 2, // l'espace pour la bordure du dégradé
+    padding: 2,
+    borderColor: "transparent",
     backgroundColor: "white",
-    overflow: "hidden", // Assurez-vous que l'image ne déborde pas
+    overflow: "hidden",
   },
   avatarImage: {
     width: "100%",
@@ -119,9 +103,23 @@ const styles = StyleSheet.create({
   },
   avatarContainer: {
     justifyContent: "center",
-    padding: 3,
     alignItems: "center",
     overflow: "hidden",
+    padding: 5,
+    borderWidth: 0.4,
+  },
+  addButton: {
+    position: "absolute",
+    bottom: -5,
+    right: -8,
+    borderColor: "white",
+    width: 35,
+    zIndex: 1000,
+    height: 35,
+    borderRadius: 20,
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

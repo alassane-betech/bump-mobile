@@ -40,7 +40,6 @@ const Story = () => {
   const longPressTimeout = useRef(null);
   const [isLongPress, setIsLongPress] = useState(false);
   useEffect(() => {
-    // À chaque changement d'index, recommencer la vidéo depuis le début
     const playFromStart = async () => {
       if (videoRef.current) {
         await videoRef.current.stopAsync();
@@ -62,7 +61,6 @@ const Story = () => {
       playbackStatus.positionMillis / playbackStatus.durationMillis;
     setProgress(newProgress);
 
-    // Passer automatiquement à la vidéo suivante une fois la vidéo actuelle terminée
     if (playbackStatus.didJustFinish && currentVideoIndex < videos.length - 1) {
       setCurrentVideoIndex((prevIndex) => {
         const newIndex = prevIndex + 1;

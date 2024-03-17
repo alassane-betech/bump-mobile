@@ -5,8 +5,8 @@ import * as Progress from "react-native-progress";
 type ProgressBarProps = {
   progress: number | number[];
   width?: number;
-  color?: string; // Couleur de la barre de progression
-  unfilledColor?: string; // Couleur de fond de la barre de progression
+  color?: string;
+  unfilledColor?: string;
 };
 
 const ProgressBar: React.FC<ProgressBarProps> = ({

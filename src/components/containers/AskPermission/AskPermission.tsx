@@ -1,4 +1,6 @@
 import { MaterialIcons } from "@expo/vector-icons";
+import CustomButton from "@src/components/ui/CustomButton/CustomButton";
+import { CustomText } from "@src/components/ui/CustomText/CustomText";
 import { COLORS, FONTS, window } from "@src/styles/BaseStyle";
 import React from "react";
 import {
@@ -8,8 +10,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import CustomButton from "../../ui/CustomButton/CustomButton";
-import { CustomText } from "../../ui/CustomText/CustomText";
 
 const { height, width } = Dimensions.get("screen");
 
