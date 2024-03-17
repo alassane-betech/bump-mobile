@@ -8,8 +8,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import CustomButton from "../CustomButton/CustomButton";
-import { CustomText } from "../CustomText/CustomText";
+import CustomButton from "../../ui/CustomButton/CustomButton";
+import { CustomText } from "../../ui/CustomText/CustomText";
 
 const { height, width } = Dimensions.get("screen");
 

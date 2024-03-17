@@ -3437,6 +3437,11 @@ expo-asset@~9.0.2:
     invariant "^2.2.4"
     md5-file "^3.2.3"
 
+expo-av@~13.10.5:
+  version "13.10.5"
+  resolved "https://registry.yarnpkg.com/expo-av/-/expo-av-13.10.5.tgz#cdce4db8c0f896be88cc881994704a251a1e63ff"
+  integrity sha512-w45oCoe+8PunDeM0rh/Ut6UaGh7OjEJOCjAiQy3nCxpA8FaXB17KaqpsvkAXIMvceHYWndH8+D29esUTS6wEsA==
+
 expo-constants@~15.4.0:
   version "15.4.5"
   resolved "https://registry.yarnpkg.com/expo-constants/-/expo-constants-15.4.5.tgz#81756a4c4e1c020f840a419cd86a124a6d1fb35b"
@@ -3465,6 +3470,11 @@ expo-keep-awake@~12.8.2:
   version "12.8.2"
   resolved "https://registry.yarnpkg.com/expo-keep-awake/-/expo-keep-awake-12.8.2.tgz#6cfdf8ad02b5fa130f99d4a1eb98e459d5b4332e"
   integrity sha512-uiQdGbSX24Pt8nGbnmBtrKq6xL/Tm3+DuDRGBk/3ZE/HlizzNosGRIufIMJ/4B4FRw4dw8KU81h2RLuTjbay6g==
+
+expo-linear-gradient@~12.7.2:
+  version "12.7.2"
+  resolved "https://registry.yarnpkg.com/expo-linear-gradient/-/expo-linear-gradient-12.7.2.tgz#2ff9593eae8448ac5630be1a36ce6133c4a6f074"
+  integrity sha512-Wwb2EF18ywgrlTodcXJ6Yt/UEcKitRMdXPNyP/IokmeKh4emoq9DxZJpZdkXm3HUTLlbRpi6/t32jrFVqXB9AQ==
 
 expo-modules-autolinking@1.10.3:
   version "1.10.3"
@@ -5541,6 +5551,13 @@ react-native-modal-datetime-picker@^17.1.0:
   version "17.1.0"
   resolved "https://registry.yarnpkg.com/react-native-modal-datetime-picker/-/react-native-modal-datetime-picker-17.1.0.tgz#74291bf92b830be285752f437841f52885c90e0b"
   integrity sha512-jfTwfaCLtBffYbQ+pOGFLM+J5HmUh3vb9rT0JrrQPjxzecdc8pNYreB1c96+mVuq8bDCvaCdIeuEsslTqLJL0Q==
+  dependencies:
+    prop-types "^15.7.2"
+
+react-native-progress@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-progress/-/react-native-progress-5.0.1.tgz#4e15258b5661c49bad74554352326ca540bb7c58"
+  integrity sha512-TYfJ4auAe5vubDma2yfFvt7ktSI+UCfysqJnkdHEcLXqAitRFOozgF/cLgN5VNi/iLdaf3ga1ETi2RF4jVZ/+g==
   dependencies:
     prop-types "^15.7.2"
 

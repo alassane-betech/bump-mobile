@@ -1,11 +1,14 @@
 declare global {
   namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList, AuthStackParamList {}
+    interface RootParamList
+      extends RootStackParamList,
+        AuthStackParamList,
+        PrivateStackParamList {}
   }
 }
 export type RootStackParamList = {
   Auth: undefined;
-  Main: undefined;
+  Private: undefined;
 };
 
 export enum AUTH_PAGES {
@@ -31,17 +34,23 @@ export type AuthStackParamList = {
   [AUTH_PAGES.Login]: undefined;
 };
 
-export enum MAIN_PAGES {
+export type PrivateStackParamList = {
+  [PRIVATE_PAGES.Main]: undefined;
+  [PRIVATE_PAGES.Story]: undefined;
+};
+
+export enum PRIVATE_PAGES {
+  Private = "Private",
   Main = "Main",
   Home = "Home",
   Lunch = "Lunch",
   Duels = "Duels",
   Profil = "Profil",
+  Story = "Story",
 }
 
 export type MainTabParamList = {
-  [MAIN_PAGES.Home]: undefined;
-  [MAIN_PAGES.Lunch]: undefined;
-  [MAIN_PAGES.Duels]: undefined;
-  [MAIN_PAGES.Profil]: undefined;
+  [PRIVATE_PAGES.Home]: undefined;
+  [PRIVATE_PAGES.Lunch]: undefined;
+  [PRIVATE_PAGES.Duels]: undefined;
 };

@@ -11,6 +11,11 @@ export default {
     fontFamily: FONTS.regular,
     fontSize: 13,
   },
+  headerTitle: {
+    fontFamily: FONTS.bold,
+    letterSpacing: -0.5,
+    fontSize: 18,
+  },
   button: {
     fontFamily: FONTS.bold,
     fontSize: 16,

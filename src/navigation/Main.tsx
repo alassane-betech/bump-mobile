@@ -9,22 +9,22 @@ import { Lunch } from "@src/pages/lunch/Lunch";
 import { Profil } from "@src/pages/profil/Profil";
 import { COLORS, FONTS } from "@src/styles/BaseStyle";
 import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
-import { MAIN_PAGES } from "./Types";
 import { CustomText } from "@src/components/ui/CustomText/CustomText";
+import { PRIVATE_PAGES } from "./Types";
 
 const Tab = createBottomTabNavigator();
 const { height, width } = Dimensions.get("screen");
 
 const routes = [
   {
-    key: MAIN_PAGES.Home,
+    key: PRIVATE_PAGES.Home,
     title: "Accueil",
     component: Home,
     iconPath: <HomeIcon />,
     iconFocusedPath: <HomeIconFocused />,
   },
   {
-    key: MAIN_PAGES.Lunch,
+    key: PRIVATE_PAGES.Lunch,
     title: "Lunch",
     component: Lunch,
     iconPath: <LunchIcon />,
@@ -40,14 +40,14 @@ const routes = [
     iconFocusedPath: null,
   },
   {
-    key: MAIN_PAGES.Duels,
+    key: PRIVATE_PAGES.Duels,
     title: "Duels",
     component: Duels,
     iconPath: <DuelsIcon />,
     iconFocusedPath: <DuelsIconFocused />,
   },
   {
-    key: MAIN_PAGES.Profil,
+    key: PRIVATE_PAGES.Profil,
     title: "Profil",
     component: Profil,
     iconPath: <ProfileIcon />,
@@ -59,7 +59,7 @@ const Main = () => {
   return (
     <View style={styles.tabContainer}>
       <Tab.Navigator
-        initialRouteName={MAIN_PAGES.Home}
+        initialRouteName={PRIVATE_PAGES.Home}
         screenOptions={{
           tabBarStyle: styles.tabBarStyle,
         }}
