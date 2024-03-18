@@ -6,11 +6,8 @@ import { ThemeProvider } from "@src/context/ThemeContext";
 import { QueryClientProvider } from "@tanstack/react-query";
 import Auth from "./Auth";
 import { AUTH_PAGES, PRIVATE_PAGES, RootStackParamList } from "./Types";
-
-import Main from "./Main";
 import { AuthContext, useAuthContext } from "@src/context/AuthContext";
 import Loader from "@src/components/ui/Loader/Loader";
-import Story from "@src/components/containers/Story/Story";
 import Private from "./Private";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -26,7 +23,7 @@ export default function Root() {
           <ThemeProvider>
             <ErrorProvider>
               <Stack.Navigator>
-                {state.token ? (
+                {!state.token ? (
                   <Stack.Screen
                     name={PRIVATE_PAGES.Private}
                     component={Private}

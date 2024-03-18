@@ -109,3 +109,30 @@ export const users = [
       "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=800",
   },
 ];
+
+export const storyItems = [
+  {
+    uri: "https://player.vimeo.com/progressive_redirect/playback/373288088/rendition/540p/file.mp4?loc=external&oauth2_token_id=1747418641&signature=bbdcbb2f7095302cafc8a9a105b5eb873e399dba0413876492b58b1a6c92f278",
+    type: "video",
+  },
+  {
+    uri: "https://images.pexels.com/photos/4862568/pexels-photo-4862568.jpeg?auto=compress&cs=tinysrgb&w=800",
+    type: "image",
+  },
+  {
+    uri: "https://player.vimeo.com/progressive_redirect/playback/389778408/rendition/540p/file.mp4?loc=external&oauth2_token_id=1747418641&signature=8b98482c472b4874b9de801119e5a06f3681e2d1b459f4472890c563d716cd8c",
+    type: "video",
+  },
+  {
+    uri: "https://images.pexels.com/photos/4862568/pexels-photo-4862568.jpeg?auto=compress&cs=tinysrgb&w=800",
+    type: "image",
+  },
+  {
+    uri: "https://player.vimeo.com/progressive_redirect/playback/389778408/rendition/540p/file.mp4?loc=external&oauth2_token_id=1747418641&signature=8b98482c472b4874b9de801119e5a06f3681e2d1b459f4472890c563d716cd8c",
+    type: "video",
+  },
+  {
+    uri: "https://images.pexels.com/photos/4862568/pexels-photo-4862568.jpeg?auto=compress&cs=tinysrgb&w=800",
+    type: "image",
+  },
+];

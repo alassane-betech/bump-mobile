@@ -9,7 +9,7 @@ type AvatarProps = {
   borderColor?: string;
   borderWidth?: number;
   id?: string;
-  type: "default" | "gradient";
+  type: "outlined" | "gradient" | "default";
 };
 
 const Avatar: React.FC<AvatarProps> = ({
@@ -20,7 +20,7 @@ const Avatar: React.FC<AvatarProps> = ({
   id,
   type = "gradient",
 }) => {
-  const gradientSize = size + borderWidth * 2.5; // Ajoutez la bordure à la taille totale
+  const gradientSize = size + borderWidth * 2.5;
   const { theme } = useThemeContext();
 
   if (type === "gradient" && id !== "1") {
@@ -65,6 +65,8 @@ const Avatar: React.FC<AvatarProps> = ({
             {
               width: gradientSize,
               height: gradientSize,
+              padding: type === "outlined" || id === "1" ? 5 : 0,
+              borderWidth: type === "outlined" || id === "1" ? 0.4 : 0,
               borderRadius: gradientSize / 2,
               borderColor,
             },
@@ -72,13 +74,16 @@ const Avatar: React.FC<AvatarProps> = ({
         >
           <Image source={{ uri: imageUri }} style={styles.avatarImage} />
         </View>
-        <View style={styles.addButton}>
-          <FontAwesome6
-            name="circle-plus"
-            size={24}
-            color={theme.text.default}
-          />
-        </View>
+        {type === "outlined" ||
+          (id === "1" && (
+            <View style={styles.addButton}>
+              <FontAwesome6
+                name="circle-plus"
+                size={24}
+                color={theme.text.default}
+              />
+            </View>
+          ))}
       </View>
     );
   }
@@ -105,8 +110,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     overflow: "hidden",
-    padding: 5,
-    borderWidth: 0.4,
   },
   addButton: {
     position: "absolute",

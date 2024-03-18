@@ -1,146 +1,138 @@
 import { useState, useEffect, useRef } from "react";
 import {
   StyleSheet,
-  View,
-  Dimensions,
   TouchableOpacity,
+  Image,
   GestureResponderEvent,
 } from "react-native";
-import { Video, ResizeMode, AVPlaybackStatus } from "expo-av";
-import ProgressBar from "@src/components/ui/ProgressBar/ProgressBar";
+import { ResizeMode, Video } from "expo-av";
+import { storyItems } from "@src/utils/Seed";
+import { window } from "@src/styles/BaseStyle";
+import { useNavigation } from "@react-navigation/native";
+import StoryHeader from "./StoryHeader";
 
-const { width, height } = Dimensions.get("window");
-
-type VideoSource = {
-  uri: string;
-};
-
-const videos: VideoSource[] = [
-  {
-    uri: "https://player.vimeo.com/progressive_redirect/playback/420239207/rendition/540p/file.mp4?loc=external&oauth2_token_id=1747418641&signature=e05d9e753e17df9738cc49b14dc826a7aaecdebe8f6f978b2bd466bf25e2349d",
-  },
-  {
-    uri: "https://player.vimeo.com/progressive_redirect/playback/389786356/rendition/540p/file.mp4?loc=external&oauth2_token_id=1747418641&signature=70663dc5f66db4da3acb0792e69f3132722a5c9279010b4b16f8cfc9433d5bd3",
-  },
-  {
-    uri: "https://player.vimeo.com/progressive_redirect/playback/390007248/rendition/540p/file.mp4?loc=external&oauth2_token_id=1747418641&signature=905d491176bce221d94e35d72b4353f8511337cd58b9f9f7836b81b4c2f3b69a",
-  },
-  {
-    uri: "https://player.vimeo.com/progressive_redirect/playback/389778408/rendition/540p/file.mp4?loc=external&oauth2_token_id=1747418641&signature=8b98482c472b4874b9de801119e5a06f3681e2d1b459f4472890c563d716cd8c",
-  },
-  {
-    uri: "https://player.vimeo.com/progressive_redirect/playback/390047650/rendition/540p/file.mp4?loc=external&oauth2_token_id=1747418641&signature=3f65c9fb1cabd60e4ad11117f7617b7d5c25c0fabf9aeb3ef77a4317ba65e341",
-  },
-];
+const { width, height } = window;
 
 const Story = () => {
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-  const [progress, setProgress] = useState(new Array(videos.length).fill(0));
-  const videoRef = useRef<Video>(null);
-  const longPressTimeout = useRef(null);
-  const [isLongPress, setIsLongPress] = useState(false);
-  useEffect(() => {
-    const playFromStart = async () => {
-      if (videoRef.current) {
-        await videoRef.current.stopAsync();
-        await videoRef.current.setPositionAsync(0);
-        await videoRef.current.playAsync();
-      }
-    };
-    playFromStart();
-  }, [currentVideoIndex]);
+  const [currentItemIndex, setCurrentItemIndex] = useState(0);
+  const navigation = useNavigation();
+  const [progress, setProgress] = useState(
+    new Array(storyItems.length).fill(0)
+  );
+  const intervalRef = useRef(null);
 
-  const handleVideoPlaybackStatusUpdate = (
-    playbackStatus: AVPlaybackStatus
-  ) => {
-    if (!playbackStatus.isLoaded) {
-      return;
-    }
-    const newProgress = [...progress];
-    newProgress[currentVideoIndex] =
-      playbackStatus.positionMillis / playbackStatus.durationMillis;
-    setProgress(newProgress);
-
-    if (playbackStatus.didJustFinish && currentVideoIndex < videos.length - 1) {
-      setCurrentVideoIndex((prevIndex) => {
-        const newIndex = prevIndex + 1;
-        updateProgressForWatchedVideos(newIndex, prevIndex);
-        return newIndex;
-      });
-    }
-  };
-
-  const updateProgressForWatchedVideos = (
-    newIndex: number,
-    oldIndex: number
-  ) => {
+  const handleProgressUpdate = (index: number, value: number) => {
     setProgress((prevProgress) => {
       const newProgress = [...prevProgress];
-      if (newIndex > oldIndex) {
-        newProgress[oldIndex] = 1;
-      } else if (newIndex < oldIndex) {
-        newProgress[oldIndex] = 0;
-      }
+      newProgress[index] = value;
       return newProgress;
     });
   };
 
+  useEffect(() => {
+    const item = storyItems[currentItemIndex];
+
+    if (item.type === "image") {
+      const duration = 5000;
+      const step = duration / 100;
+      let elapsed = 0;
+      intervalRef.current = setInterval(() => {
+        elapsed += step;
+        const progressValue = elapsed / duration;
+        handleProgressUpdate(currentItemIndex, progressValue);
+        if (elapsed >= duration) {
+          clearInterval(intervalRef.current);
+          if (currentItemIndex < storyItems.length - 1) {
+            setCurrentItemIndex(currentItemIndex + 1);
+          }
+        }
+      }, step);
+    }
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [currentItemIndex]);
+
+  const handleVideoPlaybackStatusUpdate = (playbackStatus) => {
+    if (playbackStatus.isLoaded) {
+      const progressValue =
+        playbackStatus.positionMillis / playbackStatus.durationMillis;
+      handleProgressUpdate(currentItemIndex, progressValue);
+
+      if (playbackStatus.didJustFinish) {
+        if (currentItemIndex < storyItems.length - 1) {
+          setCurrentItemIndex(currentItemIndex + 1);
+        }
+      }
+    }
+  };
+
   const handlePress = (e: GestureResponderEvent) => {
     const locationX = e.nativeEvent.locationX;
-    const isRightSide = locationX > width / 6;
-
-    if (isRightSide) {
-      if (currentVideoIndex < videos.length - 1) {
-        const newIndex = currentVideoIndex + 1;
-        updateProgressForWatchedVideos(newIndex, currentVideoIndex);
-        setCurrentVideoIndex(newIndex);
+    if (locationX > width / 6) {
+      if (currentItemIndex < storyItems.length - 1) {
+        setProgress((prevProgress) => {
+          const newProgress = [...prevProgress];
+          newProgress[currentItemIndex] = 1;
+          return newProgress;
+        });
+        setCurrentItemIndex(currentItemIndex + 1);
+      } else {
+        navigation.goBack();
       }
     } else {
-      if (currentVideoIndex > 0) {
-        const newIndex = currentVideoIndex - 1;
-        updateProgressForWatchedVideos(newIndex, currentVideoIndex);
-        setCurrentVideoIndex(newIndex);
+      if (currentItemIndex > 0) {
+        setProgress((prevProgress) => {
+          const newProgress = [...prevProgress];
+          newProgress[currentItemIndex] = 0;
+          newProgress[currentItemIndex - 1] = 0;
+          return newProgress;
+        });
+        setCurrentItemIndex(currentItemIndex - 1);
       }
     }
   };
 
-  const handlePressIn = () => {
-    setIsLongPress(false);
-    longPressTimeout.current = setTimeout(() => {
-      videoRef.current?.pauseAsync();
-      setIsLongPress(true);
-    }, 300);
-  };
-  const handlePressOut = (e: GestureResponderEvent) => {
-    clearTimeout(longPressTimeout.current);
-    if (!isLongPress) {
-      handlePress(e);
-    } else {
-      videoRef.current?.playAsync();
+  const renderStoryItem = () => {
+    const item = storyItems[currentItemIndex];
+    switch (item.type) {
+      case "video":
+        return (
+          <Video
+            source={{ uri: item.uri }}
+            rate={1.0}
+            volume={1.0}
+            isMuted={false}
+            resizeMode={ResizeMode.COVER}
+            shouldPlay
+            isLooping={false}
+            style={styles.media}
+            onPlaybackStatusUpdate={handleVideoPlaybackStatusUpdate}
+          />
+        );
+      case "image":
+        return <Image source={{ uri: item.uri }} style={styles.media} />;
+      default:
+        return null;
     }
+  };
+
+  const renderStoryHeader = () => {
+    return <StoryHeader progress={progress} />;
   };
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.videoContainer}
-        activeOpacity={1}
-        onPressIn={handlePressIn}
-        onPressOut={handlePressOut}
-      >
-        <Video
-          ref={videoRef}
-          style={styles.video}
-          source={{ uri: videos[currentVideoIndex].uri }}
-          resizeMode={ResizeMode.COVER}
-          shouldPlay
-          isMuted={false}
-          onPlaybackStatusUpdate={handleVideoPlaybackStatusUpdate}
-          isLooping={false}
-        />
-        <ProgressBar progress={progress} />
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={handlePress}
+      activeOpacity={1}
+    >
+      {renderStoryHeader()}
+      {renderStoryItem()}
+    </TouchableOpacity>
   );
 };
 
@@ -148,14 +140,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#000",
+    justifyContent: "center",
+    alignItems: "center",
   },
-  videoContainer: {
-    width: width,
-    height: height,
-    justifyContent: "flex-start",
-  },
-  video: {
-    flex: 1,
+  media: {
+    width,
+    height,
   },
 });
 
