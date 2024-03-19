@@ -18,7 +18,11 @@ export default function Private() {
         <PrivateStack.Screen
           name={PRIVATE_PAGES.Story}
           component={Story}
-          options={{ headerShown: false, presentation: "modal" }}
+          options={{
+            headerShown: false,
+            animation: "slide_from_bottom",
+            presentation: "fullScreenModal",
+          }}
         />
       </PrivateStack.Navigator>
     </SignupProvider>

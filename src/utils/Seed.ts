@@ -120,7 +120,11 @@ export const storyItems = [
     type: "image",
   },
   {
-    uri: "https://player.vimeo.com/progressive_redirect/playback/389778408/rendition/540p/file.mp4?loc=external&oauth2_token_id=1747418641&signature=8b98482c472b4874b9de801119e5a06f3681e2d1b459f4472890c563d716cd8c",
+    uri: "https://images.pexels.com/photos/4862568/pexels-photo-4862568.jpeg?auto=compress&cs=tinysrgb&w=800",
+    type: "image",
+  },
+  {
+    uri: "https://player.vimeo.com/progressive_redirect/playback/918930407/rendition/540p/file.mp4?loc=external&oauth2_token_id=1747418641&signature=53e4a5e27284c5110789f89e90aa6e1fb03677b3a67f1417e9bf790be4a75024",
     type: "video",
   },
   {

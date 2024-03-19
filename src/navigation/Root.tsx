@@ -23,7 +23,7 @@ export default function Root() {
           <ThemeProvider>
             <ErrorProvider>
               <Stack.Navigator>
-                {!state.token ? (
+                {state.token ? (
                   <Stack.Screen
                     name={PRIVATE_PAGES.Private}
                     component={Private}

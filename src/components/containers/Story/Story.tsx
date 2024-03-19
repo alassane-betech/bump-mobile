@@ -1,17 +1,22 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import {
   StyleSheet,
   TouchableOpacity,
   Image,
   GestureResponderEvent,
 } from "react-native";
-import { ResizeMode, Video } from "expo-av";
+import { AVPlaybackStatus, ResizeMode, Video } from "expo-av";
 import { storyItems } from "@src/utils/Seed";
 import { window } from "@src/styles/BaseStyle";
 import { useNavigation } from "@react-navigation/native";
 import StoryHeader from "./StoryHeader";
 
 const { width, height } = window;
+
+type ProgressUpdate = {
+  index: number;
+  value: number;
+};
 
 const Story = () => {
   const [currentItemIndex, setCurrentItemIndex] = useState(0);
@@ -21,25 +26,33 @@ const Story = () => {
   );
   const intervalRef = useRef(null);
 
-  const handleProgressUpdate = (index: number, value: number) => {
+  const handleMultipleProgressUpdates = (updates: ProgressUpdate[]) => {
     setProgress((prevProgress) => {
       const newProgress = [...prevProgress];
-      newProgress[index] = value;
+      updates.forEach((update) => {
+        if (update.index >= 0 && update.index < newProgress.length) {
+          newProgress[update.index] = update.value;
+        }
+      });
       return newProgress;
     });
   };
 
   useEffect(() => {
     const item = storyItems[currentItemIndex];
-
     if (item.type === "image") {
       const duration = 5000;
-      const step = duration / 100;
+      const step = duration / 10;
       let elapsed = 0;
       intervalRef.current = setInterval(() => {
         elapsed += step;
         const progressValue = elapsed / duration;
-        handleProgressUpdate(currentItemIndex, progressValue);
+        handleMultipleProgressUpdates([
+          {
+            index: currentItemIndex,
+            value: progressValue,
+          },
+        ]);
         if (elapsed >= duration) {
           clearInterval(intervalRef.current);
           if (currentItemIndex < storyItems.length - 1) {
@@ -56,11 +69,16 @@ const Story = () => {
     };
   }, [currentItemIndex]);
 
-  const handleVideoPlaybackStatusUpdate = (playbackStatus) => {
+  const handleVideoPlaybackStatusUpdate = (
+    playbackStatus: AVPlaybackStatus
+  ) => {
     if (playbackStatus.isLoaded) {
       const progressValue =
         playbackStatus.positionMillis / playbackStatus.durationMillis;
-      handleProgressUpdate(currentItemIndex, progressValue);
+
+      handleMultipleProgressUpdates([
+        { index: currentItemIndex, value: progressValue },
+      ]);
 
       if (playbackStatus.didJustFinish) {
         if (currentItemIndex < storyItems.length - 1) {
@@ -73,39 +91,40 @@ const Story = () => {
   const handlePress = (e: GestureResponderEvent) => {
     const locationX = e.nativeEvent.locationX;
     if (locationX > width / 6) {
-      if (currentItemIndex < storyItems.length - 1) {
-        setProgress((prevProgress) => {
-          const newProgress = [...prevProgress];
-          newProgress[currentItemIndex] = 1;
-          return newProgress;
-        });
-        setCurrentItemIndex(currentItemIndex + 1);
-      } else {
-        navigation.goBack();
-      }
+      goToNextItem();
     } else {
-      if (currentItemIndex > 0) {
-        setProgress((prevProgress) => {
-          const newProgress = [...prevProgress];
-          newProgress[currentItemIndex] = 0;
-          newProgress[currentItemIndex - 1] = 0;
-          return newProgress;
-        });
-        setCurrentItemIndex(currentItemIndex - 1);
-      }
+      goToPreviousItem();
     }
   };
 
-  const renderStoryItem = () => {
+  const goToNextItem = () => {
+    if (currentItemIndex < storyItems.length - 1) {
+      setCurrentItemIndex(currentItemIndex + 1);
+      handleMultipleProgressUpdates([{ index: currentItemIndex, value: 1 }]);
+    } else {
+      navigation.goBack();
+    }
+  };
+
+  const goToPreviousItem = () => {
+    if (currentItemIndex > 0) {
+      setCurrentItemIndex(currentItemIndex - 1);
+      handleMultipleProgressUpdates([
+        { index: currentItemIndex, value: 0 },
+        { index: currentItemIndex - 1, value: 0 },
+      ]);
+    } else {
+      navigation.goBack();
+    }
+  };
+
+  const renderStoryItem = useCallback(() => {
     const item = storyItems[currentItemIndex];
     switch (item.type) {
       case "video":
         return (
           <Video
             source={{ uri: item.uri }}
-            rate={1.0}
-            volume={1.0}
-            isMuted={false}
             resizeMode={ResizeMode.COVER}
             shouldPlay
             isLooping={false}
@@ -118,11 +137,7 @@ const Story = () => {
       default:
         return null;
     }
-  };
-
-  const renderStoryHeader = () => {
-    return <StoryHeader progress={progress} />;
-  };
+  }, [storyItems, currentItemIndex]);
 
   return (
     <TouchableOpacity
@@ -130,7 +145,7 @@ const Story = () => {
       onPress={handlePress}
       activeOpacity={1}
     >
-      {renderStoryHeader()}
+      <StoryHeader currentItemIndex={currentItemIndex} progress={progress} />
       {renderStoryItem()}
     </TouchableOpacity>
   );

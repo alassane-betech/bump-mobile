@@ -9,9 +9,10 @@ import * as Progress from "react-native-progress";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
 interface Props {
+  currentItemIndex: number;
   progress: number[];
 }
-export default function StoryHeader({ progress }: Props) {
+export default function StoryHeader({ progress, currentItemIndex }: Props) {
   const navigation = useNavigation();
   const close = () => navigation.goBack();
   return (
@@ -26,7 +27,13 @@ export default function StoryHeader({ progress }: Props) {
             ]}
           >
             <Progress.Bar
-              progress={prog}
+              progress={
+                index < currentItemIndex
+                  ? 1
+                  : index === currentItemIndex
+                  ? prog
+                  : 0
+              }
               width={null}
               color="white"
               borderWidth={0}
