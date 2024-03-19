@@ -112,31 +112,19 @@ export const users = [
 
 export const storyItems = [
   {
-    uri: "https://player.vimeo.com/progressive_redirect/playback/373288088/rendition/540p/file.mp4?loc=external&oauth2_token_id=1747418641&signature=bbdcbb2f7095302cafc8a9a105b5eb873e399dba0413876492b58b1a6c92f278",
+    uri: "https://player.vimeo.com/progressive_redirect/playback/523474783/rendition/720p/file.mp4?loc=external&oauth2_token_id=1747418641&signature=28b42d1d97984726255867ccd008a721a9efef1d44c25242a173b81c426e11c7",
     type: "video",
   },
   {
-    uri: "https://images.pexels.com/photos/4862568/pexels-photo-4862568.jpeg?auto=compress&cs=tinysrgb&w=800",
-    type: "image",
-  },
-  {
-    uri: "https://images.pexels.com/photos/4862568/pexels-photo-4862568.jpeg?auto=compress&cs=tinysrgb&w=800",
-    type: "image",
-  },
-  {
-    uri: "https://player.vimeo.com/progressive_redirect/playback/918930407/rendition/540p/file.mp4?loc=external&oauth2_token_id=1747418641&signature=53e4a5e27284c5110789f89e90aa6e1fb03677b3a67f1417e9bf790be4a75024",
+    uri: "https://player.vimeo.com/progressive_redirect/playback/403302551/rendition/720p/file.mp4?loc=external&oauth2_token_id=1747418641&signature=c7568d9ec39f29422b7dc36b139ca29ee9db881c27217a68fbb9efe9d3b89469",
     type: "video",
   },
   {
-    uri: "https://images.pexels.com/photos/4862568/pexels-photo-4862568.jpeg?auto=compress&cs=tinysrgb&w=800",
+    uri: "https://images.pexels.com/photos/604969/pexels-photo-604969.jpeg?auto=compress&cs=tinysrgb&w=800",
     type: "image",
   },
   {
-    uri: "https://player.vimeo.com/progressive_redirect/playback/389778408/rendition/540p/file.mp4?loc=external&oauth2_token_id=1747418641&signature=8b98482c472b4874b9de801119e5a06f3681e2d1b459f4472890c563d716cd8c",
+    uri: "https://player.vimeo.com/progressive_redirect/playback/412306034/rendition/720p/file.mp4?loc=external&oauth2_token_id=1747418641&signature=3b2ea5017f0acc55b2e8d22cbc4aa2c758a62237f62834077a2c090c3b0aea8b",
     type: "video",
-  },
-  {
-    uri: "https://images.pexels.com/photos/4862568/pexels-photo-4862568.jpeg?auto=compress&cs=tinysrgb&w=800",
-    type: "image",
   },
 ];

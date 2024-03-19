@@ -8,6 +8,7 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import * as Progress from "react-native-progress";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 interface Props {
   currentItemIndex: number;
   progress: number[];
@@ -15,8 +16,10 @@ interface Props {
 export default function StoryHeader({ progress, currentItemIndex }: Props) {
   const navigation = useNavigation();
   const close = () => navigation.goBack();
+  const insets = useSafeAreaInsets();
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { top: insets.top + 10 }]}>
       <View style={styles.progressContainer}>
         {progress.map((prog, index) => (
           <View
@@ -67,7 +70,6 @@ export default function StoryHeader({ progress, currentItemIndex }: Props) {
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
-    top: 30,
     zIndex: 1,
     width: "90%",
   },
