@@ -6,6 +6,7 @@ import { useMemo } from "react";
 import {
   ActivityIndicator,
   ButtonProps,
+  DimensionValue,
   Dimensions,
   StyleSheet,
   Text,
@@ -23,7 +24,7 @@ interface CustomButtonProps extends ButtonProps {
   textColor?: string;
   backgroundColor?: string;
   variant?: EButtonVariant;
-  width?: number;
+  width?: DimensionValue;
   height?: number;
   loading?: boolean;
   style?: ViewStyle | ViewStyle[];
@@ -44,9 +45,9 @@ const CustomButton = ({
   const textThemed = useMemo(() => getTextThemeStyle(theme), [theme]);
 
   const ButtonStyle = [
-    styles.button,
+    styles.defaultButton,
     variant && buttonThemed[variant],
-    style,
+    style || styles.styledButton,
     { opacity: loading ? 0.7 : 1 },
     backgroundColor && { backgroundColor },
   ];
@@ -69,12 +70,14 @@ const CustomButton = ({
 export default CustomButton;
 
 const styles = StyleSheet.create({
-  button: {
+  defaultButton: {
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 25,
-    width: screenWidth / 2 + 100,
+  },
+  styledButton: {
     height: 50,
+    width: screenWidth / 2 + 100,
   },
   buttonText: {
     ...Typo.button,
