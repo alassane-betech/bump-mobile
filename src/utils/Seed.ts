@@ -1,3 +1,5 @@
+import { EGrade } from "@src/pages/profil/Profil";
+
 export const users = [
   {
     id: "1",

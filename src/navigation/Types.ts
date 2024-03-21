@@ -45,7 +45,9 @@ export enum PRIVATE_PAGES {
   Home = "Home",
   Lunch = "Lunch",
   Duels = "Duels",
+  ProfilNav = "ProfilNav",
   Profil = "Profil",
+  LeaderBoard = "LeaderBoard",
   Story = "Story",
 }
 
@@ -53,4 +55,9 @@ export type MainTabParamList = {
   [PRIVATE_PAGES.Home]: undefined;
   [PRIVATE_PAGES.Lunch]: undefined;
   [PRIVATE_PAGES.Duels]: undefined;
+};
+
+export type ProfilStackParamList = {
+  [PRIVATE_PAGES.Profil]: undefined;
+  [PRIVATE_PAGES.LeaderBoard]: undefined;
 };

@@ -11,6 +11,7 @@ import { COLORS, FONTS } from "@src/styles/BaseStyle";
 import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import { CustomText } from "@src/components/ui/CustomText/CustomText";
 import { PRIVATE_PAGES } from "./Types";
+import ProfilNavigator from "./ProfilNavigator";
 
 const Tab = createBottomTabNavigator();
 const { height, width } = Dimensions.get("screen");
@@ -47,9 +48,9 @@ const routes = [
     iconFocusedPath: <DuelsIconFocused />,
   },
   {
-    key: PRIVATE_PAGES.Profil,
+    key: PRIVATE_PAGES.ProfilNav,
     title: "Profil",
-    component: Profil,
+    component: ProfilNavigator,
     iconPath: <ProfileIcon />,
     iconFocusedPath: <ProfileIconFocused />,
   },

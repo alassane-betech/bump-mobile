@@ -27,6 +27,7 @@ interface CustomButtonProps extends ButtonProps {
   width?: DimensionValue;
   height?: number;
   loading?: boolean;
+  textSize?: number;
   style?: ViewStyle | ViewStyle[];
 }
 
@@ -38,6 +39,7 @@ const CustomButton = ({
   variant,
   style,
   loading,
+  textSize,
   ...props
 }: CustomButtonProps) => {
   const { theme } = useThemeContext();
@@ -61,7 +63,9 @@ const CustomButton = ({
       {loading ? (
         <ActivityIndicator />
       ) : (
-        <Text style={TextStyle}>{props.title}</Text>
+        <Text style={[TextStyle, { fontSize: textSize || 16 }]}>
+          {props.title}
+        </Text>
       )}
     </TouchableOpacity>
   );

@@ -12,6 +12,7 @@ const FONTS = {
 
 export const LighTheme: Theme = {
   primary: "#F8B60D",
+  tertiary: "#ECEFF3",
   background: {
     input: "#ECEFF3",
     card: "",
@@ -47,6 +48,7 @@ export const LighTheme: Theme = {
 
 export const DarkTheme: Theme = {
   primary: "#F8B60D",
+  tertiary: "#ECEFF3",
   background: {
     input: "red",
     card: "red",
