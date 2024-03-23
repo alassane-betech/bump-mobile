@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import { View, Text, StyleSheet, Dimensions, Platform } from "react-native";
 import { COLORS, FONTS, window } from "@src/styles/BaseStyle";
 import React from "react";
 import BackButton from "@src/components/shared/BackButton/BackButton";
@@ -18,7 +18,7 @@ export const Header: React.FC<HeaderProps> = ({ title }) => {
         <BackButton />
         <Text style={styles.title}>{title}</Text>
       </View>
-      <View style={styles.row1} />
+      <View style={styles.blankRow} />
       <View style={styles.headerRightContainer}>
         <HeaderRightThing />
       </View>
@@ -51,10 +51,11 @@ const styles = StyleSheet.create({
   headerRightContainer: {
     position: "absolute",
     right: -20,
-    top: "65%",
+    top: Platform.OS === "android" ? "55%" : "65%",
   },
-  row1: {
-    marginTop: window.isSmallDevice ? "25%" : "30%",
+  blankRow: {
+    marginTop:
+      window.isSmallDevice || Platform.OS === "android" ? "25%" : "30%",
     borderTopLeftRadius: 35,
     backgroundColor: COLORS.white,
     height: 20,

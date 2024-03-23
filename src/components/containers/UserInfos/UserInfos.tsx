@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     marginTop: window.isSmallDevice
       ? "8%"
       : Platform.OS === "android"
-      ? "5%"
+      ? "12%"
       : "15%",
     width: "80%",
     alignSelf: "center",
