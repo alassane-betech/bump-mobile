@@ -1,13 +1,11 @@
 import { AntDesign } from "@expo/vector-icons";
 import { COLORS, window } from "@src/styles/BaseStyle";
 import { ResizeMode, Video } from "expo-av";
-import * as VideoThumbnails from "expo-video-thumbnails";
 import React, { memo, useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Dimensions,
   FlatList,
-  Image,
   Modal,
   StyleSheet,
   TouchableOpacity,
@@ -25,37 +23,9 @@ const VideoTab: React.FC<VideoTabProps> = ({ videosList }) => {
   const video = useRef(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState(null);
-  const [thumbnails, setThumbnails] = useState({});
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalVideos, setTotalVideos] = useState(videosList.length);
-
-  //ToDo: optimiser ce code
-  //   useEffect(() => {
-  //     const fetchThumbnails = async () => {
-  //       setLoading(true);
-  //       const thumbnailsData = { ...thumbnails };
-  //       const startIndex = (currentPage - 1) * VIDEOS_PER_PAGE;
-  //       const endIndex = Math.min(startIndex + VIDEOS_PER_PAGE, totalVideos);
-  //       for (let i = startIndex; i < endIndex; i++) {
-  //         const videoItem = videosList[i];
-  //         try {
-  //           const thumbnail = await getVideoThumbnail(videoItem.video);
-  //           thumbnailsData[videoItem.id] = thumbnail;
-  //         } catch (error) {
-  //           console.error(
-  //             `Error generating thumbnail for ${videoItem.id}:`,
-  //             error
-  //           );
-  //           thumbnailsData[videoItem.id] = null;
-  //         }
-  //       }
-  //       setThumbnails(thumbnailsData);
-  //       setLoading(false);
-  //     };
-
-  //     fetchThumbnails();
-  //   }, [videosList, currentPage]);
 
   useEffect(() => {
     if (modalVisible) {
@@ -65,35 +35,25 @@ const VideoTab: React.FC<VideoTabProps> = ({ videosList }) => {
     }
   }, [modalVisible]);
 
-  const getVideoThumbnail = async (videoUri) => {
-    try {
-      const { uri } = await VideoThumbnails.getThumbnailAsync(videoUri, {
-        time: 15000,
-        quality: 0.1,
-      });
-      return uri;
-    } catch (error) {
-      throw new Error(`Error generating thumbnail: ${error.message}`);
-    }
-  };
-
-  const renderItem = ({ item }) => {
-    const thumbnailUri = thumbnails[item.id];
-    return (
-      <TouchableOpacity
-        key={item.id}
-        onPress={() => {
-          setModalVisible(true);
-          setSelectedVideo(item.video);
-        }}
-        style={[styles.videoBlock, { backgroundColor: COLORS.tertiary }]}
-      >
-        {thumbnailUri && (
-          <Image source={{ uri: thumbnailUri }} style={styles.videoBlock} />
-        )}
-      </TouchableOpacity>
-    );
-  };
+  const renderItem = ({ item }) => (
+    <TouchableOpacity
+      key={item.id}
+      onPress={() => {
+        setModalVisible(true);
+        setSelectedVideo(item.video);
+      }}
+      style={[styles.videoBlock, { backgroundColor: COLORS.tertiary }]}
+    >
+      <Video
+        ref={video}
+        style={styles.videoBlock}
+        source={{ uri: item?.video }}
+        useNativeControls
+        resizeMode={ResizeMode.COVER}
+        isLooping
+      />
+    </TouchableOpacity>
+  );
 
   const loadMoreVideos = () => {
     if (currentPage * VIDEOS_PER_PAGE < totalVideos) {
