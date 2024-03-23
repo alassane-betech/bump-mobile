@@ -31,7 +31,7 @@ const VideoTab: React.FC<VideoTabProps> = ({ videosList }) => {
     if (modalVisible) {
       video.current?.playAsync();
     } else {
-      video.current?.pauseAsync();
+      video.current?.stopAsync();
     }
   }, [modalVisible]);
 
@@ -48,7 +48,7 @@ const VideoTab: React.FC<VideoTabProps> = ({ videosList }) => {
         ref={video}
         style={styles.videoBlock}
         source={{ uri: item?.video }}
-        useNativeControls
+        useNativeControls={false}
         resizeMode={ResizeMode.COVER}
         isLooping
       />
