@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   tabLineActive: {
-    height: 3,
+    height: 2,
     borderTopLeftRadius: 7,
     borderTopRightRadius: 7,
     backgroundColor: COLORS.black,

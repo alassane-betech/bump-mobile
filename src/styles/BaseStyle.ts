@@ -100,8 +100,8 @@ const COLORS = {
 
 export { FONTS, COLORS };
 
-const width = Dimensions.get("window").width;
-const height = Dimensions.get("window").height;
+const { width, height } = Dimensions.get("window");
+
 const deviceDiagonal = Math.sqrt(width ** 2 + height ** 2);
 
 export const window = {

@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import LeaderBoard from "@src/pages/leaderBoard/LeaderBoard";
 import { Profil } from "@src/pages/profil/Profil";
 import { PRIVATE_PAGES, ProfilStackParamList } from "./Types";
+import { LeaderBoard } from "@src/pages/leaderBoard/LeaderBoard";
 
 const ProfilStack = createNativeStackNavigator<ProfilStackParamList>();
 
