@@ -1,7 +1,7 @@
 import { AntDesign } from "@expo/vector-icons";
 import { COLORS, window } from "@src/styles/BaseStyle";
 import { ResizeMode, Video } from "expo-av";
-import React, { memo, useEffect, useRef, useState } from "react";
+import React, { memo, useCallback, useState } from "react";
 import {
   ActivityIndicator,
   Dimensions,
@@ -20,32 +20,41 @@ type VideoTabProps = {
 };
 
 const VideoTab: React.FC<VideoTabProps> = ({ videosList }) => {
-  const video = useRef(null);
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalVideos, setTotalVideos] = useState(videosList.length);
+  const [displayedVideos, setDisplayedVideos] = useState(
+    videosList.slice(0, VIDEOS_PER_PAGE)
+  );
 
-  useEffect(() => {
-    if (modalVisible) {
-      video.current?.playAsync();
-    } else {
-      video.current?.stopAsync();
+  const handleOpenModal = useCallback((item) => {
+    setModalVisible(true);
+    setSelectedVideo(item.video);
+  }, []);
+
+  const closeModal = useCallback(() => setModalVisible(false), []);
+
+  const loadMoreVideos = useCallback(() => {
+    if (currentPage * VIDEOS_PER_PAGE < videosList.length) {
+      setLoading(true);
+      setTimeout(() => {
+        setDisplayedVideos((prevVideos) =>
+          videosList.slice(0, currentPage * VIDEOS_PER_PAGE)
+        );
+        setCurrentPage((prevPage) => prevPage + 1);
+        setLoading(false);
+      }, 1000);
     }
-  }, [modalVisible]);
+  }, [currentPage, videosList]);
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
       key={item.id}
-      onPress={() => {
-        setModalVisible(true);
-        setSelectedVideo(item.video);
-      }}
+      onPress={() => handleOpenModal(item)}
       style={[styles.videoBlock, { backgroundColor: COLORS.tertiary }]}
     >
       <Video
-        ref={video}
         style={styles.videoBlock}
         source={{ uri: item?.video }}
         useNativeControls={false}
@@ -55,41 +64,34 @@ const VideoTab: React.FC<VideoTabProps> = ({ videosList }) => {
     </TouchableOpacity>
   );
 
-  const loadMoreVideos = () => {
-    if (currentPage * VIDEOS_PER_PAGE < totalVideos) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
   return (
     <View style={styles.container}>
       <Modal
         animationType="slide"
         visible={modalVisible}
         statusBarTranslucent={false}
-        onRequestClose={() => setModalVisible(false)}
+        onRequestClose={closeModal}
       >
         <View style={styles.modal}>
-          <TouchableOpacity
-            onPress={() => setModalVisible(false)}
-            style={styles.closeButton}
-          >
+          <TouchableOpacity onPress={closeModal} style={styles.closeButton}>
             <AntDesign name="close" size={24} color="black" />
           </TouchableOpacity>
-          <Video
-            ref={video}
-            style={styles.video}
-            source={{ uri: selectedVideo }}
-            useNativeControls
-            resizeMode={ResizeMode.COVER}
-            isLooping
-          />
+          {selectedVideo && (
+            <Video
+              style={styles.video}
+              source={{ uri: selectedVideo }}
+              useNativeControls
+              resizeMode={ResizeMode.COVER}
+              isLooping
+              shouldPlay={modalVisible}
+            />
+          )}
         </View>
       </Modal>
       <FlatList
-        data={videosList.slice(0, currentPage * VIDEOS_PER_PAGE)}
+        data={displayedVideos}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
         numColumns={2}
         onEndReached={loadMoreVideos}
         onEndReachedThreshold={0.5}
@@ -122,8 +124,8 @@ const styles = StyleSheet.create({
   },
   video: {
     alignSelf: "center",
-    width,
-    height,
+    width: width,
+    height: height,
   },
   closeButton: {
     position: "absolute",
