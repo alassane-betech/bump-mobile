@@ -8,7 +8,7 @@ import { Text as RNText, StyleSheet, TextProps, TextStyle } from "react-native";
 
 const styles = StyleSheet.create({
   title: Typo.screenTitle,
-  button: Typo.button,
+  button: Typo.buttonBold,
   body: Typo.body,
 });
 

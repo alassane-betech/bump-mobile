@@ -1,3 +1,5 @@
+import { Media } from "@src/pages/lunch/new-lunch/NewLunch";
+
 declare global {
   namespace ReactNavigation {
     interface RootParamList
@@ -37,6 +39,8 @@ export type AuthStackParamList = {
 export type PrivateStackParamList = {
   [PRIVATE_PAGES.Main]: undefined;
   [PRIVATE_PAGES.Story]: undefined;
+  [PRIVATE_PAGES.NewLunch]: undefined;
+  [PRIVATE_PAGES.PublishPost]: { media: Media };
 };
 
 export enum PRIVATE_PAGES {
@@ -47,6 +51,8 @@ export enum PRIVATE_PAGES {
   Duels = "Duels",
   Profil = "Profil",
   Story = "Story",
+  NewLunch = "NewLunch",
+  PublishPost = "PublishPost",
 }
 
 export type MainTabParamList = {
