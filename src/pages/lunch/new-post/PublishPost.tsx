@@ -14,33 +14,15 @@ import CustomButton, {
   EButtonVariant,
 } from "@src/components/ui/CustomButton/CustomButton";
 import { FontAwesome6 } from "@expo/vector-icons";
-import * as VideoThumbnails from "expo-video-thumbnails";
-import { useEffect, useState } from "react";
+import { ResizeMode, Video } from "expo-av";
+import { useMemo } from "react";
 
-const generateThumbnail = async (videoUri: string) => {
-  try {
-    const { uri } = await VideoThumbnails.getThumbnailAsync(videoUri);
-    return uri;
-  } catch (e) {
-    console.warn(e);
-  }
-};
 export default function PublishPost() {
   const { theme } = useThemeContext();
   const { params } = useRoute();
   const { media } = params as { media: Media };
-  const [uri, setUri] = useState("");
-  useEffect(() => {
-    const getVideoThumb = async () => {
-      if (media.type === "video") {
-        const thumb = await generateThumbnail(media.mediaUri);
-        setUri(thumb);
-      } else {
-        setUri(media.mediaUri);
-      }
-    };
-    getVideoThumb();
-  }, [media]);
+  const uri = useMemo(() => `file://${media.mediaUri}`, [media]);
+
   return (
     <SafeAreaView style={styles.container}>
       <ScreenHeader
@@ -51,7 +33,7 @@ export default function PublishPost() {
 
       <View style={styles.content}>
         <View style={styles.detail}>
-          {uri && (
+          {media.type === "image" ? (
             <Image
               source={{
                 uri,
@@ -59,6 +41,12 @@ export default function PublishPost() {
               resizeMode={
                 media.uploaded && media.type === "image" ? "contain" : "cover"
               }
+              style={styles.previewImage}
+            />
+          ) : (
+            <Video
+              resizeMode={ResizeMode.COVER}
+              source={{ uri }}
               style={styles.previewImage}
             />
           )}

@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import CameraView from "@src/components/containers/Camera/CameraView";
 import MediaPreview from "@src/components/containers/Camera/MediaPreview";
 import CustomButton from "@src/components/ui/CustomButton/CustomButton";
@@ -6,7 +6,7 @@ import LunchTypeSelect, {
   NewLunchMode,
 } from "@src/components/views/new-lunch/LunchTypeSelect";
 import { PRIVATE_PAGES } from "@src/navigation/Types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -17,11 +17,19 @@ export interface Media {
 }
 export default function NewLunch() {
   const navigation = useNavigation();
+  const { params } = useRoute();
   const [mode, setMode] = useState<NewLunchMode>(NewLunchMode.Post);
   const [media, setMedia] = useState<Media | null>(null);
 
   const handleClosePreview = () => setMedia(null);
   const handleCloseCamera = () => navigation.goBack();
+
+  useEffect(() => {
+    if (params) {
+      const { mode } = params as { mode: NewLunchMode };
+      setMode(mode);
+    }
+  }, [params]);
 
   const handleGoNext = () => {
     if (mode === NewLunchMode.Lunch) {

@@ -46,7 +46,9 @@ export default function UploadView({ onMediaUploaded }: UploadProps) {
   };
   return (
     <TouchableOpacity onPress={pickImageOrVideo}>
-      <Image source={{ uri: latestImage }} style={styles.image} />
+      {latestImage && (
+        <Image source={{ uri: latestImage }} style={styles.image} />
+      )}
       <CustomText style={styles.uploadText}>Upload</CustomText>
     </TouchableOpacity>
   );

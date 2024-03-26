@@ -16,7 +16,6 @@ import {
 import CloseIcon from "@src/components/ui/CloseIcon/CloseIcon";
 import UploadView from "./UploadView";
 import { useCameraPositionContext } from "@src/context/CameraPositionContext";
-import { window } from "@src/styles/BaseStyle";
 
 interface CameraViewProps {
   mediaCaptured?: Media;
@@ -105,9 +104,9 @@ const CameraView = ({
         photo={true}
         video={true}
         audio={true}
-        photoHdr={true}
         exposure={0}
         enableFpsGraph={true}
+        orientation="portrait"
         format={format}
       />
       <View style={styles.control}>
