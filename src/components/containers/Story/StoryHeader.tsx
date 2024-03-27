@@ -6,9 +6,9 @@ import {
 import { defaultHitSlot, window } from "@src/styles/BaseStyle";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import * as Progress from "react-native-progress";
-import AntDesign from "@expo/vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import CloseIcon from "@src/components/ui/CloseIcon/CloseIcon";
 interface Props {
   currentItemIndex: number;
   progress: number[];
@@ -59,9 +59,7 @@ export default function StoryHeader({ progress, currentItemIndex }: Props) {
             12h32
           </CustomText>
         </View>
-        <TouchableOpacity hitSlop={defaultHitSlot} onPress={close}>
-          <AntDesign name="close" size={24} color="white" />
-        </TouchableOpacity>
+        <CloseIcon onClose={close} />
       </View>
     </View>
   );

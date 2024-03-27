@@ -16,8 +16,12 @@ export default {
     letterSpacing: -0.5,
     fontSize: 18,
   },
-  button: {
+  buttonBold: {
     fontFamily: FONTS.bold,
+    fontSize: 16,
+  },
+  button: {
+    fontFamily: FONTS.regular,
     fontSize: 16,
   },
   placeholder: {

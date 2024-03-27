@@ -5,10 +5,14 @@ import Avatar from "@src/components/ui/Avatar/Avatar";
 import { useNavigation } from "@react-navigation/native";
 import { PRIVATE_PAGES } from "@src/navigation/Types";
 
-const UserAvatarItem = ({ user }) => {
+const UserAvatarItem = ({ user, index }) => {
   const navigation = useNavigation();
   const goToStories = () => {
-    navigation.navigate(PRIVATE_PAGES.Story);
+    if (index === 0) {
+      navigation.navigate(PRIVATE_PAGES.NewLunch);
+    } else {
+      navigation.navigate(PRIVATE_PAGES.Story);
+    }
   };
   return (
     <TouchableOpacity
@@ -22,7 +26,9 @@ const UserAvatarItem = ({ user }) => {
   );
 };
 const UserAvatarList = () => {
-  const renderItem = ({ item }) => <UserAvatarItem user={item} />;
+  const renderItem = ({ item, index }) => (
+    <UserAvatarItem user={item} index={index} />
+  );
 
   return (
     <FlatList

@@ -25,7 +25,7 @@ export const ErrorProvider = ({ children }: { children: ReactNode }) => {
       position: Toast.positions.TOP,
       shadow: true,
       backgroundColor: theme.error.color,
-      textStyle: Typo.button,
+      textStyle: Typo.buttonBold,
       opacity: 1,
       animation: true,
       hideOnPress: true,
