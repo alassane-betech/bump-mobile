@@ -2,7 +2,7 @@ import { useThemeContext } from "@src/context/ThemeContext";
 import { COLORS, FONTS } from "@src/styles/BaseStyle";
 import { Theme } from "@src/styles/Types";
 import Typo from "@src/styles/Typo";
-import { useMemo } from "react";
+import { ReactElement, useMemo } from "react";
 import {
   ActivityIndicator,
   ButtonProps,
@@ -11,6 +11,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  View,
   ViewStyle,
 } from "react-native";
 
@@ -27,6 +28,7 @@ interface CustomButtonProps extends ButtonProps {
   width?: DimensionValue;
   height?: number;
   loading?: boolean;
+  iconLeft?: ReactElement;
   style?: ViewStyle | ViewStyle[];
 }
 
@@ -38,6 +40,7 @@ const CustomButton = ({
   variant,
   style,
   loading,
+  iconLeft,
   ...props
 }: CustomButtonProps) => {
   const { theme } = useThemeContext();
@@ -58,6 +61,7 @@ const CustomButton = ({
   ];
   return (
     <TouchableOpacity {...props} style={ButtonStyle} disabled={loading}>
+      {iconLeft && <View style={styles.iconLeft}>{iconLeft}</View>}
       {loading ? (
         <ActivityIndicator />
       ) : (
@@ -74,13 +78,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 25,
+    height: 50,
   },
   styledButton: {
-    height: 50,
     width: screenWidth / 2 + 100,
   },
+  iconLeft: {
+    position: "absolute",
+    left: 10,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: "center",
+  },
   buttonText: {
-    ...Typo.button,
+    ...Typo.buttonBold,
   },
 });
 

@@ -19,21 +19,52 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "userInterfaceStyle": "automatic"
+      "userInterfaceStyle": "automatic",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Bump needs access to your Camera.",
+        "NSMicrophoneUsageDescription": "Bump needs access to your Microphone.",
+        "NSPhotoLibraryUsageDescription": "Allow Bump to access your photos.",
+        "NSPhotoLibraryAddUsageDescription": "Allow $(PRODUCT_NAME) to save photos"
+      },
+      "bundleIdentifier": "com.bumpapp.bump-mobile"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#F8B60D"
       },
-      "userInterfaceStyle": "automatic"
+      "userInterfaceStyle": "automatic",
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.ACCESS_MEDIA_LOCATION"
+      ],
+      "package": "com.bumpapp.bumpmobile"
     },
     "web": {
       "favicon": "./src/assets/images/favicon.png"
     },
     "plugins": [
       "expo-font",
-      "expo-secure-store"
-    ]
+      "expo-secure-store",
+      [
+        "react-native-vision-camera",
+        {
+          "cameraPermissionText": "Bump needs access to your Camera.",
+          "enableMicrophonePermission": true,
+          "microphonePermissionText": "Bump needs access to your Microphone."
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow Bump to access your photos.",
+          "isAccessMediaLocationEnabled": true
+        }
+      ]
+    ],
+    "owner": "bumpapp"
   }
 }
