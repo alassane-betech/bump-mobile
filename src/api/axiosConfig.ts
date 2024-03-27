@@ -1,45 +1,44 @@
-import { useAuthContext } from "@src/context/AuthContext";
+import { storage } from "@src/context/AuthContext";
 import { ServerError } from "@src/types/ServerResponseTypes";
 import axios from "axios";
 
-const API_URL = "https://ab4d-154-124-204-243.ngrok-free.app/api";
-// const API_URL = "http://localhost:3000/api"; // Changez cela pour la production
+const API_URL = "http://localhost:3000/api";
 
-export const AxiosConfig = () => {
-  const { state } = useAuthContext();
+const getToken = () => storage.getString("userToken");
 
-  const instance = axios.create({
-    baseURL: API_URL,
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: state?.token,
-    },
-  });
+const api = axios.create({
+  baseURL: API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
-  instance.interceptors.response.use(
-    (response) => response,
-    (error) => {
-      const { response, request } = error;
+api.interceptors.request.use((config) => {
+  const token = getToken();
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
 
-      if (!response) {
-        const networkErrorMessage = request
-          ? "Network Error: The request was made but no response was received"
-          : "Network Error: Something went wrong in setting up the request";
-
-        return Promise.reject(new Error(networkErrorMessage));
-      }
-
-      const { data, statusText } = response;
-      const errorMessage = data.message || "An error occurred";
-      const errorDetails = data.error || statusText;
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (!error.response) {
+      const networkErrorMessage = error.request
+        ? "Network Error: The request was made but no response was received"
+        : "Network Error: Something went wrong in setting up the request";
+      return Promise.reject(new Error(networkErrorMessage));
+    }
+    if (axios.isAxiosError(error)) {
       const serverError: ServerError = {
-        message: errorMessage,
-        error: errorDetails,
+        message: error.response.data.message || "An error occurred",
+        error: error.response.data.error || error.response.statusText,
       };
-
       return Promise.reject(serverError);
     }
-  );
+    return Promise.reject(new Error("An unexpected error occurred"));
+  }
+);
 
-  return instance;
-};
+export default api;

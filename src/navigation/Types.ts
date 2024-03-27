@@ -1,4 +1,6 @@
 import { User } from "@src/types/userTypes";
+import { NewLunchMode } from "@src/components/views/new-lunch/LunchTypeSelect";
+import { Media } from "@src/pages/lunch/new-lunch/NewLunch";
 
 declare global {
   namespace ReactNavigation {
@@ -39,6 +41,8 @@ export type AuthStackParamList = {
 export type PrivateStackParamList = {
   [PRIVATE_PAGES.Main]: undefined;
   [PRIVATE_PAGES.Story]: undefined;
+  [PRIVATE_PAGES.NewLunch]: { mode: NewLunchMode };
+  [PRIVATE_PAGES.PublishPost]: { media: Media };
 };
 
 export enum PRIVATE_PAGES {
@@ -52,6 +56,8 @@ export enum PRIVATE_PAGES {
   LeaderBoard = "LeaderBoard",
   Story = "Story",
   EditProfil = "EditProfil",
+  NewLunch = "NewLunch",
+  PublishPost = "PublishPost",
 }
 
 export type MainTabParamList = {

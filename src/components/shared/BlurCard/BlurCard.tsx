@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { BumpEgg } from "@src/assets/svgs/BumpEgg";
 import CustomButton, {
   EButtonVariant,
@@ -6,9 +7,14 @@ import {
   CustomText,
   ETextVariant,
 } from "@src/components/ui/CustomText/CustomText";
+import { NewLunchMode } from "@src/components/views/new-lunch/LunchTypeSelect";
+import { PRIVATE_PAGES } from "@src/navigation/Types";
 import { Platform, View, StyleSheet } from "react-native";
 
 export default function BlurCard() {
+  const navigation = useNavigation();
+  const navigateToNewLunch = () =>
+    navigation.navigate(PRIVATE_PAGES.NewLunch, { mode: NewLunchMode.Lunch });
   return (
     <View style={styles.container}>
       <View style={styles.card}>
@@ -21,6 +27,7 @@ export default function BlurCard() {
             style={styles.button}
             variant={EButtonVariant.Primary}
             title="Nouveau Lunch"
+            onPress={navigateToNewLunch}
           />
         </View>
         <View style={styles.shadow}>

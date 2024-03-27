@@ -24,8 +24,8 @@ const VideoTab: React.FC<VideoTabProps> = ({ videosList }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedVideo, setSelectedVideo] = useState(null);
 
-  const handleOpenModal = useCallback((item) => {
-    setSelectedVideo(item.video);
+  const handleOpenModal = useCallback((video: string) => {
+    setSelectedVideo(video);
   }, []);
 
   const closeModal = useCallback(() => {
@@ -33,13 +33,11 @@ const VideoTab: React.FC<VideoTabProps> = ({ videosList }) => {
   }, []);
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity
-      key={item.id}
-      onPress={() => handleOpenModal(item)}
-      style={[styles.videoBlock, { backgroundColor: COLORS.tertiary }]}
-    >
-      <VideoPlayer video={item.video} selected={selectedVideo === item.video} />
-    </TouchableOpacity>
+    <VideoPlayer
+      video={item.video}
+      selected={selectedVideo === item.video}
+      onVideoPress={handleOpenModal}
+    />
   );
 
   const loadMoreVideos = () => {
@@ -87,7 +85,15 @@ const VideoTab: React.FC<VideoTabProps> = ({ videosList }) => {
   );
 };
 
-const VideoPlayer = ({ video, selected }) => {
+const VideoPlayer = ({
+  video,
+  selected,
+  onVideoPress,
+}: {
+  video: string;
+  selected: boolean;
+  onVideoPress: (video: string) => void;
+}) => {
   const videoRef = useRef(null);
 
   useEffect(() => {
@@ -98,15 +104,21 @@ const VideoPlayer = ({ video, selected }) => {
     }
   }, [selected]);
 
+  const handleVideoPress = () => {
+    onVideoPress(video);
+  };
+
   return (
-    <Video
-      ref={videoRef}
-      style={styles.videoBlock}
-      source={{ uri: video }}
-      useNativeControls={false}
-      resizeMode={ResizeMode.COVER}
-      isLooping
-    />
+    <TouchableOpacity onPress={handleVideoPress}>
+      <Video
+        ref={videoRef}
+        style={styles.videoBlock}
+        source={{ uri: video }}
+        useNativeControls={false}
+        resizeMode={ResizeMode.COVER}
+        isLooping
+      />
+    </TouchableOpacity>
   );
 };
 
@@ -116,7 +128,7 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 10,
     paddingHorizontal: 10,
-    height: height * 0.4,
+    height: window.isSmallDevice ? height * 0.4 : height * 0.44,
   },
   modal: {
     flex: 1,

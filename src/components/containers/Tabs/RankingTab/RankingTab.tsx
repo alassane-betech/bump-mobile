@@ -1,16 +1,9 @@
 import { ProfileUserItem } from "@src/components/ui/ProfileUserItem/ProfileUserItem";
 import { PRIVATE_PAGES } from "@src/navigation/Types";
 import { ProfilProps } from "@src/pages/profil/Profil";
-import { window } from "@src/styles/BaseStyle";
 import { users } from "@src/utils/Seed";
 import React from "react";
-import {
-  Dimensions,
-  FlatList,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Dimensions, FlatList, StyleSheet, View } from "react-native";
 
 const { height } = Dimensions.get("window");
 
@@ -22,9 +15,11 @@ export const RankingTab: React.FC<RankingTabProps> = ({ navigation }) => {
   };
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity onPress={navigateToLeaderBoard}>
-      <ProfileUserItem user={item} key={item.id} />
-    </TouchableOpacity>
+    <ProfileUserItem
+      user={item}
+      key={item.id}
+      onPress={navigateToLeaderBoard}
+    />
   );
 
   return (

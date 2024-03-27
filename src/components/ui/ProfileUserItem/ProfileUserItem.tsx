@@ -1,15 +1,22 @@
 import { COLORS, FONTS } from "@src/styles/BaseStyle";
-import { DEFAULT_IMAGE } from "@src/utils/Seed";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Avatar from "../Avatar/Avatar";
 
 type ProfileUserItemProps = {
   user: any;
+  onPress?: () => void;
 };
 
-export const ProfileUserItem: React.FC<ProfileUserItemProps> = ({ user }) => {
+export const ProfileUserItem: React.FC<ProfileUserItemProps> = ({
+  user,
+  onPress,
+}) => {
   return (
-    <View style={styles.userItem}>
+    <TouchableOpacity
+      disabled={onPress ? false : true}
+      style={styles.userItem}
+      onPress={onPress}
+    >
       <View style={styles.leftBlock}>
         <View style={styles.itemNumber}>
           <Text style={styles.text}>{user?.id}</Text>
@@ -22,7 +29,7 @@ export const ProfileUserItem: React.FC<ProfileUserItemProps> = ({ user }) => {
       <View style={styles.rightBlock}>
         <Text style={styles.points}>{`${user?.points} points`}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

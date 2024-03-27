@@ -1,5 +1,4 @@
 import { useThemeContext } from "@src/context/ThemeContext";
-import { FONTS } from "@src/styles/BaseStyle";
 import { Theme } from "@src/styles/Types";
 import Typo from "@src/styles/Typo";
 import { goToLink } from "@src/utils/Helpers";
@@ -8,7 +7,7 @@ import { Text as RNText, StyleSheet, TextProps, TextStyle } from "react-native";
 
 const styles = StyleSheet.create({
   title: Typo.screenTitle,
-  button: Typo.button,
+  button: Typo.buttonBold,
   body: Typo.body,
 });
 

@@ -1,15 +1,14 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  Platform,
-  TouchableOpacity,
-} from "react-native";
+import { HeaderRightThing } from "@src/assets/svgs/HeaderRightThing";
+import BackButton from "@src/components/shared/BackButton/BackButton";
 import { COLORS, FONTS, window } from "@src/styles/BaseStyle";
 import React from "react";
-import BackButton from "@src/components/shared/BackButton/BackButton";
-import { HeaderRightThing } from "@src/assets/svgs/HeaderRightThing";
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 type HeaderProps = {
   title?: string;
@@ -18,8 +17,6 @@ type HeaderProps = {
   rightButton?: JSX.Element;
   onRightButtonPress?: () => void;
 };
-
-const { width } = Dimensions.get("window");
 
 export const Header: React.FC<HeaderProps> = ({
   title,
@@ -82,7 +79,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 35,
     backgroundColor: COLORS.white,
     height: 20,
-    width: width,
+    width: window.width,
   },
   rightButton: {
     position: "absolute",

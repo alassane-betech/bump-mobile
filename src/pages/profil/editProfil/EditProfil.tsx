@@ -42,7 +42,7 @@ export const EditProfil: React.FC<EditProfilProps> = ({
   };
 
   const handleUpdate = () => {
-    const body = { username: username, description: description };
+    const body = { username, description };
     updateUser(body).then(() => {
       navigation.navigate(PRIVATE_PAGES.Profil);
     });
