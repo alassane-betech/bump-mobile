@@ -2,18 +2,13 @@ import { Entypo } from "@expo/vector-icons";
 import { VerticalLine } from "@src/assets/svgs/VerticalLine";
 import Avatar from "@src/components/ui/Avatar/Avatar";
 import CustomButton from "@src/components/ui/CustomButton/CustomButton";
+import { CustomText } from "@src/components/ui/CustomText/CustomText";
 import { COLORS, FONTS, window } from "@src/styles/BaseStyle";
 import { Theme } from "@src/styles/Types";
 import { EGrade, User } from "@src/types/userTypes";
 import { DEFAULT_IMAGE } from "@src/utils/Seed";
 import React from "react";
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Platform, StyleSheet, TouchableOpacity, View } from "react-native";
 
 export type UserInfosProps = {
   user: User;
@@ -45,24 +40,26 @@ export const UserInfos: React.FC<UserInfosProps> = ({ user, theme }) => {
         />
       </View>
       <View style={styles.userInfos}>
-        <Text style={styles.name}>{`${user?.firstname || ""} ${
+        <CustomText style={styles.name}>{`${user?.firstname || ""} ${
           user?.lastname || ""
-        }`}</Text>
-        <Text style={styles.description}>
+        }`}</CustomText>
+        <CustomText style={styles.description}>
           {" "}
           {user?.description ?? "Spécialiste des déglaçages en urgence 🔥"}{" "}
-        </Text>
+        </CustomText>
       </View>
       <View style={styles.tags}>
-        <Text style={[styles.description, { color: COLORS.black }]}>
+        <CustomText style={[styles.description, { color: COLORS.black }]}>
           {user?.tags?.join(" ") ??
             "#cuisine italienne, #cuisinier du dimanche"}
-        </Text>
+        </CustomText>
       </View>
       <View style={styles.stats}>
         <View style={styles.statsItem}>
-          <Text style={styles.statsItemNumber}>{user?.totalFollowers}</Text>
-          <Text style={styles.statsItemText}>Abonnés</Text>
+          <CustomText style={styles.statsItemNumber}>
+            {user?.totalFollowers}
+          </CustomText>
+          <CustomText style={styles.statsItemText}>Abonnés</CustomText>
         </View>
 
         <View style={[styles.line, { left: "33%" }]}>
@@ -70,8 +67,10 @@ export const UserInfos: React.FC<UserInfosProps> = ({ user, theme }) => {
         </View>
 
         <View style={styles.statsItem}>
-          <Text style={styles.statsItemNumber}>{user?.totalFollowing}</Text>
-          <Text style={styles.statsItemText}>Abonnements</Text>
+          <CustomText style={styles.statsItemNumber}>
+            {user?.totalFollowing}
+          </CustomText>
+          <CustomText style={styles.statsItemText}>Abonnements</CustomText>
         </View>
 
         <View style={[styles.line, { left: "72%" }]}>
@@ -79,8 +78,8 @@ export const UserInfos: React.FC<UserInfosProps> = ({ user, theme }) => {
         </View>
 
         <View style={styles.statsItem}>
-          <Text style={styles.statsItemNumber}>{user?.points}</Text>
-          <Text style={styles.statsItemText}>Points</Text>
+          <CustomText style={styles.statsItemNumber}>{user?.points}</CustomText>
+          <CustomText style={styles.statsItemText}>Points</CustomText>
         </View>
       </View>
       <View style={styles.buttons}>

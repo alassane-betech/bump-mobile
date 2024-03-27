@@ -11,7 +11,7 @@ import * as Yup from "yup";
 import { useNavigation } from "@react-navigation/native";
 import { AUTH_PAGES } from "@src/navigation/Types";
 import { useSignup } from "@src/context/SignupContext";
-import { useValidateEmail } from "@src/hooks/useUsers";
+import useUsers from "@src/hooks/useUsers";
 
 export interface CredentialsFormValues {
   email: string;
@@ -48,7 +48,8 @@ export const CredentialsValidationSchema = Yup.object().shape({
 export default function CredentialsForm() {
   const navigation = useNavigation();
   const { userInfo, updateUser } = useSignup();
-  const { mutateAsync: validateEmail, isPending } = useValidateEmail();
+  const { mutateAsync: validateEmail, isPending } =
+    useUsers().useValidateEmail();
   const [emailExists, setEmailExists] = useState(false);
   const [passwordCriteria, setPasswordCriteria] = useState<PasswordCriteria>({
     minLength: false,

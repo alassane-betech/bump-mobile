@@ -7,12 +7,10 @@ import {
   ETabs,
 } from "@src/components/shared/CustomTopTab/CustomTopTab";
 import Loader from "@src/components/ui/Loader/Loader";
-import { useAuthContext } from "@src/context/AuthContext";
 import { useThemeContext } from "@src/context/ThemeContext";
+import useUsers from "@src/hooks/useUsers";
 import { PRIVATE_PAGES, ProfilStackParamList } from "@src/navigation/Types";
-import { getUser } from "@src/services/userServices";
 import { profileVideos } from "@src/utils/Seed";
-import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { Dimensions, Image, StyleSheet, View } from "react-native";
 import Animated, {
@@ -29,12 +27,8 @@ export interface ProfilProps {
 
 export const Profil: React.FC<ProfilProps> = ({ navigation }) => {
   const { theme } = useThemeContext();
-  const { state } = useAuthContext();
 
-  const { data, isPending, error, refetch } = useQuery({
-    queryKey: ["user"],
-    queryFn: async () => getUser(state.token),
-  });
+  const { data, isPending, error, refetch } = useUsers().useGetUser();
 
   const [activeTab, setActiveTab] = useState<ETabs>(ETabs.VIDEOS);
   const translateXView1 = useSharedValue(0);

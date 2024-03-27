@@ -9,8 +9,6 @@ type HeaderProps = {
   isDetails?: boolean;
 };
 
-const { width } = Dimensions.get("window");
-
 export const Header: React.FC<HeaderProps> = ({ title }) => {
   return (
     <View style={styles.container}>
@@ -59,6 +57,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 35,
     backgroundColor: COLORS.white,
     height: 20,
-    width: width,
+    width: window.width,
   },
 });
