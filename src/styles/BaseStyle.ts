@@ -12,6 +12,7 @@ const FONTS = {
 
 export const LighTheme: Theme = {
   primary: "#F8B60D",
+  tertiary: "#ECEFF3",
   background: {
     input: "#ECEFF3",
     card: "",
@@ -47,6 +48,7 @@ export const LighTheme: Theme = {
 
 export const DarkTheme: Theme = {
   primary: "#F8B60D",
+  tertiary: "#ECEFF3",
   background: {
     input: "red",
     card: "red",
@@ -98,8 +100,8 @@ const COLORS = {
 
 export { FONTS, COLORS };
 
-const width = Dimensions.get("window").width;
-const height = Dimensions.get("window").height;
+const { width, height } = Dimensions.get("window");
+
 const deviceDiagonal = Math.sqrt(width ** 2 + height ** 2);
 
 export const window = {

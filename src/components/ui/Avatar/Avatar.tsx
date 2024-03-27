@@ -3,6 +3,7 @@ import { View, Image, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { useThemeContext } from "@src/context/ThemeContext";
+import { EggIcon } from "@src/assets/svgs/EggIcon";
 type AvatarProps = {
   imageUri: string;
   size?: number;
@@ -10,6 +11,7 @@ type AvatarProps = {
   borderWidth?: number;
   id?: string;
   type: "outlined" | "gradient" | "default";
+  profilAvatar?: boolean;
 };
 
 const Avatar: React.FC<AvatarProps> = ({
@@ -19,42 +21,54 @@ const Avatar: React.FC<AvatarProps> = ({
   borderWidth = 2,
   id,
   type = "gradient",
+  profilAvatar,
 }) => {
   const gradientSize = size + borderWidth * 2.5;
   const { theme } = useThemeContext();
 
   if (type === "gradient" && id !== "1") {
     return (
-      <LinearGradient
-        colors={["#F8B60D", "#A34F01"]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={[
-          styles.gradient,
-          {
-            borderRadius: gradientSize / 2,
-            width: gradientSize,
-            height: gradientSize,
-          },
-        ]}
-      >
-        <View
+      <>
+        {profilAvatar && (
+          <View style={styles.eggIcon}>
+            <EggIcon color={borderColor} />
+          </View>
+        )}
+        <LinearGradient
+          colors={
+            !profilAvatar ? ["#F8B60D", "#A34F01"] : [borderColor, borderColor]
+          }
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
           style={[
-            styles.imageContainer,
+            styles.gradient,
             {
-              width: size,
-              height: size,
-              borderRadius: size / 2,
-              borderWidth: borderWidth,
+              borderRadius: gradientSize / 2,
+              width: gradientSize,
+              height: gradientSize,
             },
           ]}
         >
-          <Image
-            source={{ uri: imageUri }}
-            style={[styles.avatarImage, { borderRadius: size / 2 }]}
-          />
-        </View>
-      </LinearGradient>
+          <View
+            style={[
+              styles.imageContainer,
+              {
+                backgroundColor: !profilAvatar ? "white" : null,
+                padding: !profilAvatar ? 2 : 0,
+                width: size,
+                height: size,
+                borderRadius: size / 2,
+                borderWidth: borderWidth,
+              },
+            ]}
+          >
+            <Image
+              source={{ uri: imageUri }}
+              style={[styles.avatarImage, { borderRadius: size / 2 }]}
+            />
+          </View>
+        </LinearGradient>
+      </>
     );
   } else {
     return (
@@ -95,9 +109,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   imageContainer: {
-    padding: 2,
     borderColor: "transparent",
-    backgroundColor: "white",
     overflow: "hidden",
   },
   avatarImage: {
@@ -123,6 +135,12 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
+  },
+  eggIcon: {
+    position: "absolute",
+    zIndex: 9999,
+    bottom: 2,
+    left: "1.5%",
   },
 });
 

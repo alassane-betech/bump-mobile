@@ -1,5 +1,5 @@
 import { createContext, useMemo, useReducer, useEffect } from "react";
-import * as SecureStore from "expo-secure-store";
+import { MMKV } from "react-native-mmkv";
 
 export interface AuthState {
   isLoading: boolean;
@@ -15,6 +15,8 @@ export type AuthContextValue = {
   setToken: (token: string) => void;
   removeToken: () => void;
 };
+
+export const storage = new MMKV();
 
 export const AuthContext = createContext<{
   state: AuthState;
@@ -60,12 +62,12 @@ export const useAuthContext = (): {
 
   const authContext = useMemo(
     () => ({
-      setToken: async (token: string) => {
-        await SecureStore.setItemAsync("userToken", token);
+      setToken: (token: string) => {
+        storage.set("userToken", token);
         dispatch({ type: "SET_TOKEN", token });
       },
-      removeToken: async () => {
-        await SecureStore.deleteItemAsync("userToken");
+      removeToken: () => {
+        storage.delete("userToken");
         dispatch({ type: "REMOVE_TOKEN" });
       },
     }),
@@ -75,7 +77,7 @@ export const useAuthContext = (): {
   useEffect(() => {
     const bootstrapAsync = async () => {
       try {
-        const token = await SecureStore.getItemAsync("userToken");
+        const token = storage.getString("userToken");
         dispatch({ type: "RESTORE_TOKEN", token });
       } catch (error) {}
     };
