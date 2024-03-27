@@ -4,7 +4,7 @@ import ScreenHeader from "@src/components/shared/ScreenHeader/ScreenHeader";
 import { useThemeContext } from "@src/context/ThemeContext";
 import { Image, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Media } from "../new-lunch/NewLunch";
+import { EMediaType, Media } from "../new-lunch/NewLunch";
 import {
   CustomText,
   ETextVariant,
@@ -33,13 +33,15 @@ export default function PublishPost() {
 
       <View style={styles.content}>
         <View style={styles.detail}>
-          {media.type === "image" ? (
+          {media.type === EMediaType.Image ? (
             <Image
               source={{
                 uri,
               }}
               resizeMode={
-                media.uploaded && media.type === "image" ? "contain" : "cover"
+                media.uploaded && media.type === EMediaType.Image
+                  ? "contain"
+                  : "cover"
               }
               style={styles.previewImage}
             />

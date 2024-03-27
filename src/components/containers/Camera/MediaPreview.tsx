@@ -1,4 +1,4 @@
-import { Media } from "@src/pages/lunch/new-lunch/NewLunch";
+import { EMediaType, Media } from "@src/pages/lunch/new-lunch/NewLunch";
 import { useCallback, useMemo, useState } from "react";
 import { ActivityIndicator, Image, StyleSheet, View } from "react-native";
 import { ResizeMode, Video } from "expo-av";
@@ -25,7 +25,7 @@ export default function MediaPreview({ media, onClose }: MediaPreviewProps) {
   return (
     <View style={[styles.container]}>
       {!hasMediaLoaded || (!isActive && <ActivityIndicator color={"gray"} />)}
-      {type === "image" && isActive && (
+      {type === EMediaType.Image && isActive && (
         <Image
           source={{ uri }}
           style={StyleSheet.absoluteFill}
@@ -34,7 +34,7 @@ export default function MediaPreview({ media, onClose }: MediaPreviewProps) {
         />
       )}
 
-      {type === "video" && isActive && (
+      {type === EMediaType.Video && isActive && (
         <Video
           source={{ uri }}
           resizeMode={uploaded ? ResizeMode.CONTAIN : ResizeMode.COVER}

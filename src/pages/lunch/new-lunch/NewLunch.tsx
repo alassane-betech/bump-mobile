@@ -10,9 +10,13 @@ import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+export enum EMediaType {
+  Image = "image",
+  Video = "video",
+}
 export interface Media {
   mediaUri: string;
-  type: "image" | "video";
+  type: EMediaType;
   uploaded?: boolean;
 }
 export default function NewLunch() {

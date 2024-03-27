@@ -10,6 +10,7 @@ import { storyItems } from "@src/utils/Seed";
 import { window } from "@src/styles/BaseStyle";
 import { useNavigation } from "@react-navigation/native";
 import StoryHeader from "./StoryHeader";
+import { EMediaType } from "@src/pages/lunch/new-lunch/NewLunch";
 
 const { width, height } = window;
 
@@ -40,7 +41,7 @@ const Story = () => {
 
   useEffect(() => {
     const item = storyItems[currentItemIndex];
-    if (item.type === "image") {
+    if (item.type === EMediaType.Image) {
       const duration = 5000;
       const step = duration / 10;
       let elapsed = 0;
@@ -121,7 +122,7 @@ const Story = () => {
   const renderStoryItem = useCallback(() => {
     const item = storyItems[currentItemIndex];
     switch (item.type) {
-      case "video":
+      case EMediaType.Video:
         return (
           <Video
             source={{ uri: item.uri }}
@@ -132,7 +133,7 @@ const Story = () => {
             onPlaybackStatusUpdate={handleVideoPlaybackStatusUpdate}
           />
         );
-      case "image":
+      case EMediaType.Image:
         return <Image source={{ uri: item.uri }} style={styles.media} />;
       default:
         return null;
