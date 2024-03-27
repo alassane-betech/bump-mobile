@@ -7,8 +7,16 @@ import ScreenHeader from "@src/components/shared/ScreenHeader/ScreenHeader";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import Feather from "@expo/vector-icons/Feather";
 import { useThemeContext } from "@src/context/ThemeContext";
+import { useNavigation } from "@react-navigation/native";
+import { PRIVATE_PAGES } from "@src/navigation/Types";
+import { NewLunchMode } from "@src/components/views/new-lunch/LunchTypeSelect";
+import { BumpEgg } from "@src/assets/svgs/BumpEgg";
 export const Lunch: React.FC = () => {
   const { theme } = useThemeContext();
+  const navigation = useNavigation();
+  const goToNewLunch = () =>
+    navigation.navigate(PRIVATE_PAGES.NewLunch, { mode: NewLunchMode.Lunch });
+
   return (
     <View style={styles.container}>
       <Image
@@ -24,7 +32,15 @@ export const Lunch: React.FC = () => {
           <Fontisto name="bell" size={22} color={theme.text.default} />
         }
       />
-      <BlurCard />
+      <BlurCard
+        image={
+          <View style={styles.shadow}>
+            <BumpEgg />
+          </View>
+        }
+        title="Partage ton plat, tes galères de cuisine"
+        buttonProps={{ title: "Nouveau Lunch", onPress: goToNewLunch }}
+      />
       <View style={styles.userList}>
         <UserAvatarList />
       </View>
@@ -45,4 +61,17 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   blurbackground: { position: "absolute", top: -100, width: window.width },
+  shadow: {
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 3,
+      },
+      android: {
+        elevation: 5,
+      },
+    }),
+  },
 });

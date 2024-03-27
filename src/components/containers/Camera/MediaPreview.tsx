@@ -1,10 +1,10 @@
-import { EMediaType, Media } from "@src/pages/lunch/new-lunch/NewLunch";
 import { useCallback, useMemo, useState } from "react";
 import { ActivityIndicator, Image, StyleSheet, View } from "react-native";
 import { ResizeMode, Video } from "expo-av";
 import BackButton from "@src/components/shared/BackButton/BackButton";
 import { useIsFocused } from "@react-navigation/native";
 import { useIsForeground } from "@src/hooks/useIfForeground";
+import { EMediaType, Media } from "./types";
 interface MediaPreviewProps {
   media: Media;
   onClose: () => void;

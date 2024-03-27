@@ -1,4 +1,4 @@
-import { EMediaType } from "@src/pages/lunch/new-lunch/NewLunch";
+import { EMediaType } from "@src/components/containers/Camera/types";
 
 export const users = [
   {
