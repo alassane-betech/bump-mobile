@@ -29,3 +29,10 @@ export const useValidateUsername = () => {
     "Une erreur est survenue lors de la validation du username"
   );
 };
+
+export const useUpdateUser = () => {
+  return useMutationWithErrorHandling<User, any>(
+    userService.updateUser,
+    "Une erreur est survenue lors de l'édition de l'utilisateur"
+  );
+};

@@ -1,3 +1,5 @@
+import Feather from "@expo/vector-icons/Feather";
+import ErrorText from "@src/components/shared/ErrorText/ErrorText";
 import { useThemeContext } from "@src/context/ThemeContext";
 import { FONTS, defaultHitSlot } from "@src/styles/BaseStyle";
 import { Theme } from "@src/styles/Types";
@@ -5,16 +7,13 @@ import Typo from "@src/styles/Typo";
 import React, { useRef, useState } from "react";
 import {
   Animated,
-  TextInput,
+  NativeSyntheticEvent,
   StyleSheet,
+  TextInput,
+  TextInputFocusEventData,
   TextInputProps,
   TouchableOpacity,
-  NativeSyntheticEvent,
-  TextInputFocusEventData,
-  NativeTouchEvent,
 } from "react-native";
-import Feather from "@expo/vector-icons/Feather";
-import ErrorText from "@src/components/shared/ErrorText/ErrorText";
 
 export enum ETextFielType {
   Password = "Password",
@@ -25,6 +24,7 @@ interface TextFieldProps extends TextInputProps {
   label: string;
   type?: ETextFielType;
   error?: string;
+  isTextarea?: boolean;
   onPress?: () => void;
   togglePasswordVisibility?: () => void;
 }
@@ -32,6 +32,7 @@ export const TextField = ({
   label,
   type = ETextFielType.Default,
   error,
+  isTextarea,
   togglePasswordVisibility,
   onPress,
   ...props
@@ -91,7 +92,10 @@ export const TextField = ({
     <>
       <TouchableOpacity
         activeOpacity={1}
-        style={themed.container}
+        style={[
+          themed.container,
+          { height: isTextarea ? 97 : 56, paddingTop: isTextarea ? 25 : 18 },
+        ]}
         onPress={focusInput}
       >
         <Animated.Text style={[themed.label, labelStyle]}>
@@ -99,6 +103,7 @@ export const TextField = ({
         </Animated.Text>
         <TextInput
           {...props}
+          multiline={isTextarea ? true : false}
           onPressIn={handleOnPressIn}
           selectionColor={theme.text.input}
           style={[themed.textInput, props.style]}
@@ -139,8 +144,6 @@ const getThemeStyle = (theme: Theme) =>
       fontFamily: FONTS.semiBold,
     },
     container: {
-      paddingTop: 18,
-      height: 56,
       paddingLeft: 10,
       backgroundColor: theme.background.input,
       marginVertical: 5,

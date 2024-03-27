@@ -76,7 +76,7 @@ const VideoTab: React.FC<VideoTabProps> = ({ videosList }) => {
         data={videosList.slice(0, currentPage * VIDEOS_PER_PAGE)}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        numColumns={2}
+        numColumns={3}
         onEndReached={loadMoreVideos}
         onEndReachedThreshold={0.5}
         ListFooterComponent={
@@ -123,8 +123,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.black,
   },
   videoBlock: {
-    height: height * 0.3,
-    width: width * 0.45,
+    height: height * 0.2,
+    width: width * 0.3,
     borderRadius: 10,
     marginBottom: 10,
     marginRight: 10,

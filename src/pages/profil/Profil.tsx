@@ -1,4 +1,4 @@
-import { NavigationProp } from "@react-navigation/native";
+import { NavigationProp, useFocusEffect } from "@react-navigation/native";
 import { RankingTab } from "@src/components/containers/Tabs/RankingTab/RankingTab";
 import VideoTab from "@src/components/containers/Tabs/VideoTab/VideoTab";
 import { UserInfos } from "@src/components/containers/UserInfos/UserInfos";
@@ -10,10 +10,10 @@ import Loader from "@src/components/ui/Loader/Loader";
 import { useAuthContext } from "@src/context/AuthContext";
 import { useThemeContext } from "@src/context/ThemeContext";
 import { PRIVATE_PAGES, ProfilStackParamList } from "@src/navigation/Types";
-import { getUser } from "@src/services/userServices";
+import userServices from "@src/services/userServices";
 import { profileVideos } from "@src/utils/Seed";
 import { useQuery } from "@tanstack/react-query";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Dimensions, Image, StyleSheet, View } from "react-native";
 import Animated, {
   Easing,
@@ -31,6 +31,8 @@ export const Profil: React.FC<ProfilProps> = ({ navigation }) => {
   const { theme } = useThemeContext();
   const { state } = useAuthContext();
 
+  const { getUser } = userServices();
+
   const { data, isPending, error, refetch } = useQuery({
     queryKey: ["user"],
     queryFn: async () => getUser(state.token),
@@ -39,6 +41,12 @@ export const Profil: React.FC<ProfilProps> = ({ navigation }) => {
   const [activeTab, setActiveTab] = useState<ETabs>(ETabs.VIDEOS);
   const translateXView1 = useSharedValue(0);
   const translateXView2 = useSharedValue(0);
+
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+    }, [refetch])
+  );
 
   useEffect(() => {
     if (activeTab === ETabs.VIDEOS) {
@@ -69,12 +77,11 @@ export const Profil: React.FC<ProfilProps> = ({ navigation }) => {
         resizeMode="cover"
         style={styles.image}
       />
-
       {isPending ? (
         <Loader />
       ) : (
         <>
-          <UserInfos user={data} theme={theme} />
+          <UserInfos user={data} theme={theme} navigation={navigation} />
 
           <View style={styles.tabs}>
             <CustomTopTab activeTab={activeTab} setActiveTab={setActiveTab} />

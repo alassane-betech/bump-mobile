@@ -1,3 +1,5 @@
+import { User } from "@src/types/userTypes";
+
 declare global {
   namespace ReactNavigation {
     interface RootParamList
@@ -49,6 +51,7 @@ export enum PRIVATE_PAGES {
   Profil = "Profil",
   LeaderBoard = "LeaderBoard",
   Story = "Story",
+  EditProfil = "EditProfil",
 }
 
 export type MainTabParamList = {
@@ -60,4 +63,7 @@ export type MainTabParamList = {
 export type ProfilStackParamList = {
   [PRIVATE_PAGES.Profil]: undefined;
   [PRIVATE_PAGES.LeaderBoard]: undefined;
+  [PRIVATE_PAGES.EditProfil]: {
+    user: User;
+  };
 };

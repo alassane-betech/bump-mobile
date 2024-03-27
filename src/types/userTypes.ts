@@ -9,7 +9,7 @@ export interface User {
   totalFollowing?: number;
   totalFollowers?: number;
   points?: number;
-  description?: number;
+  description?: string;
   profilePicture?: string;
   grade?: EGrade;
   tags?: any;
