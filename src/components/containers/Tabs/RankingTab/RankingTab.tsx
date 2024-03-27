@@ -16,6 +16,7 @@ export const RankingTab: React.FC<RankingTabProps> = ({ navigation }) => {
 
   const renderItem = ({ item }) => (
     <ProfileUserItem
+      isPressable
       user={item}
       key={item.id}
       onPress={navigateToLeaderBoard}
