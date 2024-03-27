@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import AuthContainer from "@src/components/containers/AuthContainer/AuthContainer";
 import { TextField } from "@src/components/ui/TextField/TextField";
 import { useSignup } from "@src/context/SignupContext";
-import useUsers from "@src/hooks/useUsers";
+import { useValidateUsername } from "@src/hooks/useUsers";
 import { AUTH_PAGES } from "@src/navigation/Types";
 import { Formik } from "formik";
 import { useState } from "react";
@@ -19,8 +19,7 @@ export default function UsernameForm() {
   const navigation = useNavigation();
   const { userInfo, updateUser } = useSignup();
   const [usernameExists, setUsernameExists] = useState(false);
-  const { mutateAsync: validateUsername, isPending } =
-    useUsers().useValidateUsername();
+  const { mutateAsync: validateUsername, isPending } = useValidateUsername();
 
   const submitForm = ({ username }: FormValues) => {
     setUsernameExists(false);

@@ -15,12 +15,12 @@ import {
   CredentialsValidationSchema,
 } from "./CredentialsForm";
 import { AuthContext } from "@src/context/AuthContext";
-import useUsers from "@src/hooks/useUsers";
+import { useLogin } from "@src/hooks/useUsers";
 
 export default function LoginForm() {
   const { authContext } = useContext(AuthContext);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const { mutate: login, data, isPending, isSuccess } = useUsers().useLogin();
+  const { mutate: login, data, isPending, isSuccess } = useLogin();
 
   const handleTogglePasswordVisibility = () =>
     setIsPasswordVisible(!isPasswordVisible);

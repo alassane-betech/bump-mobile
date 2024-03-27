@@ -6,7 +6,7 @@ import CustomButton, {
 } from "@src/components/ui/CustomButton/CustomButton";
 import Hr from "@src/components/ui/Hr/Hr";
 import { useSignup } from "@src/context/SignupContext";
-import useUsers from "@src/hooks/useUsers";
+import { useCreateUser } from "@src/hooks/useUsers";
 import { AUTH_PAGES } from "@src/navigation/Types";
 import { window } from "@src/styles/BaseStyle";
 import { COOK_TYPE } from "@src/utils/Data";
@@ -16,12 +16,7 @@ import { ScrollView, View, StyleSheet } from "react-native";
 export default function CookType() {
   const navigation = useNavigation();
   const { userInfo, updateUser } = useSignup();
-  const {
-    mutate: createUser,
-    data,
-    isPending,
-    isSuccess,
-  } = useUsers().useCreateUser();
+  const { mutate: createUser, data, isPending, isSuccess } = useCreateUser();
 
   const [showError, setShowError] = useState(false);
 

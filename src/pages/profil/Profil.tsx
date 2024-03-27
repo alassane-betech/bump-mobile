@@ -8,18 +8,17 @@ import {
 } from "@src/components/shared/CustomTopTab/CustomTopTab";
 import Loader from "@src/components/ui/Loader/Loader";
 import { useThemeContext } from "@src/context/ThemeContext";
-import useUsers from "@src/hooks/useUsers";
+import { useGetUser } from "@src/hooks/useUsers";
 import { PRIVATE_PAGES, ProfilStackParamList } from "@src/navigation/Types";
+import { window } from "@src/styles/BaseStyle";
 import { profileVideos } from "@src/utils/Seed";
 import React, { useEffect, useState } from "react";
-import { Dimensions, Image, StyleSheet, View } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 import Animated, {
   Easing,
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
-
-const { height, width } = Dimensions.get("screen");
 
 export interface ProfilProps {
   navigation: NavigationProp<ProfilStackParamList, PRIVATE_PAGES.Profil>;
@@ -28,7 +27,7 @@ export interface ProfilProps {
 export const Profil: React.FC<ProfilProps> = ({ navigation }) => {
   const { theme } = useThemeContext();
 
-  const { data, isPending, error, refetch } = useUsers().useGetUser();
+  const { data, isPending, error, refetch } = useGetUser();
 
   const [activeTab, setActiveTab] = useState<ETabs>(ETabs.VIDEOS);
   const translateXView1 = useSharedValue(0);
@@ -40,12 +39,12 @@ export const Profil: React.FC<ProfilProps> = ({ navigation }) => {
         duration: 350,
         easing: Easing.inOut(Easing.ease),
       });
-      translateXView2.value = withTiming(-width, {
+      translateXView2.value = withTiming(-window.width, {
         duration: 350,
         easing: Easing.inOut(Easing.ease),
       });
     } else {
-      translateXView1.value = withTiming(width, {
+      translateXView1.value = withTiming(window.width, {
         duration: 350,
         easing: Easing.inOut(Easing.ease),
       });
@@ -103,8 +102,8 @@ const styles = StyleSheet.create({
   },
   image: {
     position: "absolute",
-    height: height * 0.4,
-    width,
+    height: window.height * 0.4,
+    width: window.width,
   },
   tabs: {
     marginTop: 15,
