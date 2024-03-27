@@ -3570,20 +3570,10 @@ expo-modules-core@1.11.10:
   dependencies:
     invariant "^2.2.4"
 
-expo-secure-store@~12.8.1:
-  version "12.8.1"
-  resolved "https://registry.yarnpkg.com/expo-secure-store/-/expo-secure-store-12.8.1.tgz#369a570702fa1dc0c49ea41a5ab18aca2a986d38"
-  integrity sha512-Ju3jmkHby4w7rIzdYAt9kQyQ7HhHJ0qRaiQOInknhOLIltftHjEgF4I1UmzKc7P5RCfGNmVbEH729Pncp/sHXQ==
-
 expo-status-bar@~1.11.1:
   version "1.11.1"
   resolved "https://registry.yarnpkg.com/expo-status-bar/-/expo-status-bar-1.11.1.tgz#a11318741d361048c11db2b16c4364a79a74af30"
   integrity sha512-ddQEtCOgYHTLlFUe/yH67dDBIoct5VIULthyT3LRJbEwdpzAgueKsX2FYK02ldh440V87PWKCamh7R9evk1rrg==
-
-expo-video-thumbnails@~7.9.0:
-  version "7.9.0"
-  resolved "https://registry.yarnpkg.com/expo-video-thumbnails/-/expo-video-thumbnails-7.9.0.tgz#7ec03759ae169a9a585d94b15c9de96dffae8851"
-  integrity sha512-KP7ZlIu83xXXIFx24bzjScwLns6b93f3eHPDUOnT5UtOScbIV3guXA6P9pRBnyxJe0K5+NhR11wX1wf+QCk9+g==
 
 expo@~50.0.11:
   version "50.0.11"
