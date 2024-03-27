@@ -85,7 +85,15 @@ const VideoTab: React.FC<VideoTabProps> = ({ videosList }) => {
   );
 };
 
-const VideoPlayer = ({ video, selected, onVideoPress }) => {
+const VideoPlayer = ({
+  video,
+  selected,
+  onVideoPress,
+}: {
+  video: string;
+  selected: boolean;
+  onVideoPress: (video: string) => void;
+}) => {
   const videoRef = useRef(null);
 
   useEffect(() => {

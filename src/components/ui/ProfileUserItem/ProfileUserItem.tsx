@@ -5,18 +5,16 @@ import Avatar from "../Avatar/Avatar";
 
 type ProfileUserItemProps = {
   user: any;
-  isPressable?: boolean;
   onPress?: () => void;
 };
 
 export const ProfileUserItem: React.FC<ProfileUserItemProps> = ({
   user,
-  isPressable,
   onPress,
 }) => {
   return (
     <TouchableOpacity
-      disabled={isPressable ? false : true}
+      disabled={onPress ? false : true}
       style={styles.userItem}
       onPress={onPress}
     >
