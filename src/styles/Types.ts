@@ -1,5 +1,6 @@
 export type Theme = {
   primary: string;
+  tertiary: string;
   background: {
     input: string;
     card: string;

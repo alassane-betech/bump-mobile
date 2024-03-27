@@ -24,3 +24,9 @@ export const validateUsername = async (username: string): Promise<boolean> => {
   );
   return data;
 };
+
+export const getUser = async (): Promise<User> => {
+  const { data } = await api.get(`/users/me`);
+
+  return data;
+};

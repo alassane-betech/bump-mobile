@@ -1,6 +1,7 @@
 import * as userService from "@src/services/userServices";
 import { AuthResult, User } from "@src/types/userTypes";
 import useMutationWithErrorHandling from "./useMutationWithErrorHandling";
+import useQueryHandling from "./useQueryHandling";
 
 export const useCreateUser = () => {
   return useMutationWithErrorHandling<AuthResult, User>(
@@ -28,4 +29,8 @@ export const useValidateUsername = () => {
     userService.validateUsername,
     "Une erreur est survenue lors de la validation du username"
   );
+};
+
+export const useGetUser = () => {
+  return useQueryHandling<User>(userService.getUser, "user");
 };

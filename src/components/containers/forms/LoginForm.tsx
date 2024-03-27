@@ -14,8 +14,8 @@ import {
   CredentialsFormValues,
   CredentialsValidationSchema,
 } from "./CredentialsForm";
-import { useLogin } from "@src/hooks/useUsers";
 import { AuthContext } from "@src/context/AuthContext";
+import { useLogin } from "@src/hooks/useUsers";
 
 export default function LoginForm() {
   const { authContext } = useContext(AuthContext);
