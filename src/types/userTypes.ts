@@ -31,3 +31,7 @@ export interface AuthResult {
   access_token: string;
   message: string;
 }
+
+export enum QueryKeys {
+  USER = "user",
+}

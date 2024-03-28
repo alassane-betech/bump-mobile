@@ -6,6 +6,7 @@ import { TextField } from "@src/components/ui/TextField/TextField";
 import { useUpdateUser } from "@src/hooks/useUsers";
 import { PRIVATE_PAGES, ProfilStackParamList } from "@src/navigation/Types";
 import { COLORS, FONTS } from "@src/styles/BaseStyle";
+import { QueryKeys } from "@src/types/userTypes";
 import * as ImagePicker from "expo-image-picker";
 import React, { useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
@@ -39,7 +40,7 @@ export const EditProfil: React.FC<EditProfilProps> = ({
     const body = { username, description };
     updateUser(body, {
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["user"] });
+        queryClient.invalidateQueries({ queryKey: [QueryKeys.USER] });
       },
     }).then(() => {
       navigation.navigate(PRIVATE_PAGES.Profil);

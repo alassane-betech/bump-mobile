@@ -1,5 +1,5 @@
 import * as userService from "@src/services/userServices";
-import { AuthResult, User } from "@src/types/userTypes";
+import { AuthResult, QueryKeys, User } from "@src/types/userTypes";
 import useMutationWithErrorHandling from "./useMutationWithErrorHandling";
 import useQueryHandling from "./useQueryHandling";
 import { UpdateUser } from "@src/styles/Types";
@@ -40,5 +40,5 @@ export const useUpdateUser = () => {
 };
 
 export const useGetUser = () => {
-  return useQueryHandling<User>(userService.getUser, "user");
+  return useQueryHandling<User>(userService.getUser, QueryKeys.USER);
 };
