@@ -70,6 +70,8 @@ export type ProfilStackParamList = {
   [PRIVATE_PAGES.Profil]: undefined;
   [PRIVATE_PAGES.LeaderBoard]: undefined;
   [PRIVATE_PAGES.EditProfil]: {
-    user: User;
+    username: string;
+    profilePicture: string;
+    description: string;
   };
 };

@@ -33,11 +33,11 @@ export const Profil: React.FC<ProfilProps> = ({ navigation }) => {
   const translateXView1 = useSharedValue(0);
   const translateXView2 = useSharedValue(0);
 
-  useFocusEffect(
-    useCallback(() => {
-      refetch();
-    }, [refetch])
-  );
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     refetch();
+  //   }, [refetch])
+  // );
 
   useEffect(() => {
     if (activeTab === ETabs.VIDEOS) {

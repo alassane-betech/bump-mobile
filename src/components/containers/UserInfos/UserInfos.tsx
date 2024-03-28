@@ -34,8 +34,14 @@ export const UserInfos: React.FC<UserInfosProps> = ({
   theme,
   navigation,
 }) => {
+  const { username, description, profilePicture } = user;
+
   const navigateToEditProfil = () => {
-    navigation.navigate(PRIVATE_PAGES.EditProfil, { user });
+    navigation.navigate(PRIVATE_PAGES.EditProfil, {
+      username,
+      description,
+      profilePicture,
+    });
   };
 
   return (

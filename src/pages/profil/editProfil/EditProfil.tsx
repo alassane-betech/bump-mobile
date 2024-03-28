@@ -1,5 +1,7 @@
 import { NavigationProp, RouteProp } from "@react-navigation/native";
+import { queryClient } from "@src/api/queryClient";
 import { Header } from "@src/components/containers/Header/Header";
+import * as ImagePicker from "expo-image-picker";
 import Avatar from "@src/components/ui/Avatar/Avatar";
 import { TextField } from "@src/components/ui/TextField/TextField";
 import { useUpdateUser } from "@src/hooks/useUsers";
@@ -23,32 +25,38 @@ export const EditProfil: React.FC<EditProfilProps> = ({
   route,
   navigation,
 }) => {
-  const { user } = route?.params;
+  const {
+    username: currentUsername,
+    description: currentDesc,
+    profilePicture,
+  } = route?.params;
 
-  const [username, setUsername] = useState<string>(user?.username);
-  const [description, setDescription] = useState<string>(user?.description);
+  const [username, setUsername] = useState<string>(currentUsername);
+  const [description, setDescription] = useState<string>(currentDesc);
+  const [pickedImage, setPickedImage] = useState<string>(null);
   const { mutateAsync: updateUser, isPending } = useUpdateUser();
-
-  const handleOnChange = (text: string, name: string) => {
-    const setValue = {
-      [labels.USERNAME]: setUsername,
-      [labels.DESCRIPTION]: setDescription,
-    };
-
-    const setValueFunction = setValue[name];
-    if (setValueFunction) {
-      setValueFunction(text);
-    }
-  };
 
   const handleUpdate = () => {
     const body = { username, description };
-    updateUser(body).then(() => {
+    updateUser(body, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["user"] });
+      },
+    }).then(() => {
       navigation.navigate(PRIVATE_PAGES.Profil);
     });
   };
 
-  const onEditImage = () => {};
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 0.8,
+    });
+
+    setPickedImage(result?.assets[0]?.uri);
+  };
 
   return (
     <View style={styles.container}>
@@ -69,24 +77,24 @@ export const EditProfil: React.FC<EditProfilProps> = ({
           <Avatar
             isEditAvatar
             profilAvatar
-            imageUri={user?.profilePicture ?? DEFAULT_IMAGE}
+            imageUri={pickedImage ? pickedImage : profilePicture}
             type="default"
             size={75}
-            onEdit={onEditImage}
+            onEdit={pickImage}
           />
         </View>
         <Text style={styles.editImageText}>Modifier la photo</Text>
 
         <TextField
           label={labels.USERNAME}
-          onChangeText={(text) => handleOnChange(text, labels.USERNAME)}
+          onChangeText={setUsername}
           defaultValue={username}
           autoCapitalize="none"
         />
         <TextField
           isTextarea
           label={labels.DESCRIPTION}
-          onChangeText={(text) => handleOnChange(text, labels.DESCRIPTION)}
+          onChangeText={setDescription}
           defaultValue={description}
           autoCapitalize="none"
         />
