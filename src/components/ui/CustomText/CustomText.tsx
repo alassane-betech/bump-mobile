@@ -9,12 +9,14 @@ const styles = StyleSheet.create({
   title: Typo.screenTitle,
   button: Typo.buttonBold,
   body: Typo.body,
+  subtitle: Typo.body,
 });
 
 export enum ETextVariant {
   Title = "title",
   Body = "body",
   Button = "button",
+  Subtitle = "subtitle",
 }
 
 interface CustomTextProps extends TextProps {
@@ -31,7 +33,10 @@ export const CustomText: React.FC<CustomTextProps> = ({
 }) => {
   const { theme } = useThemeContext();
 
-  const themed = React.useMemo(() => getThemeStyle(theme), [theme]);
+  const themed = React.useMemo(
+    () => getThemeStyle(theme, variant),
+    [theme, variant]
+  );
 
   const textStyle = [
     themed.text,
@@ -45,14 +50,19 @@ export const CustomText: React.FC<CustomTextProps> = ({
       {...(link && { onPress: () => goToLink(link) })}
       style={textStyle}
       {...props}
+      adjustsFontSizeToFit={false}
     />
   );
 };
 
-const getThemeStyle = (theme: Theme) =>
+const getThemeStyle = (theme: Theme, variant: ETextVariant) =>
   StyleSheet.create({
     text: {
-      color: theme.text.default,
+      color:
+        variant === ETextVariant.Subtitle
+          ? theme.text.input
+          : theme.text.default,
+      ...styles[variant],
     },
     link: {
       color: theme.text.link,

@@ -1,6 +1,7 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
 import CameraView from "@src/components/containers/Camera/CameraView";
 import MediaPreview from "@src/components/containers/Camera/MediaPreview";
+import { Media } from "@src/components/containers/Camera/types";
 import CustomButton from "@src/components/ui/CustomButton/CustomButton";
 import LunchTypeSelect, {
   NewLunchMode,
@@ -10,15 +11,6 @@ import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export enum EMediaType {
-  Image = "image",
-  Video = "video",
-}
-export interface Media {
-  mediaUri: string;
-  type: EMediaType;
-  uploaded?: boolean;
-}
 export default function NewLunch() {
   const navigation = useNavigation();
   const { params } = useRoute();

@@ -10,7 +10,7 @@ import PublishPost from "@src/pages/lunch/new-post/PublishPost";
 import { CameraPositionProvider } from "@src/context/CameraPositionContext";
 
 const PrivateStack = createNativeStackNavigator<PrivateStackParamList>();
-const defaultModalScreenOptions: NativeStackNavigationOptions = {
+export const defaultModalScreenOptions: NativeStackNavigationOptions = {
   headerShown: false,
   animation: "slide_from_bottom",
 };
