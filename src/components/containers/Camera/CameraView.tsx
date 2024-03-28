@@ -2,7 +2,6 @@ import { useIsFocused } from "@react-navigation/native";
 import { CustomText } from "@src/components/ui/CustomText/CustomText";
 import useCameraAndMicrophonePermissions from "@src/hooks/useCameraAndMicrophonePermissions";
 import { useIsForeground } from "@src/hooks/useIfForeground";
-import { EMediaType, Media } from "@src/pages/lunch/new-lunch/NewLunch";
 import { useState, useRef, useCallback } from "react";
 import { FontAwesome } from "@expo/vector-icons";
 import { View, TouchableOpacity, StyleSheet, Alert } from "react-native";
@@ -16,6 +15,7 @@ import {
 import CloseIcon from "@src/components/ui/CloseIcon/CloseIcon";
 import UploadView from "./UploadView";
 import { useCameraPositionContext } from "@src/context/CameraPositionContext";
+import { EMediaType, Media } from "./types";
 
 interface CameraViewProps {
   mediaCaptured?: Media;

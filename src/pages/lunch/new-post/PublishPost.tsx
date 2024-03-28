@@ -4,7 +4,6 @@ import ScreenHeader from "@src/components/shared/ScreenHeader/ScreenHeader";
 import { useThemeContext } from "@src/context/ThemeContext";
 import { Image, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { EMediaType, Media } from "../new-lunch/NewLunch";
 import {
   CustomText,
   ETextVariant,
@@ -16,6 +15,7 @@ import CustomButton, {
 import { FontAwesome6 } from "@expo/vector-icons";
 import { ResizeMode, Video } from "expo-av";
 import { useMemo } from "react";
+import { EMediaType, Media } from "@src/components/containers/Camera/types";
 
 export default function PublishPost() {
   const { theme } = useThemeContext();

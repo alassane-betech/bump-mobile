@@ -10,7 +10,7 @@ import { storyItems } from "@src/utils/Seed";
 import { window } from "@src/styles/BaseStyle";
 import { useNavigation } from "@react-navigation/native";
 import StoryHeader from "./StoryHeader";
-import { EMediaType } from "@src/pages/lunch/new-lunch/NewLunch";
+import { EMediaType } from "../Camera/types";
 
 const { width, height } = window;
 
