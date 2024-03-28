@@ -1,4 +1,4 @@
-import { NavigationProp, useFocusEffect } from "@react-navigation/native";
+import { NavigationProp } from "@react-navigation/native";
 import { RankingTab } from "@src/components/containers/Tabs/RankingTab/RankingTab";
 import VideoTab from "@src/components/containers/Tabs/VideoTab/VideoTab";
 import { UserInfos } from "@src/components/containers/UserInfos/UserInfos";
@@ -12,7 +12,7 @@ import { useGetUser } from "@src/hooks/useUsers";
 import { PRIVATE_PAGES, ProfilStackParamList } from "@src/navigation/Types";
 import { window } from "@src/styles/BaseStyle";
 import { profileVideos } from "@src/utils/Seed";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Image, StyleSheet, View } from "react-native";
 import Animated, {
   Easing,
@@ -32,12 +32,6 @@ export const Profil: React.FC<ProfilProps> = ({ navigation }) => {
   const [activeTab, setActiveTab] = useState<ETabs>(ETabs.VIDEOS);
   const translateXView1 = useSharedValue(0);
   const translateXView2 = useSharedValue(0);
-
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     refetch();
-  //   }, [refetch])
-  // );
 
   useEffect(() => {
     if (activeTab === ETabs.VIDEOS) {

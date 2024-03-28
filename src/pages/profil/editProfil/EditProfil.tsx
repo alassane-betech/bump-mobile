@@ -1,13 +1,12 @@
 import { NavigationProp, RouteProp } from "@react-navigation/native";
 import { queryClient } from "@src/api/queryClient";
 import { Header } from "@src/components/containers/Header/Header";
-import * as ImagePicker from "expo-image-picker";
 import Avatar from "@src/components/ui/Avatar/Avatar";
 import { TextField } from "@src/components/ui/TextField/TextField";
 import { useUpdateUser } from "@src/hooks/useUsers";
 import { PRIVATE_PAGES, ProfilStackParamList } from "@src/navigation/Types";
 import { COLORS, FONTS } from "@src/styles/BaseStyle";
-import { DEFAULT_IMAGE } from "@src/utils/Seed";
+import * as ImagePicker from "expo-image-picker";
 import React, { useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 
