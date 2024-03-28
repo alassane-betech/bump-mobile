@@ -19,8 +19,12 @@ export const Duels: React.FC = () => {
   return (
     <View style={styles.container}>
       <Image
-        style={styles.blurbackground}
-        source={require("@src/assets/images/blurbackground.png")}
+        style={styles.blurbackground1}
+        source={require("@src/assets/images/blurellipse.png")}
+      />
+      <Image
+        style={styles.blurbackground2}
+        source={require("@src/assets/images/blurellipse.png")}
       />
       <ScreenHeader
         title="Duel"
@@ -69,6 +73,16 @@ const styles = StyleSheet.create({
     width: 90,
     height: 90,
     alignSelf: "flex-end",
+  },
+  blurbackground1: {
+    position: "absolute",
+    top: -100,
+    right: -window.width / 3,
+  },
+  blurbackground2: {
+    position: "absolute",
+    top: 0,
+    left: -window.width / 3,
   },
   blurbackground: { position: "absolute", top: -100, width: window.width },
 });

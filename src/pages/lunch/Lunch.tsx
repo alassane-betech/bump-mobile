@@ -20,8 +20,12 @@ export const Lunch: React.FC = () => {
   return (
     <View style={styles.container}>
       <Image
-        style={styles.blurbackground}
-        source={require("@src/assets/images/blurbackground.png")}
+        style={styles.blurbackground1}
+        source={require("@src/assets/images/blurellipse.png")}
+      />
+      <Image
+        style={styles.blurbackground2}
+        source={require("@src/assets/images/blurellipse.png")}
       />
       <ScreenHeader
         title="Lunch"
@@ -60,7 +64,16 @@ const styles = StyleSheet.create({
     width: "100%",
     flex: 1,
   },
-  blurbackground: { position: "absolute", top: -100, width: window.width },
+  blurbackground1: {
+    position: "absolute",
+    top: -100,
+    right: -window.width / 3,
+  },
+  blurbackground2: {
+    position: "absolute",
+    top: 0,
+    left: -window.width / 3,
+  },
   shadow: {
     ...Platform.select({
       ios: {

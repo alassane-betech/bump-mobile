@@ -9,13 +9,17 @@ export const DuelMode: React.FC = () => {
     <View style={styles.container}>
       <Image
         style={styles.blurbackground1}
-        source={require("@src/assets/images/blurbackground.png")}
+        source={require("@src/assets/images/blurellipse.png")}
+      />
+      <Image
+        style={styles.blurbackground2}
+        source={require("@src/assets/images/blurellipse.png")}
       />
 
       <ScreenHeader title="Choix du mode" iconLeft={<BackButton />} />
       <ScrollView contentContainerStyle={styles.scroll}>
         <Image
-          style={styles.blurbackground2}
+          style={styles.blurbackground3}
           source={require("@src/assets/images/blurellipse.png")}
         />
         <BlurCard
@@ -67,8 +71,17 @@ const styles = StyleSheet.create({
     height: 90,
     alignSelf: "flex-end",
   },
-  blurbackground1: { position: "absolute", top: -100, width: window.width },
+  blurbackground1: {
+    position: "absolute",
+    top: -100,
+    right: -window.width / 3,
+  },
   blurbackground2: {
+    position: "absolute",
+    top: 0,
+    left: -window.width / 3,
+  },
+  blurbackground3: {
     position: "absolute",
     right: -window.width / 3,
     top: window.height / 4,
