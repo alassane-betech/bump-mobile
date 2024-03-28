@@ -6,3 +6,7 @@ export const queryClient = new QueryClient({
     mutations: {},
   },
 });
+
+export enum QueryKeys {
+  USER = "user",
+}

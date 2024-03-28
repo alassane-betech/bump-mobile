@@ -1,8 +1,9 @@
 import * as userService from "@src/services/userServices";
-import { AuthResult, QueryKeys, User } from "@src/types/userTypes";
+import { AuthResult, User } from "@src/types/userTypes";
 import useMutationWithErrorHandling from "./useMutationWithErrorHandling";
 import useQueryHandling from "./useQueryHandling";
 import { UpdateUser } from "@src/styles/Types";
+import { QueryKeys } from "@src/api/queryClient";
 
 export const useCreateUser = () => {
   return useMutationWithErrorHandling<AuthResult, User>(
