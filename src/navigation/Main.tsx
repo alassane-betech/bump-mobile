@@ -12,6 +12,7 @@ import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import { CustomText } from "@src/components/ui/CustomText/CustomText";
 import { PRIVATE_PAGES } from "./Types";
 import ProfilNavigator from "./ProfilNavigator";
+import DuelNavigator from "./DuelNavigator";
 
 const Tab = createBottomTabNavigator();
 const { height, width } = Dimensions.get("screen");
@@ -43,7 +44,7 @@ const routes = [
   {
     key: PRIVATE_PAGES.Duels,
     title: "Duels",
-    component: Duels,
+    component: DuelNavigator,
     iconPath: <DuelsIcon />,
     iconFocusedPath: <DuelsIconFocused />,
   },

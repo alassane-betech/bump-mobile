@@ -48,7 +48,6 @@
     },
     "plugins": [
       "expo-font",
-      "expo-secure-store",
       [
         "react-native-vision-camera",
         {

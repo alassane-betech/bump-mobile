@@ -1,11 +1,13 @@
+import { Media } from "@src/components/containers/Camera/types";
 import { NewLunchMode } from "@src/components/views/new-lunch/LunchTypeSelect";
-import { Media } from "@src/pages/lunch/new-lunch/NewLunch";
 
 declare global {
   namespace ReactNavigation {
     interface RootParamList
       extends RootStackParamList,
         AuthStackParamList,
+        DuelStackParamList,
+        ProfilStackParamList,
         PrivateStackParamList {}
   }
 }
@@ -50,6 +52,8 @@ export enum PRIVATE_PAGES {
   Home = "Home",
   Lunch = "Lunch",
   Duels = "Duels",
+  DuelsHome = "DuelsHome",
+  DuelMode = "DuelMode",
   ProfilNav = "ProfilNav",
   Profil = "Profil",
   LeaderBoard = "LeaderBoard",
@@ -67,4 +71,9 @@ export type MainTabParamList = {
 export type ProfilStackParamList = {
   [PRIVATE_PAGES.Profil]: undefined;
   [PRIVATE_PAGES.LeaderBoard]: undefined;
+};
+
+export type DuelStackParamList = {
+  [PRIVATE_PAGES.DuelsHome]: undefined;
+  [PRIVATE_PAGES.DuelMode]: undefined;
 };

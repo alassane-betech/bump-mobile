@@ -5,8 +5,17 @@ import BlurCard from "@src/components/shared/BlurCard/BlurCard";
 import ScreenHeader from "@src/components/shared/ScreenHeader/ScreenHeader";
 import Feather from "@expo/vector-icons/Feather";
 import { useThemeContext } from "@src/context/ThemeContext";
+import DuelList from "@src/components/containers/Duels/DuelList";
+import {
+  CustomText,
+  ETextVariant,
+} from "@src/components/ui/CustomText/CustomText";
+import { useNavigation } from "@react-navigation/native";
+import { PRIVATE_PAGES } from "@src/navigation/Types";
 export const Duels: React.FC = () => {
   const { theme } = useThemeContext();
+  const navigation = useNavigation();
+  const goToDuelMode = () => navigation.navigate(PRIVATE_PAGES.DuelMode);
   return (
     <View style={styles.container}>
       <Image
@@ -31,10 +40,13 @@ export const Duels: React.FC = () => {
         description="Trouve un adversaire avec un thème commun, poste ta vidéo originale et tente d'obtenir le plus de vote !"
         buttonProps={{
           title: "Nouveau Duel",
-          onPress: () => alert("ttt"),
+          onPress: goToDuelMode,
         }}
       />
-      <View style={styles.content}></View>
+      <View style={styles.content}>
+        <CustomText variant={ETextVariant.Title}>Historique</CustomText>
+        <DuelList />
+      </View>
     </View>
   );
 };
@@ -47,9 +59,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   content: {
-    paddingHorizontal: 15,
+    paddingHorizontal: 20,
     width: "100%",
     flex: 1,
+    paddingTop: 5,
+    marginTop: 10,
   },
   image: {
     width: 90,

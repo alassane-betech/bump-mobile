@@ -15,7 +15,7 @@ interface BlurCardProps {
   title: string;
   description?: string;
   buttonProps: ButtonProps;
-  image: JSX.Element;
+  image?: JSX.Element;
 }
 
 export default function BlurCard({
@@ -27,25 +27,28 @@ export default function BlurCard({
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <View style={styles.left}>
+        <View style={{ width: image ? "70%" : "100%" }}>
           <CustomText style={styles.title} variant={ETextVariant.Title}>
             {title}
           </CustomText>
 
           {description && (
-            <CustomText style={styles.description} variant={ETextVariant.Body}>
+            <CustomText
+              style={styles.description}
+              variant={ETextVariant.Subtitle}
+            >
               {description}
             </CustomText>
           )}
 
           <CustomButton
-            style={styles.button}
+            style={[styles.button, { width: image ? "70%" : "100%" }]}
             variant={EButtonVariant.Primary}
             title={buttonProps.title}
             onPress={buttonProps.onPress}
           />
         </View>
-        {image}
+        {image && image}
       </View>
     </View>
   );
@@ -64,8 +67,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  left: { width: "70%" },
-  title: { marginBottom: 10 },
+  title: { marginBottom: 5 },
   description: { marginBottom: 20 },
-  button: { width: "80%", height: 40 },
+  button: { height: 40 },
 });
