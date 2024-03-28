@@ -1,14 +1,14 @@
+import { useNavigation } from "@react-navigation/native";
 import Avatar from "@src/components/ui/Avatar/Avatar";
+import CloseIcon from "@src/components/ui/CloseIcon/CloseIcon";
 import {
   CustomText,
   ETextVariant,
 } from "@src/components/ui/CustomText/CustomText";
-import { defaultHitSlot, window } from "@src/styles/BaseStyle";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { window } from "@src/styles/BaseStyle";
+import { StyleSheet, View } from "react-native";
 import * as Progress from "react-native-progress";
-import { useNavigation } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import CloseIcon from "@src/components/ui/CloseIcon/CloseIcon";
 interface Props {
   currentItemIndex: number;
   progress: number[];

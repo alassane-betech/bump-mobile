@@ -1,5 +1,4 @@
 import { COLORS, FONTS } from "@src/styles/BaseStyle";
-import { DEFAULT_IMAGE } from "@src/utils/Seed";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Avatar from "../Avatar/Avatar";
 

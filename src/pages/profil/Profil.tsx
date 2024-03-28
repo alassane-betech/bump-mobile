@@ -27,7 +27,7 @@ export interface ProfilProps {
 export const Profil: React.FC<ProfilProps> = ({ navigation }) => {
   const { theme } = useThemeContext();
 
-  const { data, isPending, error, refetch } = useGetUser();
+  const { data, isPending, refetch } = useGetUser();
 
   const [activeTab, setActiveTab] = useState<ETabs>(ETabs.VIDEOS);
   const translateXView1 = useSharedValue(0);
@@ -62,12 +62,11 @@ export const Profil: React.FC<ProfilProps> = ({ navigation }) => {
         resizeMode="cover"
         style={styles.image}
       />
-
       {isPending ? (
         <Loader />
       ) : (
         <>
-          <UserInfos user={data} theme={theme} />
+          <UserInfos user={data} theme={theme} navigation={navigation} />
 
           <View style={styles.tabs}>
             <CustomTopTab activeTab={activeTab} setActiveTab={setActiveTab} />

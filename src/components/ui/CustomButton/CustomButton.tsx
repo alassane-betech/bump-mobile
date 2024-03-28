@@ -1,5 +1,4 @@
 import { useThemeContext } from "@src/context/ThemeContext";
-import { COLORS, FONTS } from "@src/styles/BaseStyle";
 import { Theme } from "@src/styles/Types";
 import Typo from "@src/styles/Typo";
 import { ReactElement, useMemo } from "react";

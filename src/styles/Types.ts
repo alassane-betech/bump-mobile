@@ -33,3 +33,8 @@ export type Theme = {
     backgroundColor: string;
   };
 };
+
+export type UpdateUser = {
+  username: string;
+  description: string;
+};

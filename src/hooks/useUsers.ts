@@ -2,6 +2,8 @@ import * as userService from "@src/services/userServices";
 import { AuthResult, User } from "@src/types/userTypes";
 import useMutationWithErrorHandling from "./useMutationWithErrorHandling";
 import useQueryHandling from "./useQueryHandling";
+import { UpdateUser } from "@src/styles/Types";
+import { QueryKeys } from "@src/api/queryClient";
 
 export const useCreateUser = () => {
   return useMutationWithErrorHandling<AuthResult, User>(
@@ -31,6 +33,13 @@ export const useValidateUsername = () => {
   );
 };
 
+export const useUpdateUser = () => {
+  return useMutationWithErrorHandling<User, UpdateUser>(
+    userService.updateUser,
+    "Une erreur est survenue lors de l'édition de l'utilisateur"
+  );
+};
+
 export const useGetUser = () => {
-  return useQueryHandling<User>(userService.getUser, "user");
+  return useQueryHandling<User>(userService.getUser, QueryKeys.USER);
 };

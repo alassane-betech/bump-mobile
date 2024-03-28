@@ -1,17 +1,21 @@
 import React from "react";
-import { View, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { useThemeContext } from "@src/context/ThemeContext";
 import { EggIcon } from "@src/assets/svgs/EggIcon";
+import { Feather } from "@expo/vector-icons";
+import { COLORS } from "@src/styles/BaseStyle";
 type AvatarProps = {
   imageUri: string;
+  isEditAvatar?: boolean;
   size?: number;
   borderColor?: string;
   borderWidth?: number;
   id?: string;
   type: "outlined" | "gradient" | "default";
   profilAvatar?: boolean;
+  onEdit?: () => void;
 };
 
 const Avatar: React.FC<AvatarProps> = ({
@@ -22,6 +26,8 @@ const Avatar: React.FC<AvatarProps> = ({
   id,
   type = "gradient",
   profilAvatar,
+  isEditAvatar,
+  onEdit,
 }) => {
   const gradientSize = size + borderWidth * 2.5;
   const { theme } = useThemeContext();
@@ -87,6 +93,27 @@ const Avatar: React.FC<AvatarProps> = ({
           ]}
         >
           <Image source={{ uri: imageUri }} style={styles.avatarImage} />
+          {isEditAvatar && (
+            <>
+              <TouchableOpacity
+                onPress={onEdit}
+                style={[
+                  styles.blurImage,
+                  {
+                    width: gradientSize,
+                    height: gradientSize,
+                    borderRadius: gradientSize / 2,
+                  },
+                ]}
+              />
+              <Feather
+                style={styles.camera}
+                name="camera"
+                size={24}
+                color="white"
+              />
+            </>
+          )}
         </View>
         {type === "outlined" ||
           (id === "1" && (
@@ -141,6 +168,18 @@ const styles = StyleSheet.create({
     zIndex: 9999,
     bottom: 2,
     left: "1.5%",
+  },
+  blurImage: {
+    zIndex: 99999,
+    position: "absolute",
+    opacity: 0.3,
+    backgroundColor: COLORS.darkGray,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  camera: {
+    zIndex: 99999,
+    position: "absolute",
   },
 });
 

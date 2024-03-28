@@ -1,15 +1,29 @@
-import { View, Text, StyleSheet, Dimensions, Platform } from "react-native";
+import { HeaderRightThing } from "@src/assets/svgs/HeaderRightThing";
+import BackButton from "@src/components/shared/BackButton/BackButton";
 import { COLORS, FONTS, window } from "@src/styles/BaseStyle";
 import React from "react";
-import BackButton from "@src/components/shared/BackButton/BackButton";
-import { HeaderRightThing } from "@src/assets/svgs/HeaderRightThing";
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 type HeaderProps = {
   title?: string;
   isDetails?: boolean;
+  isRightButton?: boolean;
+  rightButton?: JSX.Element;
+  onRightButtonPress?: () => void;
 };
 
-export const Header: React.FC<HeaderProps> = ({ title }) => {
+export const Header: React.FC<HeaderProps> = ({
+  title,
+  isRightButton,
+  rightButton,
+  onRightButtonPress,
+}) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -20,6 +34,14 @@ export const Header: React.FC<HeaderProps> = ({ title }) => {
       <View style={styles.headerRightContainer}>
         <HeaderRightThing />
       </View>
+      {isRightButton ? (
+        <TouchableOpacity
+          style={styles.rightButton}
+          onPress={onRightButtonPress}
+        >
+          {rightButton}
+        </TouchableOpacity>
+      ) : null}
     </View>
   );
 };
@@ -58,5 +80,10 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     height: 20,
     width: window.width,
+  },
+  rightButton: {
+    position: "absolute",
+    right: "5%",
+    top: "58%",
   },
 });

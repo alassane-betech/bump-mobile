@@ -1,4 +1,5 @@
 import api from "@src/api/axiosConfig";
+import { UpdateUser } from "@src/styles/Types";
 import { AuthResult, LoginCredentials, User } from "@src/types/userTypes";
 
 export const createUser = async (userData: User): Promise<AuthResult> => {
@@ -27,6 +28,12 @@ export const validateUsername = async (username: string): Promise<boolean> => {
 
 export const getUser = async (): Promise<User> => {
   const { data } = await api.get(`/users/me`);
+
+  return data;
+};
+
+export const updateUser = async (body: UpdateUser) => {
+  const { data } = await api.put(`/users/me`, body);
 
   return data;
 };

@@ -58,6 +58,7 @@ export enum PRIVATE_PAGES {
   Profil = "Profil",
   LeaderBoard = "LeaderBoard",
   Story = "Story",
+  EditProfil = "EditProfil",
   NewLunch = "NewLunch",
   PublishPost = "PublishPost",
 }
@@ -71,6 +72,11 @@ export type MainTabParamList = {
 export type ProfilStackParamList = {
   [PRIVATE_PAGES.Profil]: undefined;
   [PRIVATE_PAGES.LeaderBoard]: undefined;
+  [PRIVATE_PAGES.EditProfil]: {
+    username: string;
+    profilePicture: string;
+    description: string;
+  };
 };
 
 export type DuelStackParamList = {

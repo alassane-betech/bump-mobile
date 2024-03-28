@@ -26,7 +26,7 @@
         "NSPhotoLibraryUsageDescription": "Allow Bump to access your photos.",
         "NSPhotoLibraryAddUsageDescription": "Allow $(PRODUCT_NAME) to save photos"
       },
-      "bundleIdentifier": "com.bumpapp.bump-mobile"
+      "bundleIdentifier": "com.bumpapp.bumpmobile"
     },
     "android": {
       "adaptiveIcon": {

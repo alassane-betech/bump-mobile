@@ -2,6 +2,8 @@ import { Entypo } from "@expo/vector-icons";
 import { VerticalLine } from "@src/assets/svgs/VerticalLine";
 import Avatar from "@src/components/ui/Avatar/Avatar";
 import CustomButton from "@src/components/ui/CustomButton/CustomButton";
+import { PRIVATE_PAGES } from "@src/navigation/Types";
+import { ProfilProps } from "@src/pages/profil/Profil";
 import { CustomText } from "@src/components/ui/CustomText/CustomText";
 import { COLORS, FONTS, window } from "@src/styles/BaseStyle";
 import { Theme } from "@src/styles/Types";
@@ -10,10 +12,10 @@ import { DEFAULT_IMAGE } from "@src/utils/Seed";
 import React from "react";
 import { Platform, StyleSheet, TouchableOpacity, View } from "react-native";
 
-export type UserInfosProps = {
+export interface UserInfosProps extends ProfilProps {
   user: User;
   theme: Theme;
-};
+}
 
 const getGradeColor = (grade: EGrade) => {
   const color = {
@@ -27,7 +29,21 @@ const getGradeColor = (grade: EGrade) => {
   return color[grade] ?? COLORS.brown;
 };
 
-export const UserInfos: React.FC<UserInfosProps> = ({ user, theme }) => {
+export const UserInfos: React.FC<UserInfosProps> = ({
+  user,
+  theme,
+  navigation,
+}) => {
+  const { username, description, profilePicture } = user;
+
+  const navigateToEditProfil = () => {
+    navigation.navigate(PRIVATE_PAGES.EditProfil, {
+      username,
+      description,
+      profilePicture,
+    });
+  };
+
   return (
     <View style={styles.header}>
       <View style={styles.avatar}>
@@ -88,6 +104,7 @@ export const UserInfos: React.FC<UserInfosProps> = ({ user, theme }) => {
           textSize={14}
           style={styles.button}
           backgroundColor={theme.tertiary}
+          onPress={navigateToEditProfil}
         />
         <CustomButton
           title="Paramètres"
