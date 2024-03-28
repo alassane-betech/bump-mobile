@@ -34,7 +34,10 @@ export const CustomText: React.FC<CustomTextProps> = ({
 }) => {
   const { theme } = useThemeContext();
 
-  const themed = React.useMemo(() => getThemeStyle(theme, variant), [theme]);
+  const themed = React.useMemo(
+    () => getThemeStyle(theme, variant),
+    [theme, variant]
+  );
 
   const textStyle = [
     themed.text,
